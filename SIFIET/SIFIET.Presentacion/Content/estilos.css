@@ -65,7 +65,7 @@ body {
 				}
 		#mainHeader .bottom {
 			height: 40px;
-			background: url(../Content/img/bkg-cabecera-rojo.png) repeat-y;
+			background: url(img/bkg-cabecera-rojo.png) repeat-y;
 		}
 
 		/***** Main Navigation *****/
@@ -178,6 +178,10 @@ body {
 			.breadcrumb a:hover, .breadcrumb a:focus {
 				text-decoration: underline;
 			}
+
+        .wrapper {
+            float: left;
+        }
 
 /***** Main Footer *****/
 #mainFooter {

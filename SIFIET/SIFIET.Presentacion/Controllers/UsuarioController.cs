@@ -28,8 +28,11 @@ namespace SIFIET.Presentacion.Controllers
         public ActionResult RegistrarUsuario(FormCollection datos)
         {
             if (!ModelState.IsValid) return View();
-            FachadaSIFIET.RegistrarUsuario(datos["IDUSUARIO"], datos["EMAILINSTITUCIONALUSUARIO"], datos["PASSWORDUSUARIO"], int.Parse(datos["IDENTIFICACIONUSUARIO"]), datos["NOMBRESUSUARIO"], datos["APELLIDOSUSUARIO"], "false");
-                
+            FachadaSIFIET.RegistrarUsuario(datos["IDUSUARIO"], datos["EMAILINSTITUCIONALUSUARIO"],
+                datos["PASSWORDUSUARIO"], int.Parse(datos["IDENTIFICACIONUSUARIO"]), datos["NOMBRESUSUARIO"],
+                datos["APELLIDOSUSUARIO"], "false");
+                ViewBag.Mensaje = "false";
+
             return RedirectToAction("Index");
         }
 

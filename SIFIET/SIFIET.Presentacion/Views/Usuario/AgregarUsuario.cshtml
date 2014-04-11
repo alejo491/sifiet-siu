@@ -7,15 +7,15 @@
 
 
 
-
+<div>
 
 @using (Html.BeginForm("RegistrarUsuario","Usuario")) 
 {
     @Html.AntiForgeryToken()
     
-    <div >
+    
         
-        <fieldset> <legend>Nuevo Usuario</legend>
+    <fieldset> <legend>Nuevo Usuario</legend>
             
         @Html.ValidationSummary(true)
 
@@ -42,7 +42,7 @@
             </div>
         </div>
        
-            <div >
+        <div >
             Rol:
             <div >
                 <select></select>
@@ -55,7 +55,7 @@
                 @Html.ValidationMessageFor(model => model.IDENTIFICACIONUSUARIO)
             </div>
         </div>
-            <div >
+        <div >
             Contraseña:
             <div >
                 @Html.PasswordFor(model => model.PASSWORDUSUARIO)
@@ -75,15 +75,13 @@
                 <input type="submit" value="Guardar" />
             </div>
             <div>
-                 @Html.ActionLink("Cancelar", "Index")
+                @Html.ActionLink("Cancelar", "Index")
             </div>
         </div>
-            </fieldset>
-    </div>
+    </fieldset>
+   
 }
-
-
-
+     </div>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

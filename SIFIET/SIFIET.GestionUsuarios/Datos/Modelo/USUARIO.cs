@@ -17,9 +17,9 @@ namespace SIFIET.GestionUsuarios.Datos.Modelo
         public string IDUSUARIO { get; set; }
         public string EMAILINSTITUCIONALUSUARIO { get; set; }
         public string PASSWORDUSUARIO { get; set; }
-        public Nullable<int> IDENTIFICACIONUSUARIO { get; set; }
+        public Nullable<decimal> IDENTIFICACIONUSUARIO { get; set; }
         public string NOMBRESUSUARIO { get; set; }
         public string APELLIDOSUSUARIO { get; set; }
-        public string ESTADO { get; set; }
+        public string ESTADOUSUARIO { get; set; }
     }
 }

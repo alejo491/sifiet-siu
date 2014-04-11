@@ -13,10 +13,10 @@ namespace SIFIET.GestionUsuarios.Datos.Modelo
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UsuarioEntities : DbContext
+    public partial class UsuariosEntities2 : DbContext
     {
-        public UsuarioEntities()
-            : base("name=UsuarioEntities")
+        public UsuariosEntities2()
+            : base("name=UsuariosEntities2")
         {
         }
     
