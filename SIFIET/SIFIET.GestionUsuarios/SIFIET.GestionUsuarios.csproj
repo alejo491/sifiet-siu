@@ -31,7 +31,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
@@ -44,10 +48,23 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aplicacion\FachadaUsuarios.cs" />
-    <Compile Include="Datos\Modelo\ModelUsuarios.Designer.cs">
+    <Compile Include="Datos\Modelo\USUARIO.cs">
+      <DependentUpon>UsuariosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Modelo\UsuariosEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelUsuarios.edmx</DependentUpon>
+      <DependentUpon>UsuariosEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Modelo\UsuariosEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsuariosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Modelo\UsuariosEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsuariosEntities.edmx</DependentUpon>
     </Compile>
     <Compile Include="Dominio\Servicios\ServicioUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -56,10 +73,30 @@
     <Folder Include="Dominio\Entidades\Parciales\" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Datos\Modelo\ModelUsuarios.edmx">
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Datos\Modelo\UsuariosEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelUsuarios.Designer.cs</LastGenOutput>
+      <LastGenOutput>UsuariosEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Datos\Modelo\UsuariosEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UsuariosEntities.edmx</DependentUpon>
+      <LastGenOutput>UsuariosEntities.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Datos\Modelo\UsuariosEntities.edmx.diagram">
+      <DependentUpon>UsuariosEntities.edmx</DependentUpon>
+    </None>
+    <None Include="Datos\Modelo\UsuariosEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UsuariosEntities.edmx</DependentUpon>
+      <LastGenOutput>UsuariosEntities.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<SIFIET.GestionUsuarios.Datos.Modelo.USUARIO>
+
+@{
+    
+    ViewBag.Title = "Usuarios";
+}
+<div>
+<h2>Usuarios</h2>
+
+@ViewBag.Meessaje
+
+<table class="table">
+    <tr>
+        <th>
+            Codigo
+        </th>
+        <th>
+            Nombres
+        </th>
+        <th>
+            Apellidos
+
+        </th>
+        <th>
+            Identificacion
+
+        </th>
+        <th>
+            Correo
+
+        </th>
+        <th>
+            Opciones
+
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDUSUARIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMBRESUSUARIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.APELLIDOSUSUARIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDENTIFICACIONUSUARIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMAILINSTITUCIONALUSUARIO)
+        </td>
+        <!--<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDUSUARIO }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDUSUARIO }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDUSUARIO})
+        </td>-->
+    </tr>
+}
+
+
+</table>
+
+<p>
+    @Html.ActionLink("Agregar", "AgregarUsuario")
+</p>
+</div>
