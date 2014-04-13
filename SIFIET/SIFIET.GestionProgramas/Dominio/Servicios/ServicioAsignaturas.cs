@@ -24,7 +24,7 @@ namespace SIFIET.GestionProgramas.Dominio.Servicios
             }
             
         }
-        public static ASIGNATURA ConsultarAsignatura(string idAsignatura)
+        public static ASIGNATURA VisualizarAsignatura(string idAsignatura)
         {
             try
             {
@@ -72,7 +72,7 @@ namespace SIFIET.GestionProgramas.Dominio.Servicios
             }
              
         }
-        internal static int ActualizarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short semestre, short intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
+        internal static int ModificarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short semestre, short intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
         {
             try
             {

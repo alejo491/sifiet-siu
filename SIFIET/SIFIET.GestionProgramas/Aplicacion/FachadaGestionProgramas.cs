@@ -14,9 +14,9 @@ namespace SIFIET.GestionProgramas.Aplicacion
             return ServicioAsignaturas.ConsultarAsignaturas();
         }
 
-        public static ASIGNATURA ConsultarAsignatura(string idAsignatura)
+        public static ASIGNATURA VisualizarAsignatura(string idAsignatura)
         {
-            return ServicioAsignaturas.ConsultarAsignatura(idAsignatura);
+            return ServicioAsignaturas.VisualizarAsignatura(idAsignatura);
         }
         public static int RegistrarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short semestre, short intensidadhoraria,string modalidad, string clasificacion, string estadoasignatura)
         {
@@ -24,9 +24,9 @@ namespace SIFIET.GestionProgramas.Aplicacion
                 prerequisitos, semestre, intensidadhoraria, modalidad, clasificacion, estadoasignatura);
 
         }
-        public static int ActualizarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short semestre, short intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
+        public static int ModificarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short semestre, short intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
         {
-            return ServicioAsignaturas.ActualizarAsignatura(idAsignatura, idPlantadeEstudios, nombreAsignatura, correquisitos,
+            return ServicioAsignaturas.ModificarAsignatura(idAsignatura, idPlantadeEstudios, nombreAsignatura, correquisitos,
                 prerequisitos, semestre, intensidadhoraria, modalidad, clasificacion, estadoasignatura);
         }
 

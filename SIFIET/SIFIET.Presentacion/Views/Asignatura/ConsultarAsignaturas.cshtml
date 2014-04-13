@@ -1,0 +1,105 @@
+﻿@model IEnumerable<SIFIET.GestionProgramas.Datos.Modelo.ASIGNATURA>
+    @{
+
+        ViewBag.Title = "Asignaturas";
+    }
+    <div>
+        <h2>Asignaturas</h2>
+        <p>
+            @ViewBag.Mensaje
+        </p>
+
+        <table class="table">
+            <tr>
+                <th>
+                    Codigo
+                </th>
+
+                <th>
+                    Plan de Estudio
+                </th>
+                <th>
+                    Nombre
+
+                </th>
+                <th>
+                    Correquisitos
+
+                </th>
+                <th>
+                    Prerequisitos
+
+                </th>
+                <th>
+                    Semestre
+
+                </th>
+                <th>
+                    Intensidad Horaria
+
+                </th>
+                <th>
+                    Modalidad
+
+                </th>
+                <th>
+                    Clasificacion
+
+                </th>
+                <th>
+                    Estado
+
+                </th>
+
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDASIGNATURA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IDPLANESTUDIOS)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NOMADIGNATURA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CORREQUISITOSASIGNATURA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PREREQUISITOSASIGNATURA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SEMESTREASIGNATURA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.INTENSIDADHORARIA)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MODALIDAD)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CLASIFICACION)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ESTADOASIGNATURA)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Editar", "ModificarAsignatura", new { idAsignatura = item.IDASIGNATURA }) |
+                        @Html.ActionLink("Visualizar", "VisualizarAsignatura", new { idAsignatura = item.IDASIGNATURA }) |
+                        @Html.ActionLink("Eliminar", "EliminarAsignatura", new { idAsignatura = item.IDASIGNATURA })
+                    </td>
+                </tr>
+            }
+
+
+        </table>
+
+        <p>
+            @Html.ActionLink("Agregar", "RegistrarAsignatura")
+        </p>
+    </div>
