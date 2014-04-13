@@ -46,6 +46,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -74,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GestionProgramasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -179,6 +183,10 @@
       <Project>{74d7d6f2-e51d-4467-92a5-841dfb44628b}</Project>
       <Name>SIFIET.Aplicacion</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SIFIET.GestionProgramas\SIFIET.GestionProgramas.csproj">
+      <Project>{31996fbb-19a6-45a7-91a9-3c63e094397f}</Project>
+      <Name>SIFIET.GestionProgramas</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SIFIET.GestionUsuarios\SIFIET.GestionUsuarios.csproj">
       <Project>{6ef87b3d-cbc6-4ff7-9893-ed7eaeb160fd}</Project>
       <Name>SIFIET.GestionUsuarios</Name>
@@ -191,6 +199,21 @@
     <Content Include="Content\fonts\vegur\vegur-regular-webfont.eot" />
     <Content Include="Content\fonts\vegur\vegur-regular-webfont.ttf" />
     <Content Include="Content\fonts\vegur\vegur-regular-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GestionProgramas\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GestionProgramas\RegistrarAsignatura.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GestionProgramas\Details.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GestionProgramas\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\GestionProgramas\Delete.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

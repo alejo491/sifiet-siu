@@ -31,8 +31,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +47,62 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aplicacion\FachadaGestionProgramas.cs" />
+    <Compile Include="Datos\Modelo\ASIGNATURA.cs">
+      <DependentUpon>GestionProgramasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Modelo\GestionProgramasModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GestionProgramasModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Modelo\GestionProgramasModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GestionProgramasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Modelo\GestionProgramasModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GestionProgramasModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Modelo\PLANESTUDIO.cs">
+      <DependentUpon>GestionProgramasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Modelo\PROGRAMA.cs">
+      <DependentUpon>GestionProgramasModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dominio\Servicios\ServicioAsignaturas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Dominio\Entidades\Parciales\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Datos\Modelo\GestionProgramasModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GestionProgramasModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="Datos\Modelo\GestionProgramasModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GestionProgramasModel.edmx</DependentUpon>
+      <LastGenOutput>GestionProgramasModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="Datos\Modelo\GestionProgramasModel.edmx.diagram">
+      <DependentUpon>GestionProgramasModel.edmx</DependentUpon>
+    </None>
+    <None Include="Datos\Modelo\GestionProgramasModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GestionProgramasModel.edmx</DependentUpon>
+      <LastGenOutput>GestionProgramasModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

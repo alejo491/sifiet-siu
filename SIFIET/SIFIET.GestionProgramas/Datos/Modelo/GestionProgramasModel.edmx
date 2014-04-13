@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="GestionProgramasModelEntities.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="ASIGNATURA">
+          <Key>
+            <PropertyRef Name="IDASIGNATURA" />
+          </Key>
+          <Property Name="IDASIGNATURA" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="IDPLANESTUDIOS" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="NOMADIGNATURA" Type="varchar2" MaxLength="120" />
+          <Property Name="CORREQUISITOSASIGNATURA" Type="varchar2" MaxLength="250" />
+          <Property Name="PREREQUISITOSASIGNATURA" Type="varchar2" MaxLength="250" />
+          <Property Name="SEMESTREASIGNATURA" Type="number" Precision="2" Scale="0" />
+          <Property Name="INTENSIDADHORARIA" Type="number" Precision="38" Scale="0" />
+          <Property Name="MODALIDAD" Type="varchar2" MaxLength="50" />
+          <Property Name="CLASIFICACION" Type="varchar2" MaxLength="50" />
+          <Property Name="ESTADOASIGNATURA" Type="varchar2" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="PLANESTUDIOS">
+          <Key>
+            <PropertyRef Name="IDPLANESTUDIOS" />
+          </Key>
+          <Property Name="IDPLANESTUDIOS" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="IDPROGRAMA" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="NOMPLANESTUDIOS" Type="varchar2" MaxLength="120" />
+          <Property Name="DESPLANESTUDIOS" Type="varchar2" MaxLength="120" />
+          <Property Name="FECINICIOPLANESTUDIOS" Type="varchar2" MaxLength="120" />
+          <Property Name="FECFINPLANCONTENIDO" Type="varchar2" MaxLength="120" />
+          <Property Name="ESTADOPLANESTUDIOS" Type="varchar2" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="PROGRAMA">
+          <Key>
+            <PropertyRef Name="IDPROGRAMA" />
+          </Key>
+          <Property Name="IDPROGRAMA" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="IDFACULTAD" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="NOMPROGRAMA" Type="varchar2" MaxLength="120" />
+          <Property Name="DESCPROGRAMA" Type="varchar2" MaxLength="250" />
+          <Property Name="JORNANADAPROGRAMA" Type="varchar2" MaxLength="30" />
+          <Property Name="DURACIONPROGRAMA" Type="number" Precision="38" Scale="0" />
+          <Property Name="ADMISIONPROGRAMA" Type="varchar2" MaxLength="30" />
+          <Property Name="CODIGOSNIES" Type="number" Precision="38" Scale="0" />
+          <Property Name="PERIODODURACION" Type="varchar2" MaxLength="30" />
+          <Property Name="ESTADOPROGRAMA" Type="varchar2" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK_ASIGNATU_ASIGNATUR_PLANESTU">
+          <End Role="PLANESTUDIOS" Type="Self.PLANESTUDIOS" Multiplicity="1" />
+          <End Role="ASIGNATURA" Type="Self.ASIGNATURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANESTUDIOS">
+              <PropertyRef Name="IDPLANESTUDIOS" />
+            </Principal>
+            <Dependent Role="ASIGNATURA">
+              <PropertyRef Name="IDPLANESTUDIOS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANESTU_PROGRAMA__PROGRAMA">
+          <End Role="PROGRAMA" Type="Self.PROGRAMA" Multiplicity="1" />
+          <End Role="PLANESTUDIOS" Type="Self.PLANESTUDIOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROGRAMA">
+              <PropertyRef Name="IDPROGRAMA" />
+            </Principal>
+            <Dependent Role="PLANESTUDIOS">
+              <PropertyRef Name="IDPROGRAMA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GestionProgramasModelEntitiesStoreContainer">
+          <EntitySet Name="ASIGNATURA" EntityType="Self.ASIGNATURA" Schema="GPA" store:Type="Tables" />
+          <EntitySet Name="PLANESTUDIOS" EntityType="Self.PLANESTUDIOS" Schema="GPA" store:Type="Tables" />
+          <EntitySet Name="PROGRAMA" EntityType="Self.PROGRAMA" Schema="GPA" store:Type="Tables" />
+          <AssociationSet Name="FK_ASIGNATU_ASIGNATUR_PLANESTU" Association="Self.FK_ASIGNATU_ASIGNATUR_PLANESTU">
+            <End Role="PLANESTUDIOS" EntitySet="PLANESTUDIOS" />
+            <End Role="ASIGNATURA" EntitySet="ASIGNATURA" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANESTU_PROGRAMA__PROGRAMA" Association="Self.FK_PLANESTU_PROGRAMA__PROGRAMA">
+            <End Role="PROGRAMA" EntitySet="PROGRAMA" />
+            <End Role="PLANESTUDIOS" EntitySet="PLANESTUDIOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GestionProgramasModelEntities" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityType Name="ASIGNATURA">
+          <Key>
+            <PropertyRef Name="IDASIGNATURA" />
+          </Key>
+          <Property Name="IDASIGNATURA" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDPLANESTUDIOS" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMADIGNATURA" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="CORREQUISITOSASIGNATURA" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PREREQUISITOSASIGNATURA" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SEMESTREASIGNATURA" Type="Int16" />
+          <Property Name="INTENSIDADHORARIA" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="MODALIDAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CLASIFICACION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADOASIGNATURA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PLANESTUDIO" Relationship="GestionProgramasModelEntities.FK_ASIGNATU_ASIGNATUR_PLANESTU" FromRole="ASIGNATURA" ToRole="PLANESTUDIO" />
+        </EntityType>
+        <EntityType Name="PROGRAMA">
+          <Key>
+            <PropertyRef Name="IDPROGRAMA" />
+          </Key>
+          <Property Name="IDPROGRAMA" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IDFACULTAD" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NOMPROGRAMA" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="DESCPROGRAMA" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="JORNANADAPROGRAMA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="DURACIONPROGRAMA" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ADMISIONPROGRAMA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CODIGOSNIES" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="PERIODODURACION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADOPROGRAMA" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PLANESTUDIOS" Relationship="GestionProgramasModelEntities.FK_PLANESTU_PROGRAMA__PROGRAMA" FromRole="PROGRAMA" ToRole="PLANESTUDIO" />
+        </EntityType>
+        <EntityContainer Name="GestionProgramasEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ASIGNATURAs" EntityType="Self.ASIGNATURA" />
+          <EntitySet Name="PROGRAMAs" EntityType="Self.PROGRAMA" />
+          <EntitySet Name="PLANESTUDIOS" EntityType="GestionProgramasModelEntities.PLANESTUDIO" />
+          <AssociationSet Name="FK_ASIGNATU_ASIGNATUR_PLANESTU" Association="GestionProgramasModelEntities.FK_ASIGNATU_ASIGNATUR_PLANESTU">
+            <End Role="PLANESTUDIO" EntitySet="PLANESTUDIOS" />
+            <End Role="ASIGNATURA" EntitySet="ASIGNATURAs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PLANESTU_PROGRAMA__PROGRAMA" Association="GestionProgramasModelEntities.FK_PLANESTU_PROGRAMA__PROGRAMA">
+            <End Role="PROGRAMA" EntitySet="PROGRAMAs" />
+            <End Role="PLANESTUDIO" EntitySet="PLANESTUDIOS" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PLANESTUDIO">
+          <Key>
+            <PropertyRef Name="IDPLANESTUDIOS" />
+          </Key>
+          <Property Name="IDPLANESTUDIOS" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="IDPROGRAMA" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="NOMPLANESTUDIOS" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="DESPLANESTUDIOS" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="FECINICIOPLANESTUDIOS" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="FECFINPLANCONTENIDO" Type="String" MaxLength="120" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADOPLANESTUDIOS" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ASIGNATURAS" Relationship="GestionProgramasModelEntities.FK_ASIGNATU_ASIGNATUR_PLANESTU" FromRole="PLANESTUDIO" ToRole="ASIGNATURA" />
+          <NavigationProperty Name="PROGRAMA" Relationship="GestionProgramasModelEntities.FK_PLANESTU_PROGRAMA__PROGRAMA" FromRole="PLANESTUDIO" ToRole="PROGRAMA" />
+        </EntityType>
+        <Association Name="FK_ASIGNATU_ASIGNATUR_PLANESTU">
+          <End Type="GestionProgramasModelEntities.PLANESTUDIO" Role="PLANESTUDIO" Multiplicity="1" />
+          <End Type="GestionProgramasModelEntities.ASIGNATURA" Role="ASIGNATURA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLANESTUDIO">
+              <PropertyRef Name="IDPLANESTUDIOS" />
+            </Principal>
+            <Dependent Role="ASIGNATURA">
+              <PropertyRef Name="IDPLANESTUDIOS" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PLANESTU_PROGRAMA__PROGRAMA">
+          <End Type="GestionProgramasModelEntities.PROGRAMA" Role="PROGRAMA" Multiplicity="1" />
+          <End Type="GestionProgramasModelEntities.PLANESTUDIO" Role="PLANESTUDIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROGRAMA">
+              <PropertyRef Name="IDPROGRAMA" />
+            </Principal>
+            <Dependent Role="PLANESTUDIO">
+              <PropertyRef Name="IDPROGRAMA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GestionProgramasModelEntitiesStoreContainer" CdmEntityContainer="GestionProgramasEntities">
+          <EntitySetMapping Name="ASIGNATURAs">
+            <EntityTypeMapping TypeName="GestionProgramasModelEntities.ASIGNATURA">
+              <MappingFragment StoreEntitySet="ASIGNATURA">
+                <ScalarProperty Name="IDASIGNATURA" ColumnName="IDASIGNATURA" />
+                <ScalarProperty Name="IDPLANESTUDIOS" ColumnName="IDPLANESTUDIOS" />
+                <ScalarProperty Name="NOMADIGNATURA" ColumnName="NOMADIGNATURA" />
+                <ScalarProperty Name="CORREQUISITOSASIGNATURA" ColumnName="CORREQUISITOSASIGNATURA" />
+                <ScalarProperty Name="PREREQUISITOSASIGNATURA" ColumnName="PREREQUISITOSASIGNATURA" />
+                <ScalarProperty Name="SEMESTREASIGNATURA" ColumnName="SEMESTREASIGNATURA" />
+                <ScalarProperty Name="INTENSIDADHORARIA" ColumnName="INTENSIDADHORARIA" />
+                <ScalarProperty Name="MODALIDAD" ColumnName="MODALIDAD" />
+                <ScalarProperty Name="CLASIFICACION" ColumnName="CLASIFICACION" />
+                <ScalarProperty Name="ESTADOASIGNATURA" ColumnName="ESTADOASIGNATURA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROGRAMAs">
+            <EntityTypeMapping TypeName="GestionProgramasModelEntities.PROGRAMA">
+              <MappingFragment StoreEntitySet="PROGRAMA">
+                <ScalarProperty Name="IDPROGRAMA" ColumnName="IDPROGRAMA" />
+                <ScalarProperty Name="IDFACULTAD" ColumnName="IDFACULTAD" />
+                <ScalarProperty Name="NOMPROGRAMA" ColumnName="NOMPROGRAMA" />
+                <ScalarProperty Name="DESCPROGRAMA" ColumnName="DESCPROGRAMA" />
+                <ScalarProperty Name="JORNANADAPROGRAMA" ColumnName="JORNANADAPROGRAMA" />
+                <ScalarProperty Name="DURACIONPROGRAMA" ColumnName="DURACIONPROGRAMA" />
+                <ScalarProperty Name="ADMISIONPROGRAMA" ColumnName="ADMISIONPROGRAMA" />
+                <ScalarProperty Name="CODIGOSNIES" ColumnName="CODIGOSNIES" />
+                <ScalarProperty Name="PERIODODURACION" ColumnName="PERIODODURACION" />
+                <ScalarProperty Name="ESTADOPROGRAMA" ColumnName="ESTADOPROGRAMA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLANESTUDIOS">
+            <EntityTypeMapping TypeName="GestionProgramasModelEntities.PLANESTUDIO">
+              <MappingFragment StoreEntitySet="PLANESTUDIOS">
+                <ScalarProperty Name="ESTADOPLANESTUDIOS" ColumnName="ESTADOPLANESTUDIOS" />
+                <ScalarProperty Name="FECFINPLANCONTENIDO" ColumnName="FECFINPLANCONTENIDO" />
+                <ScalarProperty Name="FECINICIOPLANESTUDIOS" ColumnName="FECINICIOPLANESTUDIOS" />
+                <ScalarProperty Name="DESPLANESTUDIOS" ColumnName="DESPLANESTUDIOS" />
+                <ScalarProperty Name="NOMPLANESTUDIOS" ColumnName="NOMPLANESTUDIOS" />
+                <ScalarProperty Name="IDPROGRAMA" ColumnName="IDPROGRAMA" />
+                <ScalarProperty Name="IDPLANESTUDIOS" ColumnName="IDPLANESTUDIOS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

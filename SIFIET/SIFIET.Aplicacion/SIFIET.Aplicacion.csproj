@@ -44,6 +44,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SIFIET.GestionProgramas\SIFIET.GestionProgramas.csproj">
+      <Project>{31996fbb-19a6-45a7-91a9-3c63e094397f}</Project>
+      <Name>SIFIET.GestionProgramas</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SIFIET.GestionUsuarios\SIFIET.GestionUsuarios.csproj">
       <Project>{6ef87b3d-cbc6-4ff7-9893-ed7eaeb160fd}</Project>
       <Name>SIFIET.GestionUsuarios</Name>

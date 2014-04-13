@@ -1,0 +1,111 @@
+﻿@using System.Globalization
+@model SIFIET.GestionProgramas.Datos.Modelo.ASIGNATURA
+
+@{
+    ViewBag.Title = "Editar Asignatura";
+}
+
+
+
+
+<div>
+
+    @using (Html.BeginForm("Edit", "GestionProgramas"))
+    {
+        @Html.AntiForgeryToken()
+
+
+
+        <fieldset>
+            <legend>Editar Asignatura</legend>
+
+            @Html.ValidationSummary(true)
+
+            <div>
+                Codigo:
+                <div>
+                    @Html.EditorFor(model => model.IDASIGNATURA)
+                    @Html.ValidationMessageFor(model => model.IDASIGNATURA)
+                </div>
+            </div>
+
+            <div>
+                Plan de Estudios:
+                <div>
+                    @Html.EditorFor(model => model.IDPLANESTUDIOS)
+                    @Html.ValidationMessageFor(model => model.IDPLANESTUDIOS)
+                </div>
+            </div>
+            <div>
+                Nombre :
+                <div>
+                    @Html.EditorFor(model => model.NOMADIGNATURA)
+                    @Html.ValidationMessageFor(model => model.NOMADIGNATURA)
+                </div>
+            </div>
+            <div>
+                Correquisitos :
+                <div>
+                    @Html.EditorFor(model => model.CORREQUISITOSASIGNATURA)
+                    @Html.ValidationMessageFor(model => model.CORREQUISITOSASIGNATURA)
+                </div>
+            </div>
+            <div>
+                Prerequisitos :
+                <div>
+                    @Html.EditorFor(model => model.PREREQUISITOSASIGNATURA)
+                    @Html.ValidationMessageFor(model => model.PREREQUISITOSASIGNATURA)
+                </div>
+            </div>
+            <div>
+                Semestre :
+                <div>
+                    @Html.DropDownListFor(model => model.SEMESTREASIGNATURA, new SelectList(new short[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }), Model.SEMESTREASIGNATURA)
+                    @Html.ValidationMessageFor(model => model.SEMESTREASIGNATURA)
+                </div>
+            </div>
+            <div>
+                Intensidad Horaria :
+                <div>
+                    @Html.DropDownListFor(model => model.INTENSIDADHORARIA, new SelectList(new short[] { 2, 4, 6 }), Model.SEMESTREASIGNATURA)
+                    @Html.ValidationMessageFor(model => model.INTENSIDADHORARIA)
+                </div>
+            </div>
+            <div>
+                Modalidad :
+                <div>
+                    @Html.EditorFor(model => model.MODALIDAD)
+                    @Html.ValidationMessageFor(model => model.MODALIDAD)
+                </div>
+            </div>
+            <div>
+                Clasificacion :
+                <div>
+                    @Html.EditorFor(model => model.CLASIFICACION)
+                    @Html.ValidationMessageFor(model => model.CLASIFICACION)
+                </div>
+            </div>
+            <div>
+                Estado :
+                <div>
+                    @Html.EditorFor(model => model.ESTADOASIGNATURA)
+                    @Html.ValidationMessageFor(model => model.ESTADOASIGNATURA)
+                </div>
+            </div>
+
+
+            <div>
+                <div>
+                    <input type="submit" value="Guardar" />
+                </div>
+                <div>
+                    @Html.ActionLink("Cancelar", "Index")
+                </div>
+            </div>
+        </fieldset>
+
+    }
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
