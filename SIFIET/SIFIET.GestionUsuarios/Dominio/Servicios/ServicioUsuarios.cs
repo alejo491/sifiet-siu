@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SIFIET.GestionUsuarios.Datos.Modelo;
+using System.Data;
 
 namespace SIFIET.GestionUsuarios.Dominio.Servicios
 {
@@ -34,6 +35,28 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
             };
 
             db.USUARIOs.Add(usuario);
+            db.SaveChanges();
+        }
+
+        public static USUARIO ConsultarUsuario(string idUsuario)
+        {
+            var db = new UsuariosEntities2();
+            return db.USUARIOs.Find(idUsuario);
+        }
+
+        internal static void ModificarUsuario(USUARIO usuario)
+        {
+            var db = new UsuariosEntities2();            
+            db.Entry(usuario).State = EntityState.Modified;
+            db.SaveChanges();
+        }
+
+        public static void EliminarUsuario(string idUsuario)
+        {
+            var db = new UsuariosEntities2();
+
+            var usuario = db.USUARIOs.Find(idUsuario);
+            db.USUARIOs.Remove(usuario);
             db.SaveChanges();
         }
     }

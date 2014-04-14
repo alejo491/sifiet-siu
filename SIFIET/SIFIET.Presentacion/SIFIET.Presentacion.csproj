@@ -215,6 +215,15 @@
   <ItemGroup>
     <Content Include="Views\Asignatura\RegistrarAsignatura.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\VisualizarUsuario.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\ModificarUsuario.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Usuario\EliminarUsuario.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

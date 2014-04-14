@@ -36,5 +36,37 @@ namespace SIFIET.Presentacion.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult VisualizarUsuario(string idUsuario)
+        {
+            return View(FachadaSIFIET.ConsultarUsuario(idUsuario));
+        }
+
+        public ActionResult ModificarUsuario(string idUsuario)
+        {
+            return View(FachadaSIFIET.ConsultarUsuario(idUsuario));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ModificarUsuario([Bind(Include = "IDUSUARIO,EMAILINSTITUCIONALUSUARIO,PASSWORDUSUARIO,IDENTIFICACIONUSUARIO,NOMBRESUSUARIO,APELLIDOSUSUARIO,ESTADO")] USUARIO usuario)
+        {
+            if (!ModelState.IsValid) return View();
+            FachadaSIFIET.ModificarUsuario(usuario);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult EliminarUsuario(string idUsuario)
+        {
+            return View(FachadaSIFIET.ConsultarUsuario(idUsuario));
+        }
+
+        [HttpPost, ActionName("EliminarUsuario")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string idUsuario)
+        {
+            FachadaSIFIET.EliminarUsuario(idUsuario);
+            return RedirectToAction("Index");
+        }
+
     }
 }

@@ -28,6 +28,21 @@ namespace SIFIET.Aplicacion
             SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.RegistrarUsuario(idUsuario, emailInstitucional, passwordUsuario, identificacionUsuario, nombresUsuario, apellidosUsuario, estado);
         }
 
+        public static USUARIO ConsultarUsuario(string idUsuario)
+        {
+            return SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.ConsultarUsuario(idUsuario);
+        }
+
+        public static void ModificarUsuario(USUARIO usuario)
+        {
+            SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.ModificarUsuario(usuario);
+        }
+
+        public static void EliminarUsuario(string idUsuario)
+        {
+            SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.EliminarUsuario(idUsuario);
+        }
+
         public static List<ASIGNATURA> ConsultarAsignaturas()
         {
             return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.ConsultarAsignaturas();

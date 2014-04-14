@@ -23,5 +23,20 @@ namespace SIFIET.GestionUsuarios.Aplicacion
        {
            ServicioUsuarios.RegistrarUsuario(idUsuario, emailInstitucional, passwordUsuario, identificacionUsuario, nombresUsuario, apellidosUsuario,estado);
        }
+
+       public static USUARIO ConsultarUsuario(string idUsuario)
+       {
+           return ServicioUsuarios.ConsultarUsuario(idUsuario);
+       }
+
+       public static void ModificarUsuario(USUARIO usuario)
+       {
+           ServicioUsuarios.ModificarUsuario(usuario);
+       }
+
+       public static void EliminarUsuario(string idUsuario)
+       {
+           ServicioUsuarios.EliminarUsuario(idUsuario);
+       }
     }
 }

@@ -55,11 +55,11 @@
         <td>
             @Html.DisplayFor(modelItem => item.EMAILINSTITUCIONALUSUARIO)
         </td>
-        <!--<td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDUSUARIO }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IDUSUARIO }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDUSUARIO})
-        </td>-->
+        <td>
+            @Html.ActionLink("Editar", "ModificarUsuario", new { idUsuario=item.IDUSUARIO }) |
+            @Html.ActionLink("Detalles", "VisualizarUsuario", new { idUsuario=item.IDUSUARIO }) |
+            @Html.ActionLink("Eliminar", "EliminarUsuario", new { idUsuario=item.IDUSUARIO})
+        </td>
     </tr>
 }
 
