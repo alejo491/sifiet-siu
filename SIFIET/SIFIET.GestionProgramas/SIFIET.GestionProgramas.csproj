@@ -40,6 +40,7 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -72,12 +73,11 @@
     <Compile Include="Datos\Modelo\PROGRAMA.cs">
       <DependentUpon>GestionProgramasModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Dominio\Entidades\Parciales\ASIGNATURA.cs" />
     <Compile Include="Dominio\Servicios\ServicioAsignaturas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Dominio\Entidades\Parciales\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EntityDeploy Include="Datos\Modelo\GestionProgramasModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

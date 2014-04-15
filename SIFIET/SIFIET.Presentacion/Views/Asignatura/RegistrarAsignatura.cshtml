@@ -34,6 +34,7 @@
                 <div>
                     @Html.EditorFor(model => model.IDPLANESTUDIOS)
                     @Html.ValidationMessageFor(model => model.IDPLANESTUDIOS)
+                   
                 </div>
             </div>
             <div>
@@ -88,7 +89,8 @@
             <div>
                 Estado :
                 <div>
-                    @Html.EditorFor(model => model.ESTADOASIGNATURA)
+                    Activo @Html.RadioButtonFor(model => model.ESTADOASIGNATURA,"Activo")
+                    Inactivo @Html.RadioButtonFor(model => model.ESTADOASIGNATURA, "Inactivo")
                     @Html.ValidationMessageFor(model => model.ESTADOASIGNATURA)
                 </div>
             </div>

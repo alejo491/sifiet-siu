@@ -8,7 +8,15 @@
         <p>
             @ViewBag.Mensaje
         </p>
-
+        @using (Html.BeginForm())
+        {
+            <p>
+                Palabra busqueda : @Html.TextBox("palabraBusqueda")
+                <input type ="submit" value="Buscar"/>
+                
+            </p>
+        }
+       
         <table class="table">
             <tr>
                 <th>
@@ -34,34 +42,17 @@
                     Semestre
 
                 </th>
-                <th>
-                    Intensidad Horaria
-
-                </th>
-                <th>
-                    Modalidad
-
-                </th>
-                <th>
-                    Clasificacion
-
-                </th>
-                <th>
-                    Estado
-
-                </th>
-
 
             </tr>
-
-            @foreach (var item in Model)
+            @if (Model != null) { 
+            foreach (var item in Model)
             {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.IDASIGNATURA)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.IDPLANESTUDIOS)
+                        @Html.DisplayFor(modelItem => item.NombrePlaneEstudio)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.NOMADIGNATURA)
@@ -75,18 +66,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.SEMESTREASIGNATURA)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.INTENSIDADHORARIA)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MODALIDAD)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CLASIFICACION)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ESTADOASIGNATURA)
-                    </td>
+                    
 
                     <td>
                         @Html.ActionLink("Editar", "ModificarAsignatura", new { idAsignatura = item.IDASIGNATURA }) |
@@ -94,6 +74,7 @@
                         @Html.ActionLink("Eliminar", "EliminarAsignatura", new { idAsignatura = item.IDASIGNATURA })
                     </td>
                 </tr>
+            }
             }
 
 

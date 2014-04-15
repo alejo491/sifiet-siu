@@ -1,5 +1,4 @@
-﻿@using System.Globalization
-@model SIFIET.GestionProgramas.Datos.Modelo.ASIGNATURA
+﻿@model SIFIET.GestionProgramas.Datos.Modelo.ASIGNATURA
 
 @{
     ViewBag.Title = "Editar Asignatura";
@@ -20,18 +19,21 @@
             <legend>Editar Asignatura</legend>
 
             @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.IDASIGNATURA)
 
             <div>
                 Codigo:
                 <div>
-                    @Html.DisplayFor(model => model.IDASIGNATURA)
+                  @Html.DisplayFor(model => model.IDASIGNATURA)
+                   
                 </div>
             </div>
 
             <div>
                 Plan de Estudios:
                 <div>
-                    @Html.DisplayFor(model => model.IDPLANESTUDIOS)
+                    @Html.EditorFor(model => model.IDPLANESTUDIOS)
+                    @Html.ValidationMessageFor(model => model.IDPLANESTUDIOS)
                 </div>
             </div>
             <div>
@@ -86,7 +88,8 @@
             <div>
                 Estado :
                 <div>
-                    @Html.EditorFor(model => model.ESTADOASIGNATURA)
+                    Activo @Html.RadioButtonFor(model => model.ESTADOASIGNATURA, "Activo")
+                    Inactivo @Html.RadioButtonFor(model => model.ESTADOASIGNATURA, "Inactivo")
                     @Html.ValidationMessageFor(model => model.ESTADOASIGNATURA)
                 </div>
             </div>

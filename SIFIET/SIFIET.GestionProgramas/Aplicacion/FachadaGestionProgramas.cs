@@ -9,22 +9,22 @@ namespace SIFIET.GestionProgramas.Aplicacion
 {
     public static class FachadaGestionProgramas
     {
-        public static List<ASIGNATURA> ConsultarAsignaturas()
+        public static List<ASIGNATURA> ConsultarAsignaturas(string palabraBusqueda)
         {
-            return ServicioAsignaturas.ConsultarAsignaturas();
+            return ServicioAsignaturas.ConsultarAsignaturas(palabraBusqueda);
         }
 
         public static ASIGNATURA VisualizarAsignatura(string idAsignatura)
         {
             return ServicioAsignaturas.VisualizarAsignatura(idAsignatura);
         }
-        public static int RegistrarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short semestre, short intensidadhoraria,string modalidad, string clasificacion, string estadoasignatura)
+        public static int RegistrarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short? semestre, decimal? intensidadhoraria,string modalidad, string clasificacion, string estadoasignatura)
         {
             return ServicioAsignaturas.RegistrarAsignatura(idAsignatura, idPlantadeEstudios, nombreAsignatura, correquisitos,
                 prerequisitos, semestre, intensidadhoraria, modalidad, clasificacion, estadoasignatura);
 
         }
-        public static int ModificarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short semestre, short intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
+        public static int ModificarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short? semestre, decimal? intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
         {
             return ServicioAsignaturas.ModificarAsignatura(idAsignatura, idPlantadeEstudios, nombreAsignatura, correquisitos,
                 prerequisitos, semestre, intensidadhoraria, modalidad, clasificacion, estadoasignatura);

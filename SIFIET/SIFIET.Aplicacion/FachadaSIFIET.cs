@@ -43,9 +43,9 @@ namespace SIFIET.Aplicacion
             SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.EliminarUsuario(idUsuario);
         }
 
-        public static List<ASIGNATURA> ConsultarAsignaturas()
+        public static List<ASIGNATURA> ConsultarAsignaturas(string palabraBusqueda)
         {
-            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.ConsultarAsignaturas();
+            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.ConsultarAsignaturas(palabraBusqueda);
         }
 
         public static ASIGNATURA VisualizarAsignatura(string idAsignatura)
@@ -53,13 +53,13 @@ namespace SIFIET.Aplicacion
             return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.VisualizarAsignatura(idAsignatura);
         }
 
-        public static int RegistrarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short semestre, short intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
+        public static int RegistrarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short? semestre, decimal? intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
         {
             return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.RegistrarAsignatura(idAsignatura, idPlantadeEstudios, nombreAsignatura, correquisitos,
                 prerequisitos, semestre, intensidadhoraria, modalidad, clasificacion, estadoasignatura);
 
         }
-        public static int ModificarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short semestre, short intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
+        public static int ModificarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short? semestre, decimal? intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
         {
             return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.ModificarAsignatura(idAsignatura, idPlantadeEstudios, nombreAsignatura, correquisitos,
                 prerequisitos, semestre, intensidadhoraria, modalidad, clasificacion, estadoasignatura);

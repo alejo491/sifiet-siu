@@ -8,14 +8,25 @@ namespace SIFIET.GestionProgramas.Dominio.Servicios
 {
     static class ServicioAsignaturas
     {
-        public static List<ASIGNATURA> ConsultarAsignaturas()
+        public static List<ASIGNATURA> ConsultarAsignaturas(string palabraBusqueda)
         {
             try
             {
                 var db = new GestionProgramasEntities();
-                List<ASIGNATURA> lista = (from e in db.ASIGNATURAs
-                                          select e).ToList();
-                return lista;
+                List<ASIGNATURA> lista = new List<ASIGNATURA>();
+                if (String.IsNullOrEmpty(palabraBusqueda))
+                {
+                    lista = (from e in db.ASIGNATURAs
+                        select e).ToList();
+                    return lista;
+                }
+                else
+                {
+                    lista = (from e in db.ASIGNATURAs where (e.NOMADIGNATURA.Contains(palabraBusqueda) | e.IDASIGNATURA.Contains(palabraBusqueda)) 
+                             select e).ToList();
+                    return lista;
+                    
+                }
 
             }
             catch (Exception)
@@ -41,7 +52,7 @@ namespace SIFIET.GestionProgramas.Dominio.Servicios
 
         }
 
-        internal static int RegistrarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short semestre, short intensidadhoraria,string modalidad, string clasificacion, string estadoasignatura)
+        internal static int RegistrarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short? semestre, decimal? intensidadhoraria,string modalidad, string clasificacion, string estadoasignatura)
         {
             try
             {
@@ -72,24 +83,24 @@ namespace SIFIET.GestionProgramas.Dominio.Servicios
             }
              
         }
-        internal static int ModificarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short semestre, short intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
+        internal static int ModificarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short? semestre, decimal? intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
         {
             try
             {
                 var db = new GestionProgramasEntities();
 
-                var asg = (from asig in db.ASIGNATURAs where asig.IDASIGNATURA.Equals((idAsignatura)) select asig).First();
-
-                asg.IDPLANESTUDIOS = idPlantadeEstudios;
-                asg.NOMADIGNATURA = nombreAsignatura;
-                asg.CORREQUISITOSASIGNATURA = correquisitos;
-                asg.PREREQUISITOSASIGNATURA = prerequisitos;
-                asg.SEMESTREASIGNATURA = semestre;
-                asg.INTENSIDADHORARIA = intensidadhoraria;
-                asg.ESTADOASIGNATURA = estadoasignatura;
-                asg.CLASIFICACION = clasificacion;
-                asg.MODALIDAD = modalidad;
-                db.SaveChanges();
+                var asignatura = (from asig in db.ASIGNATURAs where asig.IDASIGNATURA.Equals((idAsignatura)) select asig).First();
+                {
+                    asignatura.NOMADIGNATURA = nombreAsignatura;
+                    asignatura.CORREQUISITOSASIGNATURA = correquisitos;
+                    asignatura.PREREQUISITOSASIGNATURA = prerequisitos;
+                    asignatura.SEMESTREASIGNATURA = semestre;
+                    asignatura.INTENSIDADHORARIA = intensidadhoraria;
+                    asignatura.ESTADOASIGNATURA = estadoasignatura;
+                    asignatura.CLASIFICACION = clasificacion;
+                    asignatura.MODALIDAD = modalidad;
+                    db.SaveChanges();
+                }
                 return 0;
 
             }
