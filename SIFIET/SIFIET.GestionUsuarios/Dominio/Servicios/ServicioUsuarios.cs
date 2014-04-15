@@ -25,23 +25,22 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
         }
 
 
-        internal static void RegistrarUsuario(string idUsuario, string emailInstitucional, string passwordUsuario, int identificacionUsuario, string nombresUsuario, string apellidosUsuario, string estado)
+        internal static void RegistrarUsuario(USUARIO usuario,string[] roles)
         {
             var db = new UsuariosEntities();
 
-            var usuario = new USUARIO()
-            {
-                IDUSUARIO = idUsuario.ToString(),
-                APELLIDOSUSUARIO = apellidosUsuario,
-                EMAILINSTITUCIONALUSUARIO = emailInstitucional,
-                ESTADOUSUARIO = estado,
-                IDENTIFICACIONUSUARIO = identificacionUsuario,
-                NOMBRESUSUARIO = nombresUsuario,
-                PASSWORDUSUARIO = passwordUsuario
-            };
+           
 
             db.USUARIOs.Add(usuario);
             db.SaveChanges();
+
+
+            
+            foreach (var rol in roles)
+            {
+                usuario.ROLs.Add(db.ROLs.Find(rol));
+            }
+             db.SaveChanges();
         }
 
         public static USUARIO ConsultarUsuario(string idUsuario)
@@ -50,10 +49,21 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
             return db.USUARIOs.Find(idUsuario);
         }
 
-        internal static void ModificarUsuario(USUARIO usuario)
+        internal static void ModificarUsuario(USUARIO usuario, string[] roles)
         {
             var db = new UsuariosEntities();
+            usuario.ROLs.Clear();
+            foreach (var rol in roles)
+            {
+
+                usuario.ROLs.Add(db.ROLs.Find(rol));
+            }
             db.Entry(usuario).State = EntityState.Modified;
+            db.SaveChanges();
+
+            
+           
+            
             db.SaveChanges();
         }
 
@@ -107,13 +117,20 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
         internal static void AsignarRol(string idUsuario, string rol)
         {
             var db = new UsuariosEntities();
+            var usuario = (from e in db.USUARIOs
+                           where e.IDUSUARIO == idUsuario
+                           select e).FirstOrDefault();
+
             ROL x = (from e in db.ROLs
                      where e.IDROL == rol
                      select e).FirstOrDefault();
-            ConsultarUsuario(idUsuario).ROLs.Add(x);
+
+            usuario.ROLs.Add(x);
             db.SaveChanges();
             
         }
+
+        
     }
 
 }

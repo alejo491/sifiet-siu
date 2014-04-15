@@ -117,16 +117,23 @@ namespace SIFIET.Presentacion.Controllers
             {
                 try
                 {
-
-
-                    FachadaSIFIET.RegistrarUsuario(datos["IDUSUARIO"], datos["EMAILINSTITUCIONALUSUARIO"],
-                        datos["PASSWORDUSUARIO"], int.Parse(datos["IDENTIFICACIONUSUARIO"]), datos["NOMBRESUSUARIO"],
-                        datos["APELLIDOSUSUARIO"], "false");
-                   var roles=datos["roles"].ToList();
-                    foreach (var rol in  roles)
+                    var usuario = new USUARIO()
                     {
-                        FachadaSIFIET.AsignarRol(datos["IDUSUARIO"],rol.ToString());
-                    }
+                        IDUSUARIO = datos["IDUSUARIO"],
+                        APELLIDOSUSUARIO = datos["APELLIDOSUSUARIO"],
+                        EMAILINSTITUCIONALUSUARIO = datos["EMAILINSTITUCIONALUSUARIO"],
+                        ESTADOUSUARIO = "false",
+                        IDENTIFICACIONUSUARIO = int.Parse(datos["IDENTIFICACIONUSUARIO"]),
+                        NOMBRESUSUARIO = datos["NOMBRESUSUARIO"],
+                        PASSWORDUSUARIO = datos["PASSWORDUSUARIO"]
+                    };
+
+                    var roles = datos["roles"].Split(',');
+                    
+
+
+                    FachadaSIFIET.RegistrarUsuario(usuario,roles);
+                   
                     
                     ViewBag.Mensaje = "Registro Exitoso";
                 }
@@ -147,6 +154,8 @@ namespace SIFIET.Presentacion.Controllers
 
         public ActionResult ModificarUsuario(string idUsuario)
         {
+            ViewBag.roles = FachadaSIFIET.ConsultarRoles();
+            
             return View(FachadaSIFIET.ConsultarUsuario(idUsuario));
         }
 
@@ -156,9 +165,10 @@ namespace SIFIET.Presentacion.Controllers
             [Bind(
                 Include =
                     "IDUSUARIO,EMAILINSTITUCIONALUSUARIO,PASSWORDUSUARIO,IDENTIFICACIONUSUARIO,NOMBRESUSUARIO,APELLIDOSUSUARIO,ESTADO"
-                )] USUARIO usuario)
+                )] USUARIO usuario,FormCollection datos)
         {
 
+            ViewBag.roles = FachadaSIFIET.ConsultarRoles();
             bool error = false;
             int x;
 
@@ -188,21 +198,27 @@ namespace SIFIET.Presentacion.Controllers
                 ViewBag.ErrorIdentificacion = "*";
                 error = true;
             }
+            if (datos["roles"] == null)
+            {
+                ViewBag.ErrorRol = "*";
+                error = true;
+
+            }
 
 
             if (error)
             {
                 ViewBag.Mensaje = "* estos campos son obligatorios";
             }
-            else if (!int.TryParse(usuario.IDENTIFICACIONUSUARIO.ToString(), out x))
+            else 
             {
-                ViewBag.ErrorIdentificacion = "Esta campo solo recive valores numericos";
-            }
-            else
-            {
+             
                 try
                 {
-                    FachadaSIFIET.ModificarUsuario(usuario);
+                    
+
+                    var roles = datos["roles"].Split(',');
+                    FachadaSIFIET.ModificarUsuario(usuario,roles);
                     return RedirectToAction("Index");
                 }
                 catch (Exception e)

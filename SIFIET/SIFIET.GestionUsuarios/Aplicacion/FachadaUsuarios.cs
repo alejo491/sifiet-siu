@@ -18,10 +18,10 @@ namespace SIFIET.GestionUsuarios.Aplicacion
 
 
 
-       
-       public static void RegistrarUsuario(string idUsuario, string emailInstitucional, string passwordUsuario, int identificacionUsuario, string nombresUsuario, string apellidosUsuario, string estado)
+
+       public static void RegistrarUsuario(USUARIO usuario,string[] roles)
        {
-           ServicioUsuarios.RegistrarUsuario(idUsuario, emailInstitucional, passwordUsuario, identificacionUsuario, nombresUsuario, apellidosUsuario,estado);
+           ServicioUsuarios.RegistrarUsuario(usuario,roles);
        }
 
        public static USUARIO ConsultarUsuario(string idUsuario)
@@ -29,9 +29,9 @@ namespace SIFIET.GestionUsuarios.Aplicacion
            return ServicioUsuarios.ConsultarUsuario(idUsuario);
        }
 
-       public static void ModificarUsuario(USUARIO usuario)
+       public static void ModificarUsuario(USUARIO usuario, string[] roles)
        {
-           ServicioUsuarios.ModificarUsuario(usuario);
+           ServicioUsuarios.ModificarUsuario(usuario,roles);
        }
 
        public static void EliminarUsuario(string idUsuario)
@@ -62,5 +62,7 @@ namespace SIFIET.GestionUsuarios.Aplicacion
        {
            ServicioUsuarios.AsignarRol(idUsuario,rol);
        }
+
+       
     }
 }

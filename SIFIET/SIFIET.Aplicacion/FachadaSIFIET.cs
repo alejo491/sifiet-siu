@@ -13,9 +13,9 @@ namespace SIFIET.Aplicacion
             
             return FachadaUsuarios.ConsultarUsuarios();
             }
-        public static void RegistrarUsuario(string idUsuario, string emailInstitucional, string passwordUsuario, int identificacionUsuario, string nombresUsuario, string apellidosUsuario, string estado)
+        public static void RegistrarUsuario(USUARIO usuario, string[] roles)
         {
-            FachadaUsuarios.RegistrarUsuario(idUsuario, emailInstitucional, passwordUsuario, identificacionUsuario, nombresUsuario, apellidosUsuario, estado);
+            FachadaUsuarios.RegistrarUsuario(usuario,roles);
         }
 
         public static USUARIO ConsultarUsuario(string idUsuario)
@@ -23,9 +23,9 @@ namespace SIFIET.Aplicacion
             return FachadaUsuarios.ConsultarUsuario(idUsuario);
         }
 
-        public static void ModificarUsuario(USUARIO usuario)
+        public static void ModificarUsuario(USUARIO usuario, string[] roles)
         {
-            FachadaUsuarios.ModificarUsuario(usuario);
+            FachadaUsuarios.ModificarUsuario(usuario,roles);
         }
 
         public static void EliminarUsuario(string idUsuario)
@@ -109,6 +109,13 @@ namespace SIFIET.Aplicacion
         {
             return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.CargarInformacion(archivo);
         }
+
+
+        
+
+
+
+
 
     }
 }
