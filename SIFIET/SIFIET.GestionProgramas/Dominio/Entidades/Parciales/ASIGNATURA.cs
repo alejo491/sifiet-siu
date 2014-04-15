@@ -15,7 +15,7 @@ namespace SIFIET.GestionProgramas.Datos.Modelo
             {
                 var db = new GestionProgramasEntities();
                 return (from e in db.PLANESTUDIOS where IDPLANESTUDIOS == e.IDPLANESTUDIOS select e.NOMPLANESTUDIOS).First();
-            
+
             }
         }
     }
@@ -30,10 +30,10 @@ namespace SIFIET.GestionProgramas.Datos.Modelo
         [Required]
         [StringLength(120, ErrorMessage = "El {0} no pueder ser mayor de 120 caracteres")]
         public string NOMADIGNATURA { get; set; }
-        
+
         [StringLength(250, ErrorMessage = "El {0} no pueder ser mayor de 250 caracteres")]
         public string CORREQUISITOSASIGNATURA { get; set; }
-        
+
         [StringLength(250, ErrorMessage = "El {0} no pueder ser mayor de 250 caracteres")]
         public string PREREQUISITOSASIGNATURA { get; set; }
         [Required]

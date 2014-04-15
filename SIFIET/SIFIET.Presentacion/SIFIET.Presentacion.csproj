@@ -79,6 +79,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AsignaturaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -223,6 +224,21 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Usuario\EliminarUsuario.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Rol\AgregarRol.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Rol\EliminarRol.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Rol\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Rol\ModificarRol.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Rol\VisualizarRol.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

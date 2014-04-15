@@ -1,0 +1,44 @@
+﻿@model SIFIET.GestionUsuarios.Datos.Modelo.ROL
+
+@{
+    ViewBag.Title = "Visualizar Rol";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>USUARIO</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Identificador:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDROL)
+        </dd>
+
+        <dt>
+            Nobre:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMROL)
+        </dd>
+
+        <dt>
+            Descripcion:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCROL)
+        </dd>
+
+        
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "ModificarRol", new { idRol = Model.IDROL }) |
+    @Html.ActionLink("Volver", "Index")
+</p>

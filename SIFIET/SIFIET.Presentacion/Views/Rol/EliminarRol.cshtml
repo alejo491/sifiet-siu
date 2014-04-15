@@ -1,0 +1,49 @@
+﻿@model SIFIET.GestionUsuarios.Datos.Modelo.ROL
+
+@{
+    ViewBag.Title = "Eliminar Usuario";
+}
+
+<h2>Eliminar</h2>
+
+<h3>Está seguro de eliminar este usuario?</h3>
+
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl>
+        <dt>
+            Identificador:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDROL)
+        </dd>
+
+        <dt>
+            Nombre:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOMROL)
+        </dd>
+        <dt>
+            Descripcion:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESCROL)
+        </dd>
+
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+            <input type="submit" value="Eliminar" /> |
+            @Html.ActionLink("Cancelar", "Index")
+        </div>
+    }
+</div>
+

@@ -1,0 +1,51 @@
+﻿@model IEnumerable<SIFIET.GestionUsuarios.Datos.Modelo.ROL>
+
+@{
+    
+    ViewBag.Title = "Roles";
+}
+<div>
+<h2>Usuarios</h2>
+    <p>
+        @ViewBag.Mensaje
+    </p>
+
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+       
+        <th>
+            Descripcion
+        </th>
+        <th>
+            Opciones
+
+        </th>
+
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMROL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCROL)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "ModificarRol", new { idRol=item.IDROL }) |
+            @Html.ActionLink("Detalles", "VisualizarRol", new { idRol = item.IDROL }) |
+            @Html.ActionLink("Eliminar", "EliminarRol", new { idRol = item.IDROL })
+        </td>
+    </tr>
+}
+
+
+</table>
+
+<p>
+    @Html.ActionLink("Agregar", "AgregarRol")
+</p>
+</div>

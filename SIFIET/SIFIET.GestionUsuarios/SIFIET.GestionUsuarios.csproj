@@ -47,7 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Aplicacion\FachadaRoles.cs" />
     <Compile Include="Aplicacion\FachadaUsuarios.cs" />
+    <Compile Include="Datos\Modelo\PERMISO.cs">
+      <DependentUpon>UsuariosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Modelo\ROL.cs">
+      <DependentUpon>UsuariosEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\Modelo\ROL_TIENE_PERMISOS.cs">
+      <DependentUpon>UsuariosEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Datos\Modelo\USUARIO.cs">
       <DependentUpon>UsuariosEntities.tt</DependentUpon>
     </Compile>
@@ -66,6 +76,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UsuariosEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Dominio\Servicios\ServicioRoles.cs" />
     <Compile Include="Dominio\Servicios\ServicioUsuarios.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

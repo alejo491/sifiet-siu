@@ -13,10 +13,10 @@ namespace SIFIET.GestionUsuarios.Datos.Modelo
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class UsuariosEntities2 : DbContext
+    public partial class UsuariosEntities : DbContext
     {
-        public UsuariosEntities2()
-            : base("name=UsuariosEntities2")
+        public UsuariosEntities()
+            : base("name=UsuariosEntities")
         {
         }
     
@@ -25,6 +25,9 @@ namespace SIFIET.GestionUsuarios.Datos.Modelo
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<PERMISO> PERMISOS { get; set; }
+        public DbSet<ROL> ROLs { get; set; }
+        public DbSet<ROL_TIENE_PERMISOS> ROL_TIENE_PERMISOS { get; set; }
         public DbSet<USUARIO> USUARIOs { get; set; }
     }
 }

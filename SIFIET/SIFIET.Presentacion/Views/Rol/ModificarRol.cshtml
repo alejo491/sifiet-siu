@@ -1,0 +1,49 @@
+﻿@model SIFIET.GestionUsuarios.Datos.Modelo.ROL
+
+@{
+    ViewBag.Title = "Editar Rol";
+}
+
+<div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+
+
+        <fieldset>
+            <legend>Editar Rol</legend>
+
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.IDROL)
+
+            <div>
+                Nombre:
+                <div>
+                    @Html.EditorFor(model => model.NOMROL)
+                    @Html.ValidationMessageFor(model => model.NOMROL)
+                </div>
+            </div>
+            <div>
+                Descripcion:
+                <div>
+                    @Html.EditorFor(model => model.DESCROL)
+                    @Html.ValidationMessageFor(model => model.DESCROL)
+                </div>
+            </div>
+            <div>
+                <div>
+                    <input type="submit" value="Editar" />
+                </div>
+                <div>                    
+                    @Html.ActionLink("Cancelar", "Index")
+                </div>
+            </div>
+        </fieldset>
+
+    }
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

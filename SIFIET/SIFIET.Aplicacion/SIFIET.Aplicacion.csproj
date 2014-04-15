@@ -49,7 +49,7 @@
       <Name>SIFIET.GestionProgramas</Name>
     </ProjectReference>
     <ProjectReference Include="..\SIFIET.GestionUsuarios\SIFIET.GestionUsuarios.csproj">
-      <Project>{6ef87b3d-cbc6-4ff7-9893-ed7eaeb160fd}</Project>
+      <Project>{6EF87B3D-CBC6-4FF7-9893-ED7EAEB160FD}</Project>
       <Name>SIFIET.GestionUsuarios</Name>
     </ProjectReference>
   </ItemGroup>

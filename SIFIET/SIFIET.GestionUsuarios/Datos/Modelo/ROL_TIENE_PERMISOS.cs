@@ -12,21 +12,12 @@ namespace SIFIET.GestionUsuarios.Datos.Modelo
     using System;
     using System.Collections.Generic;
     
-    public partial class USUARIO
+    public partial class ROL_TIENE_PERMISOS
     {
-        public USUARIO()
-        {
-            this.ROLs = new HashSet<ROL>();
-        }
+        public string IDROL { get; set; }
+        public string IDPERMISO { get; set; }
     
-        public string IDUSUARIO { get; set; }
-        public string EMAILINSTITUCIONALUSUARIO { get; set; }
-        public string PASSWORDUSUARIO { get; set; }
-        public Nullable<decimal> IDENTIFICACIONUSUARIO { get; set; }
-        public string NOMBRESUSUARIO { get; set; }
-        public string APELLIDOSUSUARIO { get; set; }
-        public string ESTADOUSUARIO { get; set; }
-    
-        public virtual ICollection<ROL> ROLs { get; set; }
+        public virtual PERMISO PERMISO { get; set; }
+        public virtual ROL ROL { get; set; }
     }
 }

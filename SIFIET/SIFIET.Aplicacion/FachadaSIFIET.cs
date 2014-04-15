@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
+using SIFIET.GestionProgramas.Aplicacion;
+using SIFIET.GestionUsuarios.Aplicacion;
 using SIFIET.GestionUsuarios.Datos.Modelo;
 using SIFIET.GestionProgramas.Datos.Modelo;
-
-
-
-
-
-
 
 namespace SIFIET.Aplicacion
 {
@@ -18,57 +11,78 @@ namespace SIFIET.Aplicacion
 
         public static List<USUARIO> ConsultarUsuarios(){
             
-            return SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.ConsultarUsuarios();
+            return FachadaUsuarios.ConsultarUsuarios();
             }
-
-        
-
         public static void RegistrarUsuario(string idUsuario, string emailInstitucional, string passwordUsuario, int identificacionUsuario, string nombresUsuario, string apellidosUsuario, string estado)
         {
-            SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.RegistrarUsuario(idUsuario, emailInstitucional, passwordUsuario, identificacionUsuario, nombresUsuario, apellidosUsuario, estado);
+            FachadaUsuarios.RegistrarUsuario(idUsuario, emailInstitucional, passwordUsuario, identificacionUsuario, nombresUsuario, apellidosUsuario, estado);
         }
 
         public static USUARIO ConsultarUsuario(string idUsuario)
         {
-            return SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.ConsultarUsuario(idUsuario);
+            return FachadaUsuarios.ConsultarUsuario(idUsuario);
         }
 
         public static void ModificarUsuario(USUARIO usuario)
         {
-            SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.ModificarUsuario(usuario);
+            FachadaUsuarios.ModificarUsuario(usuario);
         }
 
         public static void EliminarUsuario(string idUsuario)
         {
-            SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.EliminarUsuario(idUsuario);
+            FachadaUsuarios.EliminarUsuario(idUsuario);
         }
 
         public static List<ASIGNATURA> ConsultarAsignaturas(string palabraBusqueda)
         {
-            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.ConsultarAsignaturas(palabraBusqueda);
+            return FachadaGestionProgramas.ConsultarAsignaturas(palabraBusqueda);
         }
 
         public static ASIGNATURA VisualizarAsignatura(string idAsignatura)
         {
-            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.VisualizarAsignatura(idAsignatura);
+            return FachadaGestionProgramas.VisualizarAsignatura(idAsignatura);
         }
 
         public static int RegistrarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short? semestre, decimal? intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
         {
-            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.RegistrarAsignatura(idAsignatura, idPlantadeEstudios, nombreAsignatura, correquisitos,
+            return FachadaGestionProgramas.RegistrarAsignatura(idAsignatura, idPlantadeEstudios, nombreAsignatura, correquisitos,
                 prerequisitos, semestre, intensidadhoraria, modalidad, clasificacion, estadoasignatura);
 
         }
         public static int ModificarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short? semestre, decimal? intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
         {
-            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.ModificarAsignatura(idAsignatura, idPlantadeEstudios, nombreAsignatura, correquisitos,
+            return FachadaGestionProgramas.ModificarAsignatura(idAsignatura, idPlantadeEstudios, nombreAsignatura, correquisitos,
                 prerequisitos, semestre, intensidadhoraria, modalidad, clasificacion, estadoasignatura);
         }
 
         public static int EliminarAsignatura(string idAsignatura)
         {
-            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.EliminarAsignatura(idAsignatura);
+            return FachadaGestionProgramas.EliminarAsignatura(idAsignatura);
         }
 
+        public static List<ROL> ConsultarRoles()
+        {
+
+            return FachadaRoles.ConsultarRoles();
+        }
+        public static void RegistrarRoles(string idRol,string nomRol,string descRol,string estadoRol)
+        {
+            FachadaRoles.RegistrarRoles(idRol,nomRol,descRol,estadoRol);
+        }
+
+        public static ROL ConsultarRol(string idRol)
+        {
+            return FachadaRoles.ConsultarRol(idRol);
+        }
+
+        public static void ModificarRol(ROL rol)
+        {
+            FachadaRoles.ModificarRol(rol);
+        }
+
+        public static void EliminarRol(string idRol)
+        {
+            FachadaRoles.EliminarRol(idRol);
+        }
     }
 }

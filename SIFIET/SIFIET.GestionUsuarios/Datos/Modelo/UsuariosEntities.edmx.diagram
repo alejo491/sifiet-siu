@@ -4,8 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="68d81ac7fac14ecf90ac5770c2bc7ee0" Name="Diagram1">
-        <EntityTypeShape EntityType="UsuarioModel.USUARIO" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="815f8289f8a84adca29a6d5d5dc9a9c1" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.PERMISO" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ROL" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ROL_TIENE_PERMISOS" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.USUARIO" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_ROL_TIEN_ROL_TIENE_PERMISOS" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ROL_TIEN_ROL_TIENE_ROL" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.USUARIO_TIENE_ROL" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
