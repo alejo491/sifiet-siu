@@ -14,13 +14,8 @@ namespace SIFIET.GestionUsuarios.Datos.Modelo
     
     public partial class PERMISO
     {
-        public PERMISO()
-        {
-            this.ROL_TIENE_PERMISOS = new HashSet<ROL_TIENE_PERMISOS>();
-        }
-    
         public string IDPERMISO { get; set; }
-    
-        public virtual ICollection<ROL_TIENE_PERMISOS> ROL_TIENE_PERMISOS { get; set; }
+        public string NOMPERMISO { get; set; }
+        public string ESTADOPERMISO { get; set; }
     }
 }

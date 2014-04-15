@@ -15,9 +15,7 @@ namespace SIFIET.GestionUsuarios.Datos.Modelo
     public partial class ROL_TIENE_PERMISOS
     {
         public string IDROL { get; set; }
-        public string IDPERMISO { get; set; }
     
-        public virtual PERMISO PERMISO { get; set; }
         public virtual ROL ROL { get; set; }
     }
 }

@@ -4,12 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="815f8289f8a84adca29a6d5d5dc9a9c1" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.PERMISO" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ROL" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.ROL_TIENE_PERMISOS" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.USUARIO" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
-        <AssociationConnector Association="Model.FK_ROL_TIEN_ROL_TIENE_PERMISOS" ManuallyRouted="false" />
+      <Diagram DiagramId="a5cbf7bcc1694d189e0687c8bc8f580d" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.PERMISO" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ROL" Width="1.5" PointX="0.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ROL_TIENE_PERMISOS" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.USUARIO" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
         <AssociationConnector Association="Model.FK_ROL_TIEN_ROL_TIENE_ROL" ManuallyRouted="false" />
         <AssociationConnector Association="Model.USUARIO_TIENE_ROL" ManuallyRouted="false" />
       </Diagram>

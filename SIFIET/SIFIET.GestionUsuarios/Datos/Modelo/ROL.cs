@@ -22,6 +22,7 @@ namespace SIFIET.GestionUsuarios.Datos.Modelo
         public string IDROL { get; set; }
         public string NOMROL { get; set; }
         public string DESCROL { get; set; }
+        public string ESTADOROL { get; set; }
     
         public virtual ROL_TIENE_PERMISOS ROL_TIENE_PERMISOS { get; set; }
         public virtual ICollection<USUARIO> USUARIOs { get; set; }
