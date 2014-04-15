@@ -35,6 +35,9 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -51,15 +54,27 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
+    <Compile Include="Controllers\AsignaturaControllerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SIFIET.Aplicacion\SIFIET.Aplicacion.csproj">
+      <Project>{74d7d6f2-e51d-4467-92a5-841dfb44628b}</Project>
+      <Name>SIFIET.Aplicacion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SIFIET.GestionProgramas\SIFIET.GestionProgramas.csproj">
+      <Project>{31996fbb-19a6-45a7-91a9-3c63e094397f}</Project>
+      <Name>SIFIET.GestionProgramas</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SIFIET.Presentacion\SIFIET.Presentacion.csproj">
       <Project>{EFD4E65C-062B-4C31-AC84-184EE136D40A}</Project>
       <Name>SIFIET.Presentacion</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
