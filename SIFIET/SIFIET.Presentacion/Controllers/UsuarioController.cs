@@ -46,7 +46,7 @@ namespace SIFIET.Presentacion.Controllers
 
         public ActionResult AgregarUsuario()
         {
-            ViewBag.idUsuario = FachadaSIFIET.GenerarCodigo().Trim();
+            ViewBag.idUsuario = FachadaSIFIET.GenerarCodigo();
             ViewBag.roles = FachadaSIFIET.ConsultarRoles();
             return View();
         }
@@ -56,7 +56,7 @@ namespace SIFIET.Presentacion.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AgregarUsuario(FormCollection datos)
         {
-            ViewBag.idUsuario = datos["IDUSUARIO"].Trim();
+            ViewBag.idUsuario = datos["IDUSUARIO"];
             ViewBag.roles = FachadaSIFIET.ConsultarRoles();
             bool error = false;
             int x;
@@ -119,7 +119,7 @@ namespace SIFIET.Presentacion.Controllers
                 {
                     var usuario = new USUARIO()
                     {
-                        IDUSUARIO = datos["IDUSUARIO"].Trim(),
+                        IDUSUARIO = datos["IDUSUARIO"],
                         APELLIDOSUSUARIO = datos["APELLIDOSUSUARIO"],
                         EMAILINSTITUCIONALUSUARIO = datos["EMAILINSTITUCIONALUSUARIO"],
                         ESTADOUSUARIO = "false",

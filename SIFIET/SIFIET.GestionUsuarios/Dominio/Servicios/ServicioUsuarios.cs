@@ -69,9 +69,9 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
 
         public static void EliminarUsuario(string idUsuario)
         {
-            var db = new UsuariosEntities();
-
+            var db = new UsuariosEntities();            
             var usuario = db.USUARIOs.Find(idUsuario);
+            usuario.ROLs.Clear();
             db.USUARIOs.Remove(usuario);
             db.SaveChanges();
         }
