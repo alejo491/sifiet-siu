@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -81,6 +84,57 @@ namespace SIFIET.Presentacion.Controllers
             FachadaSIFIET.EliminarAsignatura(idAsignatura);
             return RedirectToAction("ConsultarAsignaturas");
         }
+
+        public ActionResult CargarInformacion()
+        {
+            return View();
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult CargarInformacion(HttpPostedFileBase archivo)
+        {
+            string fn = Path.GetFileName(archivo.FileName);
+            string filePath = Server.MapPath(@"~\Uploads") + "\\" + fn;
+            archivo.SaveAs(filePath);
+
+            if (Path.GetExtension(archivo.FileName).Equals("xls"))
+            {
+
+                using (OleDbConnection cn = new OleDbConnection())
+                {
+                    using (OleDbCommand cmd = new OleDbCommand())
+                    {
+                        cn.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filePath +
+                                              ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=1\";";
+                        cmd.Connection = cn;
+                        cmd.CommandText = "select * from [Hoja1$]";
+
+                        using (OleDbDataAdapter adp = new OleDbDataAdapter(cmd))
+                        {
+                            DataTable dt = new DataTable();
+                            adp.Fill(dt);
+                            using (
+                                StreamWriter wr = new StreamWriter(@"~\Uploads\file.txt")
+                                )
+                            {
+                                foreach (DataRow row in dt.Rows)
+                                {
+                                    wr.WriteLine(row[0] + "," + row[1] + "," + row[2] + "," + row[3] + "," + row[4] + "," + row[5] + "," + row[6] + "," + row[7] + "," + row[8] + "," + row[9]);
+                                }
+                            }
+                        }
+                    }
+                }
+                int retorno =
+                    FachadaSIFIET.CargarInformacion(@"~\Uploads\file.txt");
+                if (retorno == 1)
+                {
+                    return RedirectToAction("ConsultarAsignaturas");
+                }
+            }
+            return RedirectToAction("ConsultarAsignaturas");
+        }
+
     }
 
 }
