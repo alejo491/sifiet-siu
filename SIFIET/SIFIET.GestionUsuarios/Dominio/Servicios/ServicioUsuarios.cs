@@ -111,7 +111,7 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
                              select e.IDUSUARIO).FirstOrDefault();
             if (codigo == null) codigo = "0";
 
-            return (int.Parse(codigo) + 1).ToString();
+            return (int.Parse(codigo) + 1).ToString().Trim();
         }
 
         internal static void AsignarRol(string idUsuario, string rol)
