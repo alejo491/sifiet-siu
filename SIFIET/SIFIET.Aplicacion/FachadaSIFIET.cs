@@ -104,5 +104,11 @@ namespace SIFIET.Aplicacion
         {
             return SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.GenerarCodigo();
         }
+
+        public static int CargarInformacion(string archivo)
+        {
+            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.CargarInformacion(archivo);
+        }
+
     }
 }
