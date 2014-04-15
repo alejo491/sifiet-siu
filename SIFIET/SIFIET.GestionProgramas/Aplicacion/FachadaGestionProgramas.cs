@@ -34,5 +34,10 @@ namespace SIFIET.GestionProgramas.Aplicacion
         {
             return ServicioAsignaturas.EliminarAsignatura(idAsignatura);
         }
+
+        public static int CargarInformacion(string archivo)
+        {
+            return ServicioAsignaturas.CargarInformacion(archivo);
+        }
     }
 }
