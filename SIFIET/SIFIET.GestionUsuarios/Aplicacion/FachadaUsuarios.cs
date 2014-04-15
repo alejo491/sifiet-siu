@@ -38,5 +38,24 @@ namespace SIFIET.GestionUsuarios.Aplicacion
        {
            ServicioUsuarios.EliminarUsuario(idUsuario);
        }
+       public static List<USUARIO> BuscarUsuarioPorNombre(string nombre)
+       {
+           return ServicioUsuarios.BuscarUsuarioPorNombre(nombre);
+       }
+
+       public static List<USUARIO> BuscarUsuarioPorApellido(string apellido)
+       {
+           return ServicioUsuarios.BuscarUsuarioPorApellido(apellido);
+       }
+
+       public static List<USUARIO> BuscarUsuarioPorIdentificacion(string id)
+       {
+           return ServicioUsuarios.BuscarUsuarioPorIdentificacion(id);
+       }
+
+       public static string GenerarCodigo()
+       {
+           return ServicioUsuarios.GenerarCodigo();
+       }
     }
 }
