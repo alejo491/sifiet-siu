@@ -73,8 +73,22 @@
             <div>
                 Rol:
                 <div>
-                    <select></select>
+                    <select name="roles" multiple="true">
+                        @foreach (var rol in ViewBag.roles)
+                        {
+                            <option value="@rol.IDROL">@rol.NOMROL</option>
+
+                        }
+
+                    </select>
                 </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorRol))
+                {
+                    <div>
+
+                        @ViewBag.ErrorRol
+                    </div>
+                }
             </div>
             <div>
                 Identificacion:

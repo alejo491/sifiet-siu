@@ -47,6 +47,7 @@ namespace SIFIET.Presentacion.Controllers
         public ActionResult AgregarUsuario()
         {
             ViewBag.idUsuario = FachadaSIFIET.GenerarCodigo();
+            ViewBag.roles = FachadaSIFIET.ConsultarRoles();
             return View();
         }
 
@@ -56,11 +57,19 @@ namespace SIFIET.Presentacion.Controllers
         public ActionResult AgregarUsuario(FormCollection datos)
         {
             ViewBag.idUsuario = datos["IDUSUARIO"];
+            ViewBag.roles = FachadaSIFIET.ConsultarRoles();
             bool error = false;
             int x;
             if (datos["IDUSUARIO"].Equals(""))
             {
                 ViewBag.ErrorCodigo = "*";
+                error = true;
+
+            }
+
+            if (datos["roles"] == null)
+            {
+                ViewBag.ErrorRol = "*";
                 error = true;
 
             }
@@ -113,6 +122,12 @@ namespace SIFIET.Presentacion.Controllers
                     FachadaSIFIET.RegistrarUsuario(datos["IDUSUARIO"], datos["EMAILINSTITUCIONALUSUARIO"],
                         datos["PASSWORDUSUARIO"], int.Parse(datos["IDENTIFICACIONUSUARIO"]), datos["NOMBRESUSUARIO"],
                         datos["APELLIDOSUSUARIO"], "false");
+                   var roles=datos["roles"].ToList();
+                    foreach (var rol in  roles)
+                    {
+                        FachadaSIFIET.AsignarRol(datos["IDUSUARIO"],rol.ToString());
+                    }
+                    
                     ViewBag.Mensaje = "Registro Exitoso";
                 }
                 catch (Exception e)

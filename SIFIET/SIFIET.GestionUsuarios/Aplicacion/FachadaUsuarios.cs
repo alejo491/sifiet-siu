@@ -57,5 +57,10 @@ namespace SIFIET.GestionUsuarios.Aplicacion
        {
            return ServicioUsuarios.GenerarCodigo();
        }
+
+       public static void AsignarRol(string idUsuario, string rol)
+       {
+           ServicioUsuarios.AsignarRol(idUsuario,rol);
+       }
     }
 }
