@@ -21,7 +21,7 @@ namespace SIFIET.Presentacion.Tests
 
         }
         [Test]
-        public void PruebaCrudAsignatura()
+        public void PruebaInsertarAsignatura()
         {
             var idAsignatura = "sis2016";
             var actualRegistrar = FachadaSIFIET.RegistrarAsignatura(idAsignatura, "1", "ondas", "sis202", "sis203", 1, 1, "alta", "diruna", "activo");
@@ -34,6 +34,35 @@ namespace SIFIET.Presentacion.Tests
             Assert.AreEqual(0, actualEliminar);
             
         }
+        [Test]
+        public void PruebaEditarAsignatura()
+        {
+            var idAsignatura = "sis2016";
+            var actualRegistrar = FachadaSIFIET.RegistrarAsignatura(idAsignatura, "1", "ondas", "sis202", "sis203", 1, 1, "alta", "diruna", "activo");
+            Assert.AreEqual(0, actualRegistrar);
+            var asignaturaSinModificar = FachadaSIFIET.VisualizarAsignatura(idAsignatura);
+            Assert.AreEqual(idAsignatura, asignaturaSinModificar.IDASIGNATURA);
+            var actualModificar = FachadaSIFIET.ModificarAsignatura(idAsignatura, "1", "ondascambio", "sis202cambio", "sis203cambio", 1, 1, "altacambio", "dirunacambio", "inactivo");
+            Assert.AreEqual(0, actualModificar);
+            var asignaturaModificada = FachadaSIFIET.VisualizarAsignatura(idAsignatura);
+            Assert.AreNotSame(asignaturaModificada, asignaturaSinModificar);
+            var actualEliminar = FachadaSIFIET.EliminarAsignatura((idAsignatura));
+            Assert.AreEqual(0, actualEliminar);
+
+        }
+        [Test]
+        public void PruebaEliminarAsignatura()
+        {
+            var idAsignatura = "sis2016";
+            var actualRegistrar = FachadaSIFIET.RegistrarAsignatura(idAsignatura, "1", "ondas", "sis202", "sis203", 1, 1, "alta", "diruna", "activo");
+            Assert.AreEqual(0, actualRegistrar);
+            var actualEliminar = FachadaSIFIET.EliminarAsignatura((idAsignatura));
+            Assert.AreEqual(0, actualEliminar);
+            var asignatura = FachadaSIFIET.VisualizarAsignatura(idAsignatura);
+            Assert.IsNull(asignatura);
+
+        }
+
         [Test]
         public void PruebaEditarAsignaturas2()
         {
