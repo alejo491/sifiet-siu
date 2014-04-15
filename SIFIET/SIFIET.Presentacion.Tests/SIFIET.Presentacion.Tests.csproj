@@ -56,6 +56,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\UsuarioControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
     <Compile Include="Controllers\AsignaturaControllerTest.cs" />
@@ -73,6 +74,10 @@
     <ProjectReference Include="..\SIFIET.GestionProgramas\SIFIET.GestionProgramas.csproj">
       <Project>{31996fbb-19a6-45a7-91a9-3c63e094397f}</Project>
       <Name>SIFIET.GestionProgramas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SIFIET.GestionUsuarios\SIFIET.GestionUsuarios.csproj">
+      <Project>{6ef87b3d-cbc6-4ff7-9893-ed7eaeb160fd}</Project>
+      <Name>SIFIET.GestionUsuarios</Name>
     </ProjectReference>
     <ProjectReference Include="..\SIFIET.Presentacion\SIFIET.Presentacion.csproj">
       <Project>{EFD4E65C-062B-4C31-AC84-184EE136D40A}</Project>
