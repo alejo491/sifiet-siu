@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using SIFIET.GestionProgramas.Datos.Modelo;
@@ -130,6 +131,40 @@ namespace SIFIET.GestionProgramas.Dominio.Servicios
             
         }
 
+        public static int CargarInformacion(string archivo)
+        {
+            String linea;
+            StreamReader f = new StreamReader(archivo);
+            try
+            {
+                while ((linea = f.ReadLine()) != null)
+                {
+                    string[] campos = linea.Split(',');
+                    var db = new GestionProgramasEntities();
+
+                    var asg = new ASIGNATURA();
+                    {
+                        asg.IDASIGNATURA = campos[0];
+                        asg.IDPLANESTUDIOS = campos[1];
+                        asg.NOMADIGNATURA = campos[2];
+                        asg.CORREQUISITOSASIGNATURA = campos[3];
+                        asg.PREREQUISITOSASIGNATURA = campos[4];
+                        asg.SEMESTREASIGNATURA = short.Parse(campos[5]);
+                        asg.INTENSIDADHORARIA = short.Parse(campos[6]);
+                        asg.MODALIDAD = campos[7];
+                        asg.CLASIFICACION = campos[8];
+                        asg.ESTADOASIGNATURA = campos[9];
+                    }
+                    db.ASIGNATURAs.Add(asg);
+                    db.SaveChanges();
+                }
+                return 0;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
 
     }
 }
