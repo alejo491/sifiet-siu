@@ -66,9 +66,9 @@
             @Html.DisplayFor(modelItem => item.EMAILINSTITUCIONALUSUARIO)
         </td>
         <td>
-            @Html.ActionLink("Editar", "ModificarUsuario", new { idUsuario=item.IDUSUARIO }) |
-            @Html.ActionLink("Detalles", "VisualizarUsuario", new { idUsuario=item.IDUSUARIO }) |
-            @Html.ActionLink("Eliminar", "EliminarUsuario", new { idUsuario=item.IDUSUARIO})
+            @Html.ActionLink("Editar", "ModificarUsuario", new { idUsuario=item.IDUSUARIO.Trim() }) |
+            @Html.ActionLink("Detalles", "VisualizarUsuario", new { idUsuario=item.IDUSUARIO.Trim() }) |
+            @Html.ActionLink("Eliminar", "EliminarUsuario", new { idUsuario=item.IDUSUARIO.Trim()})
         </td>
     </tr>
 }
