@@ -103,6 +103,17 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
 
             return (int.Parse(codigo) + 1).ToString();
         }
+
+        internal static void AsignarRol(string idUsuario, string rol)
+        {
+            var db = new UsuariosEntities();
+            ROL x = (from e in db.ROLs
+                     where e.IDROL == rol
+                     select e).FirstOrDefault();
+            ConsultarUsuario(idUsuario).ROLs.Add(x);
+            db.SaveChanges();
+            
+        }
     }
 
 }

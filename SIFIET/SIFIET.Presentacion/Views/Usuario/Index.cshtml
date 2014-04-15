@@ -6,9 +6,19 @@
 }
 <div>
 <h2>Usuarios</h2>
-    <p>
-        @ViewBag.Mensaje
-    </p>
+    @using (Html.BeginForm("Index", "Usuario"))
+{
+    <div>
+        <label>Buscar Por:</label><select name="criterio">
+            <option value="nombre">Nombre</option>
+            <option value="apellido">Apellido</option>
+            <option value="identificacion">Identificacion</option>
+        </select>
+        <input name="valorbusqueda" type="text" value="" />
+        <input type="submit" value="Buscar" />
+
+    </div>
+}
 
 <table class="table">
     <tr>
