@@ -3,6 +3,13 @@
 @{
     ViewBag.Title = "Editar Usuario";
 }
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div>
+
+        @ViewBag.Mensaje
+    </div>
+}
 
 <div>
 
@@ -23,15 +30,29 @@
                 Nombres:
                 <div>
                     @Html.EditorFor(model => model.NOMBRESUSUARIO)
-                    @Html.ValidationMessageFor(model => model.NOMBRESUSUARIO)
+
                 </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorNombre))
+                {
+                    <div>
+
+                        @ViewBag.ErrorNombre
+                    </div>
+                }
             </div>
             <div>
                 Apellidos:
                 <div>
                     @Html.EditorFor(model => model.APELLIDOSUSUARIO)
-                    @Html.ValidationMessageFor(model => model.APELLIDOSUSUARIO)
+
                 </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorApellido))
+                {
+                    <div>
+
+                        @ViewBag.ErrorApellido
+                    </div>
+                }
             </div>
 
             <div>
@@ -44,22 +65,43 @@
                 Identificacion:
                 <div>
                     @Html.EditorFor(model => model.IDENTIFICACIONUSUARIO)
-                    @Html.ValidationMessageFor(model => model.IDENTIFICACIONUSUARIO)
+
                 </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorIdentificacion))
+                {
+                    <div>
+
+                        @ViewBag.ErrorIdentificacion
+                    </div>
+                }
             </div>
             <div>
                 Contraseña:
                 <div>
                     @Html.PasswordFor(model => model.PASSWORDUSUARIO)
-                    @Html.ValidationMessageFor(model => model.PASSWORDUSUARIO)
+
                 </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorPass))
+                {
+                    <div>
+
+                        @ViewBag.ErrorPass
+                    </div>
+                }
             </div>
             <div>
                 E-Mail:
                 <div>
                     @Html.EditorFor(model => model.EMAILINSTITUCIONALUSUARIO)
-                    @Html.ValidationMessageFor(model => model.EMAILINSTITUCIONALUSUARIO)
+
                 </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorEmail))
+                {
+                    <div>
+
+                        @ViewBag.ErrorEmail
+                    </div>
+                }
             </div>
 
 
@@ -67,7 +109,7 @@
                 <div>
                     <input type="submit" value="Editar" />
                 </div>
-                <div>                    
+                <div>
                     @Html.ActionLink("Cancelar", "Index")
                 </div>
             </div>

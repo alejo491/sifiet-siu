@@ -4,84 +4,134 @@
     ViewBag.Title = "Nuevo Usuario";
 }
 
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div>
 
-
+        @ViewBag.Mensaje
+    </div>
+}
 
 <div>
 
-@using (Html.BeginForm("RegistrarUsuario","Usuario")) 
-{
-    @Html.AntiForgeryToken()
-    
-    
-        
-    <fieldset> <legend>Nuevo Usuario</legend>
-            
-        @Html.ValidationSummary(true)
+    @using (Html.BeginForm("AgregarUsuario", "Usuario"))
+    {
+        @Html.AntiForgeryToken()
 
-        <div >
-            Codigo:
-            <div >
-                @Html.EditorFor(model => model.IDUSUARIO)
-                @Html.ValidationMessageFor(model => model.IDUSUARIO)
-            </div>
-        </div>
 
-        <div >
-            Nombres:
-            <div >
-                @Html.EditorFor(model => model.NOMBRESUSUARIO)
-                @Html.ValidationMessageFor(model => model.NOMBRESUSUARIO)
-            </div>
-        </div>
-        <div >
-            Apellidos:
-            <div >
-                @Html.EditorFor(model => model.APELLIDOSUSUARIO)
-                @Html.ValidationMessageFor(model => model.APELLIDOSUSUARIO)
-            </div>
-        </div>
-       
-        <div >
-            Rol:
-            <div >
-                <select></select>
-            </div>
-        </div>
-        <div >
-            Identificacion:
-            <div >
-                @Html.EditorFor(model => model.IDENTIFICACIONUSUARIO)
-                @Html.ValidationMessageFor(model => model.IDENTIFICACIONUSUARIO)
-            </div>
-        </div>
-        <div >
-            Contraseña:
-            <div >
-                @Html.PasswordFor(model => model.PASSWORDUSUARIO)
-                @Html.ValidationMessageFor(model => model.PASSWORDUSUARIO)
-            </div>
-        </div>
-        <div >
-            E-Mail:
-            <div >
-                @Html.EditorFor(model => model.EMAILINSTITUCIONALUSUARIO) 
-                @Html.ValidationMessageFor(model => model.EMAILINSTITUCIONALUSUARIO)
-            </div>
-        </div>
 
-        <div >
-            <div >
-                <input type="submit" value="Guardar" />
+        <fieldset>
+            <legend>Nuevo Usuario</legend>
+
+            @Html.ValidationSummary(true)
+
+            <div>
+                Codigo:
+                <div>
+                    <input name="IDUSUARIO" readonly="true" type="text" value="@ViewBag.idUsuario" />
+
+                </div>
+
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorCodigo))
+                {
+                    <div>
+
+                        @ViewBag.ErrorCodigo
+                    </div>
+                }
+            </div>
+
+            <div>
+                Nombres:
+                <div>
+                    @Html.EditorFor(model => model.NOMBRESUSUARIO)
+
+                </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorNombre))
+                {
+                    <div>
+
+                        @ViewBag.ErrorNombre
+                    </div>
+                }
             </div>
             <div>
-                @Html.ActionLink("Cancelar", "Index")
+                Apellidos:
+                <div>
+                    @Html.EditorFor(model => model.APELLIDOSUSUARIO)
+
+                </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorApellido))
+                {
+                    <div>
+
+                        @ViewBag.ErrorApellido
+                    </div>
+                }
             </div>
-        </div>
-    </fieldset>
-   
-}
-     </div>
+
+            <div>
+                Rol:
+                <div>
+                    <select></select>
+                </div>
+            </div>
+            <div>
+                Identificacion:
+                <div>
+                    @Html.EditorFor(model => model.IDENTIFICACIONUSUARIO)
+
+                </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorIdentificacion))
+                {
+                    <div>
+
+                        @ViewBag.ErrorIdentificacion
+                    </div>
+                }
+            </div>
+            <div>
+                Contraseña:
+                <div>
+                    @Html.PasswordFor(model => model.PASSWORDUSUARIO)
+
+                </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorPass))
+                {
+                    <div>
+
+                        @ViewBag.ErrorPass
+                    </div>
+                }
+            </div>
+            <div>
+                E-Mail:
+                <div>
+                    @Html.EditorFor(model => model.EMAILINSTITUCIONALUSUARIO)
+
+                </div>
+
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorEmail))
+                {
+                    <div>
+
+                        @ViewBag.ErrorEmail
+                    </div>
+                }
+            </div>
+
+            <div>
+                <div>
+                    <input type="submit" value="Guardar" />
+                </div>
+                <div>
+                    @Html.ActionLink("Volver a la lista", "Index")
+                </div>
+            </div>
+        </fieldset>
+
+    }
+</div>
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

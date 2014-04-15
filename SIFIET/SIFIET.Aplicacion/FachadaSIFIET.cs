@@ -84,5 +84,25 @@ namespace SIFIET.Aplicacion
         {
             FachadaRoles.EliminarRol(idRol);
         }
+
+        public static List<USUARIO> BuscarUsuarioPorNombre(string nombre)
+        {
+            return SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.BuscarUsuarioPorNombre(nombre);
+        }
+
+        public static List<USUARIO> BuscarUsuarioPorApellido(string apellido)
+        {
+            return SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.BuscarUsuarioPorApellido(apellido);
+        }
+
+        public static List<USUARIO> BuscarUsuarioPorIdentificacion(string id)
+        {
+            return SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.BuscarUsuarioPorIdentificacion(id);
+        }
+
+        public static string GenerarCodigo()
+        {
+            return SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.GenerarCodigo();
+        }
     }
 }
