@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using SIFIET.Aplicacion;
 using SIFIET.GestionProgramas.Datos.Modelo;
 
@@ -23,7 +24,8 @@ namespace SIFIET.Presentacion.Controllers
 
         public ActionResult ConsultarAsignaturas(string palabraBusqueda)
         {
-            return View(FachadaSIFIET.ConsultarAsignaturas(palabraBusqueda));
+             ViewData["Mensaje"] = Session["varsession"];
+             return View(FachadaSIFIET.ConsultarAsignaturas(palabraBusqueda));   
         }
         public ActionResult RegistrarAsignatura()
         {
@@ -93,46 +95,63 @@ namespace SIFIET.Presentacion.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CargarInformacion(HttpPostedFileBase archivo)
         {
-            string fn = Path.GetFileName(archivo.FileName);
-            string filePath = Server.MapPath(@"~\Uploads") + "\\" + fn;
-            archivo.SaveAs(filePath);
-
-            if (Path.GetExtension(archivo.FileName).Equals("xls"))
+            Boolean fileOK = false;
+            String fileExtension = Path.GetExtension(archivo.FileName).ToLower();
+            String[] allowedExtensions = { ".xls" };
+            for (int i = 0; i < allowedExtensions.Length; i++)
             {
-
-                using (OleDbConnection cn = new OleDbConnection())
+                if (fileExtension == allowedExtensions[i])
                 {
-                    using (OleDbCommand cmd = new OleDbCommand())
-                    {
-                        cn.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filePath +
-                                              ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=1\";";
-                        cmd.Connection = cn;
-                        cmd.CommandText = "select * from [Hoja1$]";
+                    fileOK = true;
+                }
+            }
 
-                        using (OleDbDataAdapter adp = new OleDbDataAdapter(cmd))
+            if (fileOK)
+            {
+                string fn = Path.GetFileName(archivo.FileName);
+                string filePath = Server.MapPath(@"~\Uploads") + "\\" + fn;
+                archivo.SaveAs(filePath);
+                String path = Server.MapPath("~/UploadedImages/");
+
+                    using (OleDbConnection cn = new OleDbConnection())
+                    {
+                        using (OleDbCommand cmd = new OleDbCommand())
                         {
-                            DataTable dt = new DataTable();
-                            adp.Fill(dt);
-                            using (
-                                StreamWriter wr = new StreamWriter(@"~\Uploads\file.txt")
-                                )
+                            cn.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filePath +
+                                                  ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=1\";";
+                            cmd.Connection = cn;
+                            cmd.CommandText = "select * from [Hoja1$]";
+
+                            using (OleDbDataAdapter adp = new OleDbDataAdapter(cmd))
                             {
-                                foreach (DataRow row in dt.Rows)
+                                DataTable dt = new DataTable();
+                                adp.Fill(dt);
+                                using (
+                                    StreamWriter wr =
+                                        new StreamWriter(
+                                            @"~\Uploads\file.txt")
+                                    )
                                 {
-                                    wr.WriteLine(row[0] + "," + row[1] + "," + row[2] + "," + row[3] + "," + row[4] + "," + row[5] + "," + row[6] + "," + row[7] + "," + row[8] + "," + row[9]);
+                                    foreach (DataRow row in dt.Rows)
+                                    {
+                                        wr.WriteLine(row[0] + "," + row[1] + "," + row[2] + "," + row[3] + "," + row[4] +
+                                                     "," + row[5] + "," + row[6] + "," + row[7] + "," + row[8] + "," +
+                                                     row[9]);
+                                    }
                                 }
                             }
                         }
                     }
-                }
-                int retorno =
-                    FachadaSIFIET.CargarInformacion(@"~\Uploads\file.txt");
-                if (retorno == 1)
-                {
-                    return RedirectToAction("ConsultarAsignaturas");
-                }
-            }
-            return RedirectToAction("ConsultarAsignaturas");
+                    int retorno =
+                        FachadaSIFIET.CargarInformacion(@"~\Uploads\file.txt");
+                    if (retorno == 0)
+                    {
+                        Session["varsession"] = "El archivo se cargo correctamente.";
+                        return RedirectToAction("ConsultarAsignaturas");
+                    }
+                } 
+                Session["varsession"] = "El archivo no se cargo correctamente o no corresponde a un archivo excel.";
+                return RedirectToAction("ConsultarAsignaturas");
         }
 
     }

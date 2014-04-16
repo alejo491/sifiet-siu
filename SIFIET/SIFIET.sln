@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIFIET.Presentacion", "SIFIET.Presentacion\SIFIET.Presentacion.csproj", "{EFD4E65C-062B-4C31-AC84-184EE136D40A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{31996FBB-19A6-45A7-91A9-3C63E094397F} = {31996FBB-19A6-45A7-91A9-3C63E094397F}
