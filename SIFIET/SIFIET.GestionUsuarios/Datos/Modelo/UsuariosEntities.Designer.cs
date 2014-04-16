@@ -1,4 +1,4 @@
-﻿// La generación de código T4 está habilitada para el modelo 'E:\UNIVERSIDAD\PROYECTO2\APLICACION\SIFIET.GestionUsuarios\Datos\Modelo\UsuariosEntities.edmx'. 
+﻿// La generación de código T4 está habilitada para el modelo 'D:\SIFIET\SIFIET.GestionUsuarios\Datos\Modelo\UsuariosEntities.edmx'. 
 // Para habilitar la generación de código heredada, cambie el valor de la propiedad del diseñador 'Estrategia de generación de código'
 // por 'ObjectContext heredado'. Esta propiedad está disponible en la ventana Propiedades cuando se abre
 // el modelo en el diseñador.

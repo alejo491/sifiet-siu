@@ -10,8 +10,9 @@
             <PropertyRef Name="IDPERMISO" />
           </Key>
           <Property Name="IDPERMISO" Type="varchar2" MaxLength="100" Nullable="false" />
-          <Property Name="NOMPERMISO" Type="char" MaxLength="10" />
-          <Property Name="ESTADOPERMISO" Type="varchar2" MaxLength="30" />
+          <Property Name="NOMPERMISO" Type="char" MaxLength="50" />
+          <Property Name="ESTADOPERMISO" Type="varchar2" MaxLength="50" />
+          <Property Name="GESTIONAR" Type="number" Precision="38" Scale="0" />
         </EntityType>
         <EntityType Name="ROL">
           <Key>
@@ -25,8 +26,10 @@
         <EntityType Name="ROL_TIENE_PERMISOS">
           <Key>
             <PropertyRef Name="IDROL" />
+            <PropertyRef Name="IDPERMISO" />
           </Key>
           <Property Name="IDROL" Type="varchar2" MaxLength="15" Nullable="false" />
+          <Property Name="IDPERMISO" Type="varchar2" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="USUARIO">
           <Key>
@@ -49,8 +52,10 @@
           <Property Name="IDUSUARIO" Type="char" MaxLength="15" Nullable="false" />
         </EntityType>
         <Association Name="FK_ROL_TIEN_ROL_TIENE_ROL">
-          <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
-          <End Role="ROL_TIENE_PERMISOS" Type="Self.ROL_TIENE_PERMISOS" Multiplicity="0..1" />
+          <End Role="ROL" Type="Self.ROL" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ROL_TIENE_PERMISOS" Type="Self.ROL_TIENE_PERMISOS" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ROL">
               <PropertyRef Name="IDROL" />
@@ -84,6 +89,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="ROL_TIENE_PERMISOS_FK1">
+          <End Role="PERMISOS" Type="Self.PERMISOS" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ROL_TIENE_PERMISOS" Type="Self.ROL_TIENE_PERMISOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERMISOS">
+              <PropertyRef Name="IDPERMISO" />
+            </Principal>
+            <Dependent Role="ROL_TIENE_PERMISOS">
+              <PropertyRef Name="IDPERMISO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="ModelStoreContainer">
           <EntitySet Name="PERMISOS" EntityType="Self.PERMISOS" Schema="GPA" store:Type="Tables" />
           <EntitySet Name="ROL" EntityType="Self.ROL" Schema="GPA" store:Type="Tables" />
@@ -102,6 +121,10 @@
             <End Role="USUARIO" EntitySet="USUARIO" />
             <End Role="USUARIO_TIENE_ROL" EntitySet="USUARIO_TIENE_ROL" />
           </AssociationSet>
+          <AssociationSet Name="ROL_TIENE_PERMISOS_FK1" Association="Self.ROL_TIENE_PERMISOS_FK1">
+            <End Role="PERMISOS" EntitySet="PERMISOS" />
+            <End Role="ROL_TIENE_PERMISOS" EntitySet="ROL_TIENE_PERMISOS" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -112,8 +135,10 @@
             <PropertyRef Name="IDPERMISO" />
           </Key>
           <Property Name="IDPERMISO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NOMPERMISO" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="ESTADOPERMISO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="NOMPERMISO" Type="String" MaxLength="50" FixedLength="true" Unicode="false" />
+          <Property Name="ESTADOPERMISO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GESTIONAR" Type="Decimal" Precision="38" Scale="0" />
+          <NavigationProperty Name="ROLs" Relationship="Self.ROL_TIENE_PERMISOS" FromRole="PERMISOS" ToRole="ROL" />
         </EntityType>
         <EntityType Name="ROL">
           <Key>
@@ -123,15 +148,8 @@
           <Property Name="NOMROL" Type="String" MaxLength="15" FixedLength="true" Unicode="false" />
           <Property Name="DESCROL" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="ESTADOROL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ROL_TIENE_PERMISOS" Relationship="Self.FK_ROL_TIEN_ROL_TIENE_ROL" FromRole="ROL" ToRole="ROL_TIENE_PERMISOS" />
+          <NavigationProperty Name="PERMISOS" Relationship="Self.ROL_TIENE_PERMISOS" FromRole="ROL" ToRole="PERMISOS" />
           <NavigationProperty Name="USUARIOs" Relationship="Self.USUARIO_TIENE_ROL" FromRole="ROL" ToRole="USUARIO" />
-        </EntityType>
-        <EntityType Name="ROL_TIENE_PERMISOS">
-          <Key>
-            <PropertyRef Name="IDROL" />
-          </Key>
-          <Property Name="IDROL" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="ROL" Relationship="Self.FK_ROL_TIEN_ROL_TIENE_ROL" FromRole="ROL_TIENE_PERMISOS" ToRole="ROL" />
         </EntityType>
         <EntityType Name="USUARIO">
           <Key>
@@ -146,17 +164,9 @@
           <Property Name="ESTADOUSUARIO" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ROLs" Relationship="Self.USUARIO_TIENE_ROL" FromRole="USUARIO" ToRole="ROL" />
         </EntityType>
-        <Association Name="FK_ROL_TIEN_ROL_TIENE_ROL">
-          <End Role="ROL" Type="Self.ROL" Multiplicity="1" />
-          <End Role="ROL_TIENE_PERMISOS" Type="Self.ROL_TIENE_PERMISOS" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="ROL">
-              <PropertyRef Name="IDROL" />
-            </Principal>
-            <Dependent Role="ROL_TIENE_PERMISOS">
-              <PropertyRef Name="IDROL" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="ROL_TIENE_PERMISOS">
+          <End Role="ROL" Type="Self.ROL" Multiplicity="*" />
+          <End Role="PERMISOS" Type="Self.PERMISO" Multiplicity="*" />
         </Association>
         <Association Name="USUARIO_TIENE_ROL">
           <End Role="ROL" Type="Self.ROL" Multiplicity="*" />
@@ -165,11 +175,10 @@
         <EntityContainer Name="UsuariosEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="PERMISOS" EntityType="Self.PERMISO" />
           <EntitySet Name="ROLs" EntityType="Self.ROL" />
-          <EntitySet Name="ROL_TIENE_PERMISOS" EntityType="Self.ROL_TIENE_PERMISOS" />
           <EntitySet Name="USUARIOs" EntityType="Self.USUARIO" />
-          <AssociationSet Name="FK_ROL_TIEN_ROL_TIENE_ROL" Association="Self.FK_ROL_TIEN_ROL_TIENE_ROL">
+          <AssociationSet Name="ROL_TIENE_PERMISOS" Association="Self.ROL_TIENE_PERMISOS">
             <End Role="ROL" EntitySet="ROLs" />
-            <End Role="ROL_TIENE_PERMISOS" EntitySet="ROL_TIENE_PERMISOS" />
+            <End Role="PERMISOS" EntitySet="PERMISOS" />
           </AssociationSet>
           <AssociationSet Name="USUARIO_TIENE_ROL" Association="Self.USUARIO_TIENE_ROL">
             <End Role="ROL" EntitySet="ROLs" />
@@ -188,6 +197,7 @@
                 <ScalarProperty Name="IDPERMISO" ColumnName="IDPERMISO" />
                 <ScalarProperty Name="NOMPERMISO" ColumnName="NOMPERMISO" />
                 <ScalarProperty Name="ESTADOPERMISO" ColumnName="ESTADOPERMISO" />
+                <ScalarProperty Name="GESTIONAR" ColumnName="GESTIONAR" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -198,13 +208,6 @@
                 <ScalarProperty Name="NOMROL" ColumnName="NOMROL" />
                 <ScalarProperty Name="DESCROL" ColumnName="DESCROL" />
                 <ScalarProperty Name="ESTADOROL" ColumnName="ESTADOROL" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ROL_TIENE_PERMISOS">
-            <EntityTypeMapping TypeName="Model.ROL_TIENE_PERMISOS">
-              <MappingFragment StoreEntitySet="ROL_TIENE_PERMISOS">
-                <ScalarProperty Name="IDROL" ColumnName="IDROL" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -221,6 +224,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="ROL_TIENE_PERMISOS" TypeName="Model.ROL_TIENE_PERMISOS" StoreEntitySet="ROL_TIENE_PERMISOS">
+            <EndProperty Name="ROL">
+              <ScalarProperty Name="IDROL" ColumnName="IDROL" />
+            </EndProperty>
+            <EndProperty Name="PERMISOS">
+              <ScalarProperty Name="IDPERMISO" ColumnName="IDPERMISO" />
+            </EndProperty>
+          </AssociationSetMapping>
           <AssociationSetMapping Name="USUARIO_TIENE_ROL" TypeName="Model.USUARIO_TIENE_ROL" StoreEntitySet="USUARIO_TIENE_ROL">
             <EndProperty Name="ROL">
               <ScalarProperty Name="IDROL" ColumnName="IDROL" />
