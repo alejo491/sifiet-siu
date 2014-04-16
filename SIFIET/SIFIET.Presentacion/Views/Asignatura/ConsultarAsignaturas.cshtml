@@ -38,6 +38,6 @@
         <p> 
             @Html.ActionLink("Agregar", "RegistrarAsignatura")
             @Html.ActionLink("Cargar desde Archivo", "CargarInformacion")
-            
+            @Html.Encode(ViewData["Mensaje"])
         </p>
     </div>

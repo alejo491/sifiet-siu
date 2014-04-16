@@ -131,7 +131,7 @@ namespace SIFIET.GestionProgramas.Dominio.Servicios
             
         }
 
-        public static int CargarInformacion(string archivo)
+        internal static int CargarInformacion(string archivo)
         {
             String linea;
             StreamReader f = new StreamReader(archivo);
