@@ -2,14 +2,14 @@
     ViewBag.Title = "CargarInformacion";
 }
 
-<div>
-   <h2>CargarInformacion</h2>
-    
-    @using (Html.BeginForm("CargarInformacion", "Asignatura", FormMethod.Post,
-        new {enctype = "multipart/form-data"}))
-    {
-        <input name="archivo" type="file" />
-        <input type="submit" value="Cargar Archivo" />
-    }
+   @using (Html.BeginForm("CargarInformacion", "Asignatura", FormMethod.Post, new {enctype = "multipart/form-data"}))
+   {
+   <fieldset>
+       
+       <legend>Cargar Informacion</legend>
 
-</div>
+            <input name="archivo" type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required/>
+            <input type="submit" value="Cargar Informacion"/>
+   </fieldset>
+   }   
+
