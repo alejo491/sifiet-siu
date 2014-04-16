@@ -27,7 +27,6 @@ namespace SIFIET.GestionUsuarios.Datos.Modelo
     
         public DbSet<PERMISO> PERMISOS { get; set; }
         public DbSet<ROL> ROLs { get; set; }
-        public DbSet<ROL_TIENE_PERMISOS> ROL_TIENE_PERMISOS { get; set; }
         public DbSet<USUARIO> USUARIOs { get; set; }
     }
 }
