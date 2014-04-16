@@ -24,11 +24,12 @@ namespace SIFIET.Presentacion.Tests
         public void PruebaInsertarAsignatura()
         {
             var idAsignatura = "sis2016";
-            var actualRegistrar = FachadaSIFIET.RegistrarAsignatura(idAsignatura, "1", "ondas", "sis202", "sis203", 1, 1, "alta", "diruna", "activo");
+            var idPlanEstudio = "1";//Debe estar en la base datos un registro Plan de estudios con ese codigo
+            var actualRegistrar = FachadaSIFIET.RegistrarAsignatura(idAsignatura, idPlanEstudio, "ondas", "sis202", "sis203", 1, 1, "alta", "diruna", "activo");
             Assert.AreEqual(0, actualRegistrar);
             var asignatura = FachadaSIFIET.VisualizarAsignatura(idAsignatura);
             Assert.AreEqual(idAsignatura, asignatura.IDASIGNATURA);
-            var actualModificar = FachadaSIFIET.ModificarAsignatura(idAsignatura, "1", "ondas2", "sis202", "sis203", 1, 1, "alta", "diruna", "activo");
+            var actualModificar = FachadaSIFIET.ModificarAsignatura(idAsignatura, idPlanEstudio, "ondas2", "sis202", "sis203", 1, 1, "alta", "diruna", "activo");
             Assert.AreEqual(0, actualModificar);
             var actualEliminar = FachadaSIFIET.EliminarAsignatura((idAsignatura));
             Assert.AreEqual(0, actualEliminar);
@@ -38,14 +39,15 @@ namespace SIFIET.Presentacion.Tests
         public void PruebaEditarAsignatura()
         {
             var idAsignatura = "sis2016";
-            var actualRegistrar = FachadaSIFIET.RegistrarAsignatura(idAsignatura, "1", "ondas", "sis202", "sis203", 1, 1, "alta", "diruna", "activo");
+            var idPlanEstudio = "1";//Debe estar en la base datos un registro Plan de estudios con ese codigo
+            var actualRegistrar = FachadaSIFIET.RegistrarAsignatura(idAsignatura, idPlanEstudio, "ondas", "sis202", "sis203", 1, 1, "alta", "diruna", "activo");
             Assert.AreEqual(0, actualRegistrar);
             var asignaturaSinModificar = FachadaSIFIET.VisualizarAsignatura(idAsignatura);
             Assert.AreEqual(idAsignatura, asignaturaSinModificar.IDASIGNATURA);
-            var actualModificar = FachadaSIFIET.ModificarAsignatura(idAsignatura, "1", "ondascambio", "sis202cambio", "sis203cambio", 1, 1, "altacambio", "dirunacambio", "inactivo");
+            var actualModificar = FachadaSIFIET.ModificarAsignatura(idAsignatura, idPlanEstudio, "ondascambio", "sis202cambio", "sis203cambio", 1, 1, "altacambio", "dirunacambio", "inactivo");
             Assert.AreEqual(0, actualModificar);
             var asignaturaModificada = FachadaSIFIET.VisualizarAsignatura(idAsignatura);
-            Assert.AreNotSame(asignaturaModificada, asignaturaSinModificar);
+            Assert.AreNotSame(asignaturaModificada, asignaturaSinModificar);//Verifico que los objetos no sean iguales, si lo son falla la prueba
             var actualEliminar = FachadaSIFIET.EliminarAsignatura((idAsignatura));
             Assert.AreEqual(0, actualEliminar);
 
@@ -54,12 +56,13 @@ namespace SIFIET.Presentacion.Tests
         public void PruebaEliminarAsignatura()
         {
             var idAsignatura = "sis2016";
-            var actualRegistrar = FachadaSIFIET.RegistrarAsignatura(idAsignatura, "1", "ondas", "sis202", "sis203", 1, 1, "alta", "diruna", "activo");
+            var idPlanEstudio = "1";//Debe estar en la base datos un registro Plan de estudios con ese codigo
+            var actualRegistrar = FachadaSIFIET.RegistrarAsignatura(idAsignatura, idPlanEstudio, "ondas", "sis202", "sis203", 1, 1, "alta", "diruna", "activo");
             Assert.AreEqual(0, actualRegistrar);
             var actualEliminar = FachadaSIFIET.EliminarAsignatura((idAsignatura));
             Assert.AreEqual(0, actualEliminar);
             var asignatura = FachadaSIFIET.VisualizarAsignatura(idAsignatura);
-            Assert.IsNull(asignatura);
+            Assert.IsNull(asignatura);//Debe ser null ya que  no debe existir un registro con ese idAsignatura 
 
         }
 
