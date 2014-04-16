@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using SIFIET.GestionProgramas.Datos.Modelo;
@@ -39,5 +40,42 @@ namespace SIFIET.GestionProgramas.Aplicacion
         {
             return ServicioAsignaturas.CargarInformacion(archivo);
         }
+        // Metodos Gestion Programa
+        public static List<PROGRAMA> ConsultarProgramas()
+        {
+            return ServicioProgramas.ConsultarProgramas();
+        }
+
+        public static void RegistrarPrograma(PROGRAMA programa)
+        {
+            ServicioProgramas.RegistrarPrograma(programa);
+
+        }
+
+        public static PROGRAMA ConsultarPrograma(string id)
+        {
+            return ServicioProgramas.ConsultarPrograma(id);
+        }
+
+        public static List<PROGRAMA> ConsultarProgramaPorNombre(string busqueda)
+        {
+            return ServicioProgramas.ConsultarProgramaPorNombre(busqueda);
+        }
+
+        public static void EditarPrograma(PROGRAMA programa)
+        {
+            ServicioProgramas.EditarPrograma(programa);
+        }
+
+        public static void EliminarPrograma(PROGRAMA programa)
+        {
+            ServicioProgramas.EliminarPrograma(programa);
+        }
+
+        public static void CargarDatos(DataSet datosExcel)
+        {
+            ServicioProgramas.CargarDatos(datosExcel);
+        }
+        // Fin metodos Gestion Programa
     }
 }

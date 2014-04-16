@@ -1,0 +1,60 @@
+﻿@model IEnumerable<SIFIET.GestionProgramas.Datos.Modelo.PROGRAMA>
+
+@{
+    
+    ViewBag.Title = "Programas";
+}
+<div>
+<h2>Programas</h2>
+    <p>
+        @ViewBag.Mensaje
+    </p>
+
+    @using (Html.BeginForm())
+    {
+        List<string> opciones = new List<string>();
+        opciones.Add("Nombre");
+        opciones.Add("Facultad");
+        
+        <p>
+            <!-- Campo a buscar: Html.DropDownList("campo", (SelectList)opciones, "All")-->
+            @Html.TextBox("busqueda")  
+            <input type="submit" value="Buscar" />
+        </p>
+    }
+
+<table>
+    <tr>
+        <th>Nombre</th><th>Duración</th><th>Facultad</th><th>Codigo SNIES</th><th>Opciones</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOMPROGRAMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DURACIONPROGRAMA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IDFACULTAD)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CODIGOSNIES)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "EditarPrograma", new { id=item.IDPROGRAMA }) |
+            @Html.ActionLink("Detalles", "VisualizarPrograma", new { id=item.IDPROGRAMA }) |
+            @Html.ActionLink("Eliminar", "EliminarPrograma", new { id=item.IDPROGRAMA})
+        </td>
+    </tr>
+}
+
+
+</table>
+
+<p>
+    @Html.ActionLink("Agregar", "AgregarPrograma")
+    @Html.ActionLink("Cargar Datos", "CargarDatos");
+</p>
+</div>

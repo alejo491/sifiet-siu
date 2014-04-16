@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using SIFIET.GestionProgramas.Aplicacion;
 using SIFIET.GestionUsuarios.Aplicacion;
 using SIFIET.GestionUsuarios.Datos.Modelo;
@@ -118,5 +119,43 @@ namespace SIFIET.Aplicacion
         {
             return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.CargarInformacion(archivo);
         }
+
+        // Metodos Gestionar Programa
+        public static List<PROGRAMA> ConsultarProgramas()
+        {
+            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.ConsultarProgramas();
+        }
+
+        public static List<PROGRAMA> ConsultarProgramaPorNombre(string busqueda)
+        {
+            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.ConsultarProgramaPorNombre(busqueda);
+        }
+
+        public static void RegistrarPrograma(PROGRAMA programa)
+        {
+            SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.RegistrarPrograma(programa);
+        }
+
+        public static PROGRAMA ConsultarPrograma(string id)
+        {
+            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.ConsultarPrograma(id);
+        }
+
+        public static void EditarPrograma(PROGRAMA programa)
+        {
+            SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.EditarPrograma(programa);
+        }
+
+        public static void EliminarPrograma(PROGRAMA programa)
+        {
+            SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.EliminarPrograma(programa);
+        }
+
+        public static void CargarDatos(DataSet datosExcel)
+        {
+            SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.CargarDatos(datosExcel);
+        }
+        // Fin metodos gestionar programa
+
     }
 }
