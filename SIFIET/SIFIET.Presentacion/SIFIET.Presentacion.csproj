@@ -86,6 +86,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AsignaturaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProgramaController.cs" />
     <Compile Include="Controllers\RolController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
@@ -250,6 +251,24 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Asignatura\CargarInformacion.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Programa\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Programa\AgregarPrograma.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Programa\EditarPrograma.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Programa\EliminarPrograma.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Programa\VisualizarPrograma.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Programa\CargarDatos.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -80,6 +80,7 @@
     </Compile>
     <Compile Include="Dominio\Entidades\Parciales\ASIGNATURA.cs" />
     <Compile Include="Dominio\Servicios\ServicioAsignaturas.cs" />
+    <Compile Include="Dominio\Servicios\ServicioProgramas.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

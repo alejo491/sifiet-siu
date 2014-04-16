@@ -1,0 +1,69 @@
+﻿
+@model SIFIET.GestionProgramas.Datos.Modelo.PROGRAMA
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Esta seguro que desa eliminar este registro?</h3>
+<fieldset>
+    <legend>PROGRAMA</legend>
+
+    <div class="display-label">IDPROGRAMA</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDPROGRAMA)
+    </div>
+
+    <div class="display-label">IDFACULTAD</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IDFACULTAD)
+    </div>
+
+    <div class="display-label">NOMPROGRAMA</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NOMPROGRAMA)
+    </div>
+
+    <div class="display-label">DESCPROGRAMA</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DESCPROGRAMA)
+    </div>
+
+    <div class="display-label">JORNANADAPROGRAMA</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.JORNANADAPROGRAMA)
+    </div>
+
+    <div class="display-label">DURACIONPROGRAMA</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DURACIONPROGRAMA)
+    </div>
+
+    <div class="display-label">ADMISIONPROGRAMA</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ADMISIONPROGRAMA)
+    </div>
+
+    <div class="display-label">CODIGOSNIES</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CODIGOSNIES)
+    </div>
+
+    <div class="display-label">PERIODODURACION</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PERIODODURACION)
+    </div>
+
+    <div class="display-label">ESTADOPROGRAMA</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ESTADOPROGRAMA)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Eliminar" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
