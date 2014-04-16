@@ -2,86 +2,42 @@
     @{
 
         ViewBag.Title = "Asignaturas";
+        WebGrid grid = new WebGrid(Model);
     }
     <div>
         <h2>Asignaturas</h2>
-        <p>
-            @ViewBag.Mensaje
-        </p>
+        
         @using (Html.BeginForm())
         {
             <p>
                 Palabra busqueda : @Html.TextBox("palabraBusqueda")
-                <input type ="submit" value="Buscar"/>
-                
+                <input type="submit" value="Buscar" />
+
             </p>
         }
-       
-        <table class="table">
-            <tr>
-                <th>
-                    Codigo
-                </th>
-
-                <th>
-                    Plan de Estudio
-                </th>
-                <th>
-                    Nombre
-
-                </th>
-                <th>
-                    Correquisitos
-
-                </th>
-                <th>
-                    Prerequisitos
-
-                </th>
-                <th>
-                    Semestre
-
-                </th>
-
-            </tr>
-            @if (Model != null) { 
-            foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IDASIGNATURA)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NombrePlaneEstudio)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NOMADIGNATURA)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CORREQUISITOSASIGNATURA)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PREREQUISITOSASIGNATURA)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SEMESTREASIGNATURA)
-                    </td>
-                    
-
-                    <td>
+        
+        @grid.GetHtml(
+        fillEmptyRows: true,
+        mode: WebGridPagerModes.All,
+        columns: new[]
+        {
+            
+            grid.Column("IDASIGNATURA",header:"Codigo"),
+            grid.Column("NOMADIGNATURA",header:"Nombre"),
+            grid.Column("NombrePlaneEstudio",header:"Plan Estudio"),
+            grid.Column("CORREQUISITOSASIGNATURA",header:"Prerequisitos"),
+            grid.Column("PREREQUISITOSASIGNATURA",header:"Correquisitos"),
+            grid.Column("",header:"Opciones",
+                format: @<text>
                         @Html.ActionLink("Editar", "ModificarAsignatura", new { idAsignatura = item.IDASIGNATURA }) |
                         @Html.ActionLink("Visualizar", "VisualizarAsignatura", new { idAsignatura = item.IDASIGNATURA }) |
                         @Html.ActionLink("Eliminar", "EliminarAsignatura", new { idAsignatura = item.IDASIGNATURA })
-                    </td>
-                </tr>
-            }
-            }
-
-
-        </table>
-
-        <p>
-            @Html.ActionLink("Cargar desde Archivo", "CargarInformacion")
+                         </text>
+            )
+        })
+        <p> 
             @Html.ActionLink("Agregar", "RegistrarAsignatura")
+            @Html.ActionLink("Cargar desde Archivo", "CargarInformacion")
+            
         </p>
     </div>
