@@ -3,6 +3,7 @@
 @{
     
     ViewBag.Title = "Usuarios";
+    WebGrid grid = new WebGrid(Model);
 }
 <div>
 <h2>Usuarios</h2>
@@ -19,62 +20,29 @@
 
     </div>
 }
+    
+    @grid.GetHtml(
+        fillEmptyRows: true,
+        mode: WebGridPagerModes.All,
+        columns: new[]
+        {
 
-<table class="table">
-    <tr>
-        <th>
-            Codigo
-        </th>
-       
-        <th>
-            Nombres
-        </th>
-        <th>
-            Apellidos
-
-        </th>
-        <th>
-            Identificacion
-
-        </th>
-        <th>
-            Correo
-
-        </th>
-        <th>
-            Opciones
-
-        </th>
-
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IDUSUARIO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NOMBRESUSUARIO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.APELLIDOSUSUARIO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IDENTIFICACIONUSUARIO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EMAILINSTITUCIONALUSUARIO)
-        </td>
-        <td>
-            @Html.ActionLink("Editar", "ModificarUsuario", new { idUsuario=item.IDUSUARIO }) |
-            @Html.ActionLink("Detalles", "VisualizarUsuario", new { idUsuario=item.IDUSUARIO }) |
-            @Html.ActionLink("Eliminar", "EliminarUsuario", new { idUsuario=item.IDUSUARIO })
-        </td>
-    </tr>
-}
+            grid.Column("IDUSUARIO",header:"Codigo"),
+            grid.Column("NOMBRESUSUARIO",header:"Nombres"),
+            grid.Column("APELLIDOSUSUARIO",header:"Apellidos"),
+            grid.Column("IDENTIFICACIONUSUARIO",header:"Identificacion"),
+            grid.Column("EMAILINSTITUCIONALUSUARIO",header:"Email"),
+            grid.Column("",header:"Opciones",
+                format: @<text>
+                @Html.ActionLink("Editar", "ModificarUsuario", new { idUsuario = item.IDUSUARIO }) |
+                @Html.ActionLink("Detalles", "VisualizarUsuario", new { idUsuario = item.IDUSUARIO }) |
+                @Html.ActionLink("Eliminar", "EliminarUsuario", new { idUsuario = item.IDUSUARIO })
+                </text>
+            )
+        })
+    
 
 
-</table>
 
 <p>
     @Html.ActionLink("Agregar", "AgregarUsuario")
