@@ -25,22 +25,22 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
         }
 
 
-        internal static void RegistrarUsuario(USUARIO usuario,string[] roles)
+        internal static void RegistrarUsuario(USUARIO usuario, string[] roles)
         {
             var db = new UsuariosEntities();
 
-           
+
 
             db.USUARIOs.Add(usuario);
             db.SaveChanges();
 
 
-            
+
             foreach (var rol in roles)
             {
                 usuario.ROLs.Add(db.ROLs.Find(rol));
             }
-             db.SaveChanges();
+            db.SaveChanges();
         }
 
         public static USUARIO ConsultarUsuario(string idUsuario)
@@ -61,9 +61,9 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
             db.Entry(usuario).State = EntityState.Modified;
             db.SaveChanges();
 
-            
-           
-            
+
+
+
             db.SaveChanges();
         }
 
@@ -118,19 +118,17 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
         {
             var db = new UsuariosEntities();
             var usuario = (from e in db.USUARIOs
-                           where e.IDUSUARIO == idUsuario
-                           select e).FirstOrDefault();
+                where e.IDUSUARIO == idUsuario
+                select e).FirstOrDefault();
 
             ROL x = (from e in db.ROLs
-                     where e.IDROL == rol
-                     select e).FirstOrDefault();
+                where e.IDROL == rol
+                select e).FirstOrDefault();
 
             usuario.ROLs.Add(x);
             db.SaveChanges();
-            
-        }
 
-        
+        }
     }
 
 }

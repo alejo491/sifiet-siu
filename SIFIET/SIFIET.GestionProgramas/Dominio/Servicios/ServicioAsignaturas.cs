@@ -32,7 +32,7 @@ namespace SIFIET.GestionProgramas.Dominio.Servicios
             }
             catch (Exception)
             {
-                return null;
+                return new List<ASIGNATURA>();
             }
             
         }

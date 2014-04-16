@@ -1,17 +1,21 @@
-﻿@model SIFIET.GestionUsuarios.Datos.Modelo.ROL
+﻿@using SIFIET.GestionUsuarios.Datos.Modelo
+@model SIFIET.GestionUsuarios.Datos.Modelo.ROL
 
 @{
     ViewBag.Title = "Editar Rol";
 }
-
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje))
+{
+    <div>
+        @ViewBag.Mensaje
+    </div>
+}
 <div>
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
-
-
+        
         <fieldset>
             <legend>Editar Rol</legend>
 
@@ -22,16 +26,56 @@
                 Nombre:
                 <div>
                     @Html.EditorFor(model => model.NOMROL)
-                    @Html.ValidationMessageFor(model => model.NOMROL)
                 </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorNombreRol))
+                {
+                    <div>
+                        @ViewBag.ErrorNombreRol
+                    </div>
+                }
+                
             </div>
+
             <div>
                 Descripcion:
                 <div>
-                    @Html.EditorFor(model => model.DESCROL)
-                    @Html.ValidationMessageFor(model => model.DESCROL)
+                    @Html.TextAreaFor(model => model.DESCROL)
+                </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorDescripcionRol))
+                {
+                    <div>
+                        @ViewBag.ErrorDescripcionRol
+                    </div>
+                }
+            </div>
+            <div>
+                Estado:
+                <div>
+                    @Html.DropDownListFor(model => model.ESTADOROL, new[]
+                    {
+                        new SelectListItem{Value = "Activo", Text = "Activo"},
+                        new SelectListItem{Value = "Inactivo", Text = "Inactivo"}
+                    })
                 </div>
             </div>
+            @foreach (var item in Model.PERMISOS)
+            {
+                <div>
+                    <h4>@Html.DisplayFor(modelItem => item.NOMPERMISO):</h4>
+                    <select name="@item.NOMPERMISO.Trim()">
+                        @if (item.GESTIONAR == 0)
+                        {
+                            <option value="Visualizar" selected>Visualizar</option>
+                            <option value="Gestionar">Gestionar</option>
+                        }
+                        else
+                        {
+                             <option value="Visualizar">Visualizar</option>
+                            <option value="Gestionar" selected>Gestionar</option>
+                        }
+                    </select>
+                </div>
+            }
             <div>
                 <div>
                     <input type="submit" value="Editar" />

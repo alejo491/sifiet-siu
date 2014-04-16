@@ -65,9 +65,9 @@ namespace SIFIET.Aplicacion
 
             return FachadaRoles.ConsultarRoles();
         }
-        public static void RegistrarRoles(string idRol,string nomRol,string descRol,string estadoRol)
+        public static void RegistrarRoles(string idRol,string nomRol,string descRol,string estadoRol,List<PERMISO> permisos )
         {
-            FachadaRoles.RegistrarRoles(idRol,nomRol,descRol,estadoRol);
+            FachadaRoles.RegistrarRoles(idRol,nomRol,descRol,estadoRol,permisos);
         }
 
         public static ROL ConsultarRol(string idRol)
@@ -75,24 +75,33 @@ namespace SIFIET.Aplicacion
             return FachadaRoles.ConsultarRol(idRol);
         }
 
-        public static void ModificarRol(ROL rol)
+        public static void ModificarRol(string idRol, string nomRol, string descRol, string estadoRol, List<PERMISO> permisos)
         {
-            FachadaRoles.ModificarRol(rol);
+            FachadaRoles.ModificarRol(idRol,nomRol,descRol,estadoRol,permisos);
         }
 
         public static void EliminarRol(string idRol)
         {
             FachadaRoles.EliminarRol(idRol);
         }
+        public static List<ROL> BuscarRolPorNombre(string nombre)
+        {
+            return FachadaRoles.BuscarRolPorNombre(nombre);
+        }
+
+        public static List<ROL> BuscarRolPorEstado(string id)
+        {
+            return FachadaRoles.BuscarRolPorEstado(id);
+        }
 
         public static List<USUARIO> BuscarUsuarioPorNombre(string nombre)
         {
-            return SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.BuscarUsuarioPorNombre(nombre);
+            return FachadaUsuarios.BuscarUsuarioPorNombre(nombre);
         }
 
         public static List<USUARIO> BuscarUsuarioPorApellido(string apellido)
         {
-            return SIFIET.GestionUsuarios.Aplicacion.FachadaUsuarios.BuscarUsuarioPorApellido(apellido);
+            return FachadaUsuarios.BuscarUsuarioPorApellido(apellido);
         }
 
         public static List<USUARIO> BuscarUsuarioPorIdentificacion(string id)
@@ -109,13 +118,5 @@ namespace SIFIET.Aplicacion
         {
             return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.CargarInformacion(archivo);
         }
-
-
-        
-
-
-
-
-
     }
 }

@@ -59,9 +59,6 @@
     <Compile Include="Datos\Modelo\ROL.cs">
       <DependentUpon>UsuariosEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Datos\Modelo\ROL_TIENE_PERMISOS.cs">
-      <DependentUpon>UsuariosEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Datos\Modelo\USUARIO.cs">
       <DependentUpon>UsuariosEntities.tt</DependentUpon>
     </Compile>

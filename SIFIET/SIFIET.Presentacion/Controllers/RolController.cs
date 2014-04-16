@@ -14,7 +14,20 @@ namespace SIFIET.Presentacion.Controllers
         {
             return View(FachadaSIFIET.ConsultarRoles());
         }
+        [HttpPost]
+        public ActionResult Index(FormCollection datos)
+        {
+            if (datos["criterio"].Equals("nombre"))
+            {
+                return View(FachadaSIFIET.BuscarRolPorNombre((datos["valorbusqueda"])));
+            }
+            if (datos["criterio"].Equals("estado"))
+            {
+                return View(FachadaSIFIET.BuscarRolPorEstado(datos["valorbusqueda"]));
+            }
+            return View(FachadaSIFIET.ConsultarRoles());
 
+        }
         public ActionResult AgregarRol()
         {
             return View();
@@ -22,14 +35,44 @@ namespace SIFIET.Presentacion.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RegistrarRol(FormCollection datos)
+        public ActionResult AgregarRol(FormCollection datos)
         {
-            if (!ModelState.IsValid) return View();
-            FachadaSIFIET.RegistrarRoles(datos["IDROL"], datos["NOMROL"],
-                datos["DESCROL"],"Por Definir");
-            ViewBag.Mensaje = "false";
-
-            return RedirectToAction("Index");
+            ViewBag.idUsuario = datos["IDROL"];
+            int x;
+            bool valido = true;
+            if (datos["IDROL"].Trim().Equals(""))
+            {
+                ViewBag.ErrorIdRol = "Campo Requerido";
+                valido = false;
+            }else
+            if (!int.TryParse(datos["IDROL"], out x))
+            {
+                ViewBag.ErrorIdRol = "Solo Valores Numericos";
+                valido = false;
+            }
+            if (datos["NOMROL"].Trim().Equals(""))
+            {
+                ViewBag.ErrorNombreRol = "Campo Requerido";
+                valido = false;
+            }
+            if (datos["DESCROL"].Trim().Equals(""))
+            {
+                ViewBag.ErrorDescripcionRol = "Campo Requerido";
+                valido = false;
+            }
+            if (!ModelState.IsValid || !valido) return View();
+            var permisos = CrearPermisos(datos);
+            try
+            {
+                FachadaSIFIET.RegistrarRoles(datos["IDROL"].Trim(), datos["NOMROL"].Trim(),
+                    datos["DESCROL"].Trim(), datos["ESTADOROL"], permisos);
+                ViewBag.Mensaje = "Registro Exitoso";
+            }
+            catch (Exception e)
+            {
+                ViewBag.Mensaje = "Error: " + e.Message;
+            }
+            return View();
         }
 
         public ActionResult VisualizarRol(string idRol)
@@ -44,11 +87,46 @@ namespace SIFIET.Presentacion.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ModificarRol([Bind(Include = "IDROL,NOMROL,DESCROL")] ROL rol)
+        public ActionResult ModificarRol(FormCollection datos)
         {
-            if (!ModelState.IsValid) return View();
-            FachadaSIFIET.ModificarRol(rol);
-            return RedirectToAction("Index");
+            ViewBag.idUsuario = datos["IDROL"];
+            int x;
+            bool valido = true;
+            if (datos["IDROL"].Trim().Equals(""))
+            {
+                ViewBag.ErrorIdRol = "Campo Requerido";
+                valido = false;
+            }
+            else
+                if (!int.TryParse(datos["IDROL"], out x))
+                {
+                    ViewBag.ErrorIdRol = "Solo Valores Numericos";
+                    valido = false;
+                }
+            if (datos["NOMROL"].Trim().Equals(""))
+            {
+                ViewBag.ErrorNombreRol = "Campo Requerido";
+                valido = false;
+            }
+            if (datos["DESCROL"].Trim().Equals(""))
+            {
+                ViewBag.ErrorDescripcionRol = "Campo Requerido";
+                valido = false;
+            }
+            if (!ModelState.IsValid || !valido) return View();
+            var permisos = CrearPermisos(datos);
+           try
+           {
+                FachadaSIFIET.ModificarRol(datos["IDROL"].Trim(), datos["NOMROL"].Trim(),
+                    datos["DESCROL"].Trim(), datos["ESTADOROL"], permisos);
+                ViewBag.Mensaje = "Rol Modificado con Exito";
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                  ViewBag.Mensaje = "Error: " + e.Message;
+            }
+            return View();
         }
 
         public ActionResult EliminarRol(string idRol)
@@ -62,6 +140,48 @@ namespace SIFIET.Presentacion.Controllers
         {
             FachadaSIFIET.EliminarRol(idRol);
             return RedirectToAction("Index");
+        }
+
+        public static List<PERMISO> CrearPermisos(FormCollection datos)
+        {
+            var permisos=new List<PERMISO>();
+            var permiso=new PERMISO
+            {
+                NOMPERMISO = "Plan de Estudios",
+                GESTIONAR = datos["Plan de Estudios"].Trim().Equals("Gestionar") ? 1 : 0
+            };
+            permisos.Add(permiso);
+            permiso = new PERMISO
+            {
+                NOMPERMISO = "Usuarios", 
+                GESTIONAR = datos["Usuarios"].Trim().Equals("Gestionar") ? 1 : 0
+            };
+            permisos.Add(permiso);
+            permiso = new PERMISO
+            {
+                NOMPERMISO = "Programas", 
+                GESTIONAR = datos["Programas"].Trim().Equals("Gestionar") ? 1 : 0
+            };
+            permisos.Add(permiso);
+            permiso = new PERMISO
+            {
+                NOMPERMISO = "Infraestructura",
+                GESTIONAR = datos["Infraestructura"].Trim().Equals("Gestionar") ? 1 : 0
+            };
+            permisos.Add(permiso);
+            permiso = new PERMISO
+            {
+                NOMPERMISO = "Asignaturas",
+                GESTIONAR = datos["Asignaturas"].Trim().Equals("Gestionar") ? 1 : 0
+            };
+            permisos.Add(permiso);
+            permiso = new PERMISO
+            {
+                NOMPERMISO = "Salones", 
+                GESTIONAR = datos["Salones"].Trim().Equals("Gestionar") ? 1 : 0
+            };
+            permisos.Add(permiso);
+            return permisos;
         }
     }
 }
