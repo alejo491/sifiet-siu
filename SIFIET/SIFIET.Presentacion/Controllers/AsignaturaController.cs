@@ -129,7 +129,7 @@ namespace SIFIET.Presentacion.Controllers
                                 using (
                                     StreamWriter wr =
                                         new StreamWriter(
-                                            @"C:\InfoAlex\Windows 8.1\Proyecto II\Aplicacion\SIFIET.Presentacion\Uploads\file.txt")
+                                            @"~\Uploads\file.txt")
                                     )
                                 {
                                     foreach (DataRow row in dt.Rows)
@@ -143,7 +143,7 @@ namespace SIFIET.Presentacion.Controllers
                         }
                     }
                     int retorno =
-                        FachadaSIFIET.CargarInformacion(@"C:\InfoAlex\Windows 8.1\Proyecto II\Aplicacion\SIFIET.Presentacion\Uploads\file.txt");
+                        FachadaSIFIET.CargarInformacion(@"~\Uploads\file.txt");
                     if (retorno == 0)
                     {
                         Session["varsession"] = "El archivo se cargo correctamente.";
