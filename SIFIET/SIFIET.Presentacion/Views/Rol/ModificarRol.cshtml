@@ -21,7 +21,7 @@
 
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.IDROL)
-
+            <input type="hidden" name="NOMROLNOW" id="NOMROLNOW" value="@Model.NOMROL"/>
             <div>
                 Nombre:
                 <div>
@@ -48,21 +48,11 @@
                     </div>
                 }
             </div>
-            <div>
-                Estado:
-                <div>
-                    @Html.DropDownListFor(model => model.ESTADOROL, new[]
-                    {
-                        new SelectListItem{Value = "Activo", Text = "Activo"},
-                        new SelectListItem{Value = "Inactivo", Text = "Inactivo"}
-                    })
-                </div>
-            </div>
             @foreach (var item in Model.PERMISOS)
             {
                 <div>
                     <h4>@Html.DisplayFor(modelItem => item.NOMPERMISO):</h4>
-                    <select name="@item.NOMPERMISO.Trim()">
+                    <select name="@item.NOMPERMISO.Trim()" id="@item.NOMPERMISO.Trim()">
                         @if (item.GESTIONAR == 0)
                         {
                             <option value="Visualizar" selected>Visualizar</option>
@@ -70,7 +60,7 @@
                         }
                         else
                         {
-                             <option value="Visualizar">Visualizar</option>
+                            <option value="Visualizar">Visualizar</option>
                             <option value="Gestionar" selected>Gestionar</option>
                         }
                     </select>
@@ -78,16 +68,16 @@
             }
             <div>
                 <div>
-                    <input type="submit" value="Editar" />
+                    <input type="submit" value="Editar" onclick="return comfirmarAgregarRol()" />
                 </div>
-                <div>                    
-                    @Html.ActionLink("Cancelar", "Index")
+                <div>
+                    <input type="button" value="Cancelar" onclick="return confirmSalirRol()" />
                 </div>
             </div>
         </fieldset>
 
     }
 </div>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="/Scripts/funciones.js"></script>
+<script src="/Scripts/jquery.validate.min.js"></script>
+<script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>

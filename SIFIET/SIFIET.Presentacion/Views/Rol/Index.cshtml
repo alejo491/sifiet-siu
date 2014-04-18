@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SIFIET.GestionUsuarios.Datos.Modelo.ROL>
+﻿@using SIFIET.GestionUsuarios.Datos.Modelo
+@model IEnumerable<SIFIET.GestionUsuarios.Datos.Modelo.ROL>
 
 @{
     
@@ -19,29 +20,34 @@
 
         </div>
     }
+        @grid.GetHtml(
+            fillEmptyRows: true,
+            mode: WebGridPagerModes.All,
+            columns: new[]
+            {
+
+                grid.Column("NOMROL", header: "Nombre"),
+                grid.Column("DESCROL", header: "Descipcion"),
+                grid.Column("ESTADOROL", header: "Estado"),
+                grid.Column("", header: "Opciones",
+                    format: @<text>
+                                 @Html.ActionLink("Editar", "ModificarRol", new {idRol = item.IDROL}) |
+                                 @Html.ActionLink("Detalles", "VisualizarRol", new {idRol = item.IDROL}) |
+                                 @Html.ActionLink("Eliminar", "EliminarRol", new {idRol = item.IDROL})
+                             </text>
+                    )
+            })
+@if (!string.IsNullOrEmpty(ViewBag.Mensaje) && ViewBag.Mensaje.Equals("Ningun Rol Encontrado"))
+{
+    <script> mensajeNoRoles(); </script>
+}
     <p>
-        @ViewBag.Mensaje
+        @TempData["Mensaje"]
     </p>
+    <div>
+        <h3>
+            @Html.ActionLink("Agregar", "AgregarRol")
+        </h3>
+    </div>
 
-    @grid.GetHtml(
-        fillEmptyRows: true,
-        mode: WebGridPagerModes.All,
-        columns: new[]
-        {
-
-            grid.Column("NOMROL",header:"Nombre"),
-            grid.Column("DESCROL",header:"Descipcion"),
-            grid.Column("ESTADOROL",header:"Estado"),
-            grid.Column("",header:"Opciones",
-                format: @<text>
-                @Html.ActionLink("Editar", "ModificarRol", new { idRol = item.IDROL }) |
-                @Html.ActionLink("Detalles", "VisualizarRol", new { idRol = item.IDROL }) |
-                @Html.ActionLink("Eliminar", "EliminarRol", new { idRol = item.IDROL })
-                </text>
-            )
-        })
-
-    <p>
-        @Html.ActionLink("Agregar", "AgregarRol")
-    </p>
 </div>
