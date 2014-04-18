@@ -109,6 +109,7 @@ namespace SIFIET.Presentacion.Controllers
 
             DataTable dt = new DataTable();
             DataTable aux = new DataTable();
+            DataTable det = new DataTable();
             if (fileOK)
             {
                 string fn = Path.GetFileName(archivo.FileName);
@@ -139,18 +140,52 @@ namespace SIFIET.Presentacion.Controllers
                         }
 
                         cmd.Connection = cn;
-                        string consulta = "";
+                        List<int> validador = new List<int>();
                         foreach (string hoja in listhojas)
                         {
-                            if (!listhojas.Last().Equals(hoja))
+                            cmd.CommandText = "Select * from [" + hoja + "]";
+                            using (OleDbDataAdapter adpaux = new OleDbDataAdapter(cmd))
                             {
-                                consulta = consulta + "Select * from [" + hoja + "] union ";
+                                adpaux.Fill(det);
+                            }
+                            if (det.Columns.Count > 1)
+                            {
+                                validador.Add(1);
                             }
                             else
                             {
-                                consulta = consulta + "Select * from [" + hoja + "]";   
+                                validador.Add(0); 
                             }
-                            
+                            cmd.CommandText = "";
+                            det.Reset();
+                        }
+
+                        int unelemento = 0;
+                        for (int j = 0; j < validador.Count ; j++)
+                        {
+                            unelemento = unelemento + validador[j];
+                        }
+
+                        string consulta = "";
+                        int i = 0;
+                        foreach (string hoja in listhojas)
+                        {
+                            if (unelemento == 1 && validador[i] == 1)
+                            {
+                                consulta = consulta + "Select * from [" + hoja + "]";
+                            }
+                            else
+                            {
+                                if (!listhojas.Last().Equals(hoja) && validador[i] == 1)
+                                {
+                                    consulta = consulta + "Select * from [" + hoja + "] union ";
+                                }
+                                else if (validador[i] == 1)
+                                {
+                                    consulta = consulta + "Select * from [" + hoja + "]";
+                                }
+                            }
+                            i++;
                         }
                         cmd.CommandText = consulta;
                         using (OleDbDataAdapter adp = new OleDbDataAdapter(cmd))
