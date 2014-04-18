@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using SIFIET.Aplicacion;
 using SIFIET.GestionProgramas.Datos.Modelo;
 
@@ -87,17 +88,17 @@ namespace SIFIET.Presentacion.Controllers
             return RedirectToAction("ConsultarAsignaturas");
         }
 
-        public ActionResult CargarInformacion()
+        public ActionResult CargarArchivo()
         {
             return View();
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult CargarInformacion(HttpPostedFileBase archivo)
+        public ActionResult CargarArchivo(HttpPostedFileBase archivo)
         {
             Boolean fileOK = false;
             String fileExtension = Path.GetExtension(archivo.FileName).ToLower();
-            String[] allowedExtensions = { ".xls" };
+            String[] allowedExtensions = { ".xls" , ".xlsx"};
             for (int i = 0; i < allowedExtensions.Length; i++)
             {
                 if (fileExtension == allowedExtensions[i])
@@ -106,52 +107,77 @@ namespace SIFIET.Presentacion.Controllers
                 }
             }
 
+            DataTable dt = new DataTable();
             if (fileOK)
             {
                 string fn = Path.GetFileName(archivo.FileName);
                 string filePath = Server.MapPath(@"~\Uploads") + "\\" + fn;
                 archivo.SaveAs(filePath);
-                String path = Server.MapPath("~/UploadedImages/");
 
-                    using (OleDbConnection cn = new OleDbConnection())
+                using (OleDbConnection cn = new OleDbConnection())
+                {
+                    using (OleDbCommand cmd = new OleDbCommand())
                     {
-                        using (OleDbCommand cmd = new OleDbCommand())
+                        if (fileExtension == ".xls")
                         {
                             cn.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + filePath +
                                                   ";Extended Properties=\"Excel 8.0;HDR=Yes;IMEX=1\";";
-                            cmd.Connection = cn;
-                            cmd.CommandText = "select * from [Hoja1$]";
+                        }
+                        if (fileExtension == ".xlsx")
+                        {
+                            cn.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath + 
+                                                    ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
+                        }
+                        cmd.Connection = cn;
+                        cmd.CommandText = "select * from [Hoja1$]";
 
-                            using (OleDbDataAdapter adp = new OleDbDataAdapter(cmd))
-                            {
-                                DataTable dt = new DataTable();
-                                adp.Fill(dt);
-                                using (
-                                    StreamWriter wr =
-                                        new StreamWriter(
-                                            @"~\Uploads\file.txt")
-                                    )
-                                {
-                                    foreach (DataRow row in dt.Rows)
-                                    {
-                                        wr.WriteLine(row[0] + "," + row[1] + "," + row[2] + "," + row[3] + "," + row[4] +
-                                                     "," + row[5] + "," + row[6] + "," + row[7] + "," + row[8] + "," +
-                                                     row[9]);
-                                    }
-                                }
-                            }
+                        using (OleDbDataAdapter adp = new OleDbDataAdapter(cmd))
+                        {
+                            adp.Fill(dt);
                         }
                     }
-                    int retorno =
-                        FachadaSIFIET.CargarInformacion(@"~\Uploads\file.txt");
+                }
+            }
+            DataSet ds = new DataSet();
+            ds.Tables.Add(dt);
+            Session["DatosSession"] = ds;
+            return RedirectToAction("CargarInformacion");
+        }
+
+        public ActionResult CargarInformacion()
+        {
+            DataSet ds = new DataSet();
+            ds = (DataSet)Session["DatosSession"];
+            return View(ds);
+        }
+
+        public ActionResult EnviarDatos()
+        {
+            DataSet ds = new DataSet();
+            ds = (DataSet) Session["DatosSession"];
+            using (
+                   StreamWriter wr = new StreamWriter(
+                        @"~\Uploads\file.txt")
+                                    )
+            {
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    wr.WriteLine(row[0] + "," + row[1] + "," + row[2] + "," + row[3] + "," + row[4] +
+                                 "," + row[5] + "," + row[6] + "," + row[7] + "," + row[8] + "," +
+                                 row[9]);
+                }
+            }
+            Session.Remove("DatosSession");
+            int retorno =
+                FachadaSIFIET.CargarInformacion(@"~\Uploads\file.txt");
                     if (retorno == 0)
                     {
-                        Session["varsession"] = "El archivo se cargo correctamente.";
+                        Session["UpSession"] = "El archivo se cargo correctamente.";
                         return RedirectToAction("ConsultarAsignaturas");
                     }
-                } 
-                Session["varsession"] = "El archivo no se cargo correctamente o no corresponde a un archivo excel.";
-                return RedirectToAction("ConsultarAsignaturas");
+                    Session["UpSession"] = "El archivo no se cargo correctamente.";
+            return RedirectToAction("ConsultarAsignaturas");
+
         }
 
     }
