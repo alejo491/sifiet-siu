@@ -108,6 +108,7 @@ namespace SIFIET.Presentacion.Controllers
             }
 
             DataTable dt = new DataTable();
+            DataTable aux = new DataTable();
             if (fileOK)
             {
                 string fn = Path.GetFileName(archivo.FileName);
@@ -128,9 +129,30 @@ namespace SIFIET.Presentacion.Controllers
                             cn.ConnectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + filePath + 
                                                     ";Extended Properties=\"Excel 12.0;HDR=Yes;IMEX=2\"";
                         }
-                        cmd.Connection = cn;
-                        cmd.CommandText = "select * from [Hoja1$]";
 
+                        cn.Open();
+                        aux = cn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null);
+                        List<string> listhojas = new List<string>();
+                        foreach (DataRow row in aux.Rows)
+                        {
+                            listhojas.Add(row["TABLE_NAME"].ToString());
+                        }
+
+                        cmd.Connection = cn;
+                        string consulta = "";
+                        foreach (string hoja in listhojas)
+                        {
+                            if (!listhojas.Last().Equals(hoja))
+                            {
+                                consulta = consulta + "Select * from [" + hoja + "] union ";
+                            }
+                            else
+                            {
+                                consulta = consulta + "Select * from [" + hoja + "]";   
+                            }
+                            
+                        }
+                        cmd.CommandText = consulta;
                         using (OleDbDataAdapter adp = new OleDbDataAdapter(cmd))
                         {
                             adp.Fill(dt);
