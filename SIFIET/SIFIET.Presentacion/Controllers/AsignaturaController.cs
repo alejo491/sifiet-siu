@@ -158,6 +158,7 @@ namespace SIFIET.Presentacion.Controllers
                             adp.Fill(dt);
                         }
                     }
+                    cn.Close();
                 }
             }
             DataSet ds = new DataSet();
