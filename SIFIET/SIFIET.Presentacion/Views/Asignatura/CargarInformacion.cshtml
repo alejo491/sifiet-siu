@@ -11,7 +11,7 @@
        <legend>Cargar Informacion</legend>
 
             <input name="archivo" type="file" accept="application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" required/>
-            <input type="submit" value="Cargar"/>
+            <input type="submit" value="Abrir"/>
 
 @if (Model != null)
 {
@@ -51,7 +51,7 @@
 <div>
     
     @Html.ActionLink("Ir a inicio", "ConsultarAsignaturas")
-    @Html.ActionLink("Confirmar Carga de Informacion", "EnviarDatos")
+    @Html.ActionLink("Carga", "EnviarDatos")
 </div>  
 
     </fieldset>
