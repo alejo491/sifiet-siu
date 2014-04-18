@@ -17,15 +17,24 @@ namespace SIFIET.Presentacion.Controllers
         [HttpPost]
         public ActionResult Index(FormCollection datos)
         {
+            var oRoles=new List<ROL>();
             if (datos["criterio"].Equals("nombre"))
             {
-                return View(FachadaSIFIET.BuscarRolPorNombre((datos["valorbusqueda"])));
+                oRoles = FachadaSIFIET.BuscarRolPorNombre((datos["valorbusqueda"]));
             }
             if (datos["criterio"].Equals("estado"))
             {
-                return View(FachadaSIFIET.BuscarRolPorEstado(datos["valorbusqueda"]));
+                oRoles = FachadaSIFIET.BuscarRolPorEstado((datos["valorbusqueda"]));
             }
-            return View(FachadaSIFIET.ConsultarRoles());
+            if (!oRoles.Any())
+            {
+                ViewBag.Mensaje = "Ningun Rol Encontrado";
+            }
+            else
+            {
+                oRoles = FachadaSIFIET.ConsultarRoles();
+            }
+            return View(oRoles);
 
         }
         public ActionResult AgregarRol()
@@ -37,23 +46,18 @@ namespace SIFIET.Presentacion.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AgregarRol(FormCollection datos)
         {
-            ViewBag.idUsuario = datos["IDROL"];
-            int x;
             bool valido = true;
-            if (datos["IDROL"].Trim().Equals(""))
-            {
-                ViewBag.ErrorIdRol = "Campo Requerido";
-                valido = false;
-            }else
-            if (!int.TryParse(datos["IDROL"], out x))
-            {
-                ViewBag.ErrorIdRol = "Solo Valores Numericos";
-                valido = false;
-            }
             if (datos["NOMROL"].Trim().Equals(""))
             {
                 ViewBag.ErrorNombreRol = "Campo Requerido";
                 valido = false;
+            }
+            else {
+                if (FachadaSIFIET.ExisteNombre(datos["NOMROL"].Trim()))
+                {
+                    ViewBag.ErrorNombreRol = "Nombre Ya Registrado";
+                    valido = false;
+                }
             }
             if (datos["DESCROL"].Trim().Equals(""))
             {
@@ -64,9 +68,11 @@ namespace SIFIET.Presentacion.Controllers
             var permisos = CrearPermisos(datos);
             try
             {
-                FachadaSIFIET.RegistrarRoles(datos["IDROL"].Trim(), datos["NOMROL"].Trim(),
-                    datos["DESCROL"].Trim(), datos["ESTADOROL"], permisos);
-                ViewBag.Mensaje = "Registro Exitoso";
+                FachadaSIFIET.RegistrarRoles(datos["NOMROL"].Trim(),
+                    datos["DESCROL"].Trim(),"Activo", permisos);
+                ViewBag.Mensaje = "Rol Creado con Exito";
+                TempData["Mensaje"] = "Rol Creado con Exito";
+                return RedirectToAction("Index");
             }
             catch (Exception e)
             {
@@ -108,23 +114,35 @@ namespace SIFIET.Presentacion.Controllers
                 ViewBag.ErrorNombreRol = "Campo Requerido";
                 valido = false;
             }
+            else
+            {
+                if (!datos["NOMROL"].Trim().Equals(datos["NOMROLNOW"].Trim()) && FachadaSIFIET.ExisteNombre(datos["NOMROL"].Trim()))
+                {
+                    ViewBag.ErrorNombreRol = "Nombre Ya Registrado";
+                    valido = false;
+                }
+            }
             if (datos["DESCROL"].Trim().Equals(""))
             {
                 ViewBag.ErrorDescripcionRol = "Campo Requerido";
                 valido = false;
             }
-            if (!ModelState.IsValid || !valido) return View();
+            if (!ModelState.IsValid || !valido)
+            {
+                return View(FachadaSIFIET.ConsultarRol(datos["IDROL"].Trim()));
+            }
             var permisos = CrearPermisos(datos);
-           try
-           {
+            try
+            {
                 FachadaSIFIET.ModificarRol(datos["IDROL"].Trim(), datos["NOMROL"].Trim(),
-                    datos["DESCROL"].Trim(), datos["ESTADOROL"], permisos);
+                    datos["DESCROL"].Trim(), "Activo", permisos);
                 ViewBag.Mensaje = "Rol Modificado con Exito";
+                TempData["Mensaje"] = "Rol Modificado con Exito";
                 return RedirectToAction("Index");
             }
             catch (Exception e)
             {
-                  ViewBag.Mensaje = "Error: " + e.Message;
+                ViewBag.Mensaje = "Error: " + e.Message;
             }
             return View();
         }

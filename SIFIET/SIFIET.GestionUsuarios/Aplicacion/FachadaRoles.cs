@@ -13,9 +13,9 @@ namespace SIFIET.GestionUsuarios.Aplicacion
             {
                 return ServicioRoles.Consultar();
             }
-            public static void RegistrarRoles(string idRol,string nomRol,string descRol,string estadoRol,List<PERMISO> permisos )
+            public static void RegistrarRoles(string nomRol,string descRol,string estadoRol,List<PERMISO> permisos )
             {
-                ServicioRoles.RegistrarRol( idRol, nomRol,  descRol,  estadoRol,permisos);
+                ServicioRoles.RegistrarRol(nomRol,  descRol,  estadoRol,permisos);
             }
 
             public static ROL ConsultarRol(string idRol)
@@ -41,6 +41,11 @@ namespace SIFIET.GestionUsuarios.Aplicacion
         public static List<ROL> BuscarRolPorEstado(string id)
         {
             return ServicioRoles.BuscarRolPorEstado(id);
+        }
+
+        public static bool ExisteNombre(string nombre)
+        {
+            return ServicioRoles.ExisteNombre(nombre);
         }
     }
 }

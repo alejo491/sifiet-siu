@@ -12,105 +12,83 @@
 }
 <div>
 
-@using (Html.BeginForm("AgregarRol","Rol")) 
-{
-    @Html.AntiForgeryToken()     
-    <fieldset> <legend>Nuevo Rol</legend>
-        @Html.ValidationSummary(true)
-        <div >
-            Identificador:
+    @using (Html.BeginForm("AgregarRol","Rol")) 
+    {
+        @Html.AntiForgeryToken()     
+        <fieldset> <legend>Nuevo Rol</legend>
+            @Html.ValidationSummary(true)
             <div >
-                @Html.EditorFor(model => model.IDROL)
-            </div>
-            @if (!string.IsNullOrEmpty(ViewBag.ErrorIdRol))
-            {
-                <div>
-                    @ViewBag.ErrorIdRol
+                Nombre:
+                <div >
+                    @Html.EditorFor(model => model.NOMROL)
                 </div>
-            }
-        </div>
-        <div >
-            Nombre:
-            <div >
-                @Html.EditorFor(model => model.NOMROL)
-            </div>
-            @if (!string.IsNullOrEmpty(ViewBag.ErrorNombreRol))
-            {
-                <div>
-                    @ViewBag.ErrorNombreRol
-                </div>
-            }
-        </div>
-        <div >
-            Descripcion:
-            <div >
-                @Html.TextAreaFor(model => model.DESCROL)
-            </div>
-            @if (!string.IsNullOrEmpty(ViewBag.ErrorDescripcionRol))
-            {
-                <div>
-                    @ViewBag.ErrorDescripcionRol
-                </div>
-            }
-
-        </div>
-        <div>
-            Estado:
-            <div>
-                @Html.DropDownListFor(model => model.ESTADOROL, new[]
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorNombreRol))
                 {
-                    new SelectListItem{Value = "Activo", Text = "Activo",Selected = true},
-                    new SelectListItem{Value = "Inactivo", Text = "Inactivo"}
-                })
+                    <div>
+                        @ViewBag.ErrorNombreRol
+                    </div>
+                }
             </div>
-        </div>
-        <div>
-            <h3>Permisos</h3>
-            <div>
-                <p>Plan de Estudios:</p>
-                <select name="Plan de Estudios">
-                    <option value="Visualizar">Visualizar</option>
-                    <option value="Gestionar">Gestionar</option>
-                </select>
-                <p>Usuarios</p>
-                <select name="Usuarios">
-                    <option value="Visualizar">Visualizar</option>
-                    <option value="Gestionar">Gestionar</option>
-                </select>
-                <p>Programas</p>
-                <select name="Programas">
-                    <option value="Visualizar">Visualizar</option>
-                    <option value="Gestionar">Gestionar</option>
-                </select>
-                <p>Infraestructura</p>
-                <select name="Infraestructura">
-                    <option value="Visualizar">Visualizar</option>
-                    <option value="Gestionar">Gestionar</option>
-                </select>
-                <p>Asignaturas</p>
-                <select name="Asignaturas">
-                    <option value="Visualizar">Visualizar</option>
-                    <option value="Gestionar">Gestionar</option>
-                </select>
-                <p>Salones</p>
-                <select name="Salones">
-                    <option value="Visualizar">Visualizar</option>
-                    <option value="Gestionar">Gestionar</option>
-                </select>
-            </div>
-        </div>
-    </fieldset>
-    <div >
             <div >
-                <input type="submit" value="Guardar" />
+                Descripcion:
+                <div >
+                    @Html.TextAreaFor(model => model.DESCROL)
+                </div>
+                @if (!string.IsNullOrEmpty(ViewBag.ErrorDescripcionRol))
+                {
+                    <div>
+                        @ViewBag.ErrorDescripcionRol
+                    </div>
+                }
+
             </div>
             <div>
-                @Html.ActionLink("Volver a La Lista", "Index")
+                <h3>Permisos</h3>
+                <div>
+                    <p>Plan de Estudios:</p>
+                    <select name="Plan de Estudios" id="Plan de Estudios">
+                        <option value="Visualizar">Visualizar</option>
+                        <option value="Gestionar">Gestionar</option>
+                    </select>
+                    <p>Usuarios</p>
+                    <select name="Usuarios" id="Usuarios">
+                        <option value="Visualizar">Visualizar</option>
+                        <option value="Gestionar">Gestionar</option>
+                    </select>
+                    <p>Programas</p>
+                    <select name="Programas" id="Programas">
+                        <option value="Visualizar">Visualizar</option>
+                        <option value="Gestionar">Gestionar</option>
+                    </select>
+                    <p>Infraestructura</p>
+                    <select name="Infraestructura" id="Infraestructura">
+                        <option value="Visualizar">Visualizar</option>
+                        <option value="Gestionar">Gestionar</option>
+                    </select>
+                    <p>Asignaturas</p>
+                    <select name="Asignaturas" id="Asignaturas">
+                        <option value="Visualizar">Visualizar</option>
+                        <option value="Gestionar">Gestionar</option>
+                    </select>
+                    <p>Salones</p>
+                    <select name="Salones" id="Salones">
+                        <option value="Visualizar">Visualizar</option>
+                        <option value="Gestionar">Gestionar</option>
+                    </select>
+                </div>
+            </div>
+        </fieldset>
+        <div >
+            <div >
+               <input type="submit" value="Guardar" onclick="return comfirmarAgregarRol()"/>
+            </div>
+            <div>
+                <input type="button" value="Cancelar" onclick="return confirmSalirRol()"/>
             </div>
         </div>
    
-}
-     </div>
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    }
+</div>
+<script src="/Scripts/funciones.js"></script>
+<script src="/Scripts/jquery.validate.min.js"></script>
+<script src="/Scripts/jquery.validate.unobtrusive.min.js"></script>

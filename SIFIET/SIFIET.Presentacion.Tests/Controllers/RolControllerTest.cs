@@ -18,99 +18,80 @@ namespace SIFIET.Presentacion.Tests.Controllers
         [Test]
         public void AgregarRolOk()
         {
-            const string idRol = "-1";
-            try
-            {
-                FachadaSIFIET.EliminarRol(idRol);
-            }
-            catch (Exception) { }
             const string nomRol = "prueba";
             const string descRol = "prueba";
             const string estadoRol = "Inactivo";
             var permisos = new List<PERMISO>();
-            FachadaSIFIET.RegistrarRoles(idRol, nomRol, descRol, estadoRol, permisos);
-            var resultado = FachadaSIFIET.ConsultarRol(idRol);
+            FachadaSIFIET.RegistrarRoles(nomRol, descRol, estadoRol, permisos);
+            var resultadoList = FachadaSIFIET.BuscarRolPorNombre(nomRol);
+            var resultado = resultadoList.ElementAt(0);
             Assert.AreEqual(nomRol, resultado.NOMROL.Trim());
             Assert.AreEqual(descRol, resultado.DESCROL.Trim());
             Assert.AreEqual(estadoRol, resultado.ESTADOROL.Trim());
-            FachadaSIFIET.EliminarRol(idRol);
+            FachadaSIFIET.EliminarRol(resultado.IDROL.Trim());
         }
         [Test]
-        public void AgregarRolId()
+        public void AgregarRolNombre()
         {
-            const string idRol = null;
-            try
-            {
-                FachadaSIFIET.EliminarRol(idRol);
-            }
-            catch (Exception) {}
-            const string nomRol = "prueba";
+            const string nomRol = null;
             const string descRol = "prueba";
             const string estadoRol = "Inactivo";
             var permisos = new List<PERMISO>();
             try
             {
-                FachadaSIFIET.RegistrarRoles(idRol, nomRol, descRol, estadoRol, permisos);
+                FachadaSIFIET.RegistrarRoles(nomRol, descRol, estadoRol, permisos);
             }
             catch (Exception e) { Assert.True(true); }
         }
         [Test]
         public void AgregarRolPermisos()
         {
-            const string idRol = "-1";
-            try
-            {
-                FachadaSIFIET.EliminarRol(idRol);
-            }
-            catch (Exception) { }
+           
             const string nomRol = "prueba";
             const string descRol = "prueba";
             const string estadoRol = "Inactivo";
             List<PERMISO> permisos = null;
             try
             {
-                FachadaSIFIET.RegistrarRoles(idRol, nomRol, descRol, estadoRol, permisos);
+                FachadaSIFIET.RegistrarRoles(nomRol, descRol, estadoRol, permisos);
             }
             catch (Exception e) { Assert.True(true); }
-            var resultado = FachadaSIFIET.ConsultarRol(idRol);
-            Assert.AreEqual(resultado,null);
+            try
+            {
+                var resultado = FachadaSIFIET.BuscarRolPorNombre(nomRol);
+                FachadaSIFIET.EliminarRol(resultado.ElementAt(0).IDROL.Trim());
+            }
+            catch (Exception)
+            {
+            }
         }
         [Test]
         public void EditarRol()
         {
-            const string idRol = "-1";
-            try
-            {
-                FachadaSIFIET.EliminarRol(idRol);
-            }
-            catch (Exception) { }
             const string nomRol = "prueba";
             const string descRol = "prueba";
             const string estadoRol = "Inactivo";
             var permisos = new List<PERMISO>();
-            FachadaSIFIET.RegistrarRoles(idRol, nomRol, descRol, estadoRol, permisos);
-            FachadaSIFIET.ModificarRol(idRol,"prueba2","prueba2","Activo",permisos);
-            var resultado = FachadaSIFIET.ConsultarRol(idRol);
+            FachadaSIFIET.RegistrarRoles(nomRol, descRol, estadoRol, permisos);
+            var res = FachadaSIFIET.BuscarRolPorNombre(nomRol);
+            FachadaSIFIET.ModificarRol(res.ElementAt(0).IDROL, "modificada", "modificada", "Activo", permisos);
+            var resultado = FachadaSIFIET.ConsultarRol(res.ElementAt(0).IDROL);
             Assert.AreNotEqual(nomRol,resultado.NOMROL);
             Assert.AreNotEqual(descRol, resultado.DESCROL);
             Assert.AreNotEqual(estadoRol, resultado.ESTADOROL);
+            FachadaSIFIET.EliminarRol(res.ElementAt(0).IDROL.Trim());
         }
         [Test]
         public void EliminarRol()
         {
-            const string idRol = "-1";
-            try
-            {
-                FachadaSIFIET.EliminarRol(idRol);
-            }
-            catch (Exception) { }
             const string nomRol = "prueba";
             const string descRol = "prueba";
             const string estadoRol = "Inactivo";
             var permisos = new List<PERMISO>();
-            FachadaSIFIET.RegistrarRoles(idRol, nomRol, descRol, estadoRol, permisos);
-            FachadaSIFIET.EliminarRol(idRol);
-            var resultado = FachadaSIFIET.ConsultarRol(idRol);
+            FachadaSIFIET.RegistrarRoles(nomRol, descRol, estadoRol, permisos);
+            var res = FachadaSIFIET.BuscarRolPorNombre(nomRol);
+            FachadaSIFIET.EliminarRol(res.ElementAt(0).IDROL);
+            var resultado = FachadaSIFIET.ConsultarRol(res.ElementAt(0).IDROL);
             Assert.AreEqual(resultado, null);
         }
     }

@@ -30,20 +30,25 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
         }
 
 
-        internal static void RegistrarRol(string idRol,string nomRol, string descRol,string estadoRol,List<PERMISO> permisos )
+        internal static void RegistrarRol(string nomRol, string descRol,string estadoRol,List<PERMISO> permisos )
         {
             
-                if (idRol != null && nomRol != null && descRol != null && estadoRol != null)
+                if (nomRol != null && descRol != null && estadoRol != null)
                 {
                     var db = new UsuariosEntities();
+                    var id_rol = 0;
+                    string codigo_rol = (from e in db.ROLs
+                                     orderby e.IDROL descending
+                                     select e.IDROL).FirstOrDefault();
+                    id_rol = codigo_rol == null ? 0 : int.Parse(codigo_rol) + 1;
                     var rol = new ROL()
                     {
-                        IDROL = idRol.Trim(),
+                        IDROL = id_rol.ToString().Trim(),
                         NOMROL = nomRol.Trim(),
                         DESCROL = descRol.Trim(),
                         ESTADOROL = estadoRol.Trim(),
                     };
-                    var id = 0;
+                    int id = 0;
                     string codigo = (from e in db.PERMISOS
                         orderby e.IDPERMISO descending
                         select e.IDPERMISO).FirstOrDefault();
@@ -51,7 +56,7 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
                     foreach (var permiso in permisos)
                     {
                         id++;
-                        permiso.IDPERMISO = id.ToString(CultureInfo.InvariantCulture);
+                        permiso.IDPERMISO = id.ToString().Trim();
                         permiso.ROLs.Add(rol);
                         rol.PERMISOS.Add(permiso);
                         db.PERMISOS.Add(permiso);
@@ -88,9 +93,9 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
                 }
                 var rol = new ROL()
                 {
-                    IDROL = idRol,
-                    NOMROL = nomRol,
-                    DESCROL = descRol,
+                    IDROL = idRol.Trim(),
+                    NOMROL = nomRol.Trim(),
+                    DESCROL = descRol.Trim(),
                     ESTADOROL = estadoRol,
                 };
                 var id = 0;
@@ -120,8 +125,9 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
         {
             var db = new UsuariosEntities();
 
-            var rol = db.ROLs.Find(idRol);
-            db.ROLs.Remove(rol);
+            var rol = db.ROLs.Find(idRol.Trim());
+            rol.ESTADOROL = "Inactivo";
+            db.Entry(rol).State = EntityState.Modified;
             db.SaveChanges();
         }
 
@@ -141,6 +147,14 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
                                    where e.ESTADOROL.Contains(id)
                                    select e).ToList();
             return lista;
+        }
+        public static bool ExisteNombre(string nombre)
+        {
+            var db = new UsuariosEntities();
+            var lista = (from e in db.ROLs
+                               where e.NOMROL.Trim()== nombre.Trim()
+                               select e).ToList();
+            return lista.Count > 0;
         }
     }
 }

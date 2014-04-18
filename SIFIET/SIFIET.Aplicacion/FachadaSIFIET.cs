@@ -66,9 +66,9 @@ namespace SIFIET.Aplicacion
 
             return FachadaRoles.ConsultarRoles();
         }
-        public static void RegistrarRoles(string idRol,string nomRol,string descRol,string estadoRol,List<PERMISO> permisos )
+        public static void RegistrarRoles(string nomRol,string descRol,string estadoRol,List<PERMISO> permisos )
         {
-            FachadaRoles.RegistrarRoles(idRol,nomRol,descRol,estadoRol,permisos);
+            FachadaRoles.RegistrarRoles(nomRol,descRol,estadoRol,permisos);
         }
 
         public static ROL ConsultarRol(string idRol)
@@ -88,6 +88,11 @@ namespace SIFIET.Aplicacion
         public static List<ROL> BuscarRolPorNombre(string nombre)
         {
             return FachadaRoles.BuscarRolPorNombre(nombre);
+        }
+
+        public static bool ExisteNombre(string nombre)
+        {
+            return FachadaRoles.ExisteNombre(nombre);
         }
 
         public static List<ROL> BuscarRolPorEstado(string id)
