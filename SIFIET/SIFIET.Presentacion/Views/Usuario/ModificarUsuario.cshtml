@@ -1,5 +1,9 @@
 ﻿@model SIFIET.GestionUsuarios.Datos.Modelo.USUARIO
 
+
+
+
+
 @{
     ViewBag.Title = "Editar Usuario";
 }
@@ -121,7 +125,7 @@
 
             <div>
                 <div>
-                    <input type="submit" value="Editar" />
+                    <input type="submit" value="Editar" onclick="return confirmacionAgregarUsuario();"/>
                 </div>
                 <div>
                     @Html.ActionLink("Cancelar", "Index")

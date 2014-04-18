@@ -76,11 +76,11 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
             db.SaveChanges();
         }
 
-        internal static List<USUARIO> BuscarUsuarioPorIdentificacion(string id)
+        internal static List<USUARIO> BuscarUsuarioPorIdentificacion(int id)
         {
             var db = new UsuariosEntities();
             List<USUARIO> lista = (from e in db.USUARIOs
-                                   where SqlFunctions.StringConvert(e.IDENTIFICACIONUSUARIO).Contains(id)
+                                   where e.IDENTIFICACIONUSUARIO == id
                                    select e).ToList();
             return lista;
         }
@@ -111,7 +111,7 @@ namespace SIFIET.GestionUsuarios.Dominio.Servicios
                              select e.IDUSUARIO).FirstOrDefault();
             if (codigo == null) codigo = "0";
 
-            return (int.Parse(codigo) + 1).ToString().Trim();
+            return (int.Parse(codigo) + 1).ToString();
         }
 
         internal static void AsignarRol(string idUsuario, string rol)

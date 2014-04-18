@@ -12,44 +12,11 @@
     </div>
 }
 
-<script>
-    function confirmacion() {
-        var nombresUsuario = document.getElementById("NOMBRESUSUARIO").value;
-        var apellidosUsuario = document.getElementById("APELLIDOSUSUARIO").value; 
-        var identificacionUsuario = document.getElementById("IDENTIFICACIONUSUARIO").value;
-        var passwordUsuario = document.getElementById("PASSWORDUSUARIO").value; 
-        var emailInstitucionalUsuario = document.getElementById("EMAILINSTITUCIONALUSUARIO").value;
-        var roles = document.getElementsByName("roles").item(0).value;
 
-        //var prueba = getSelectValues(roles); deberia funcionar
-
-        if (nombresUsuario != "" && apellidosUsuario != "" && identificacionUsuario != "" && passwordUsuario != "" && emailInstitucionalUsuario != "" && roles != null) {
-            return confirm("¿Desea registrar el usuario con la siguiente información? \n\n Nombres: " + nombresUsuario + "\n\n Apellidos: " + apellidosUsuario + "\n\n Identificación: " + identificacionUsuario + "\n\n Password: " + passwordUsuario + "\n\n Email: " + emailInstitucionalUsuario + "\n\n Roles: " + roles);
-        }
-        else{
-            return false;
-        }                   
-    }
-
-    //function getSelectValues(select) {
-    //    var result = [];
-    //    var options = select && select.options;
-    //    var opt;
-
-    //    for (var i = 0, iLen = options.length; i < iLen; i++) {
-    //        opt = options[i];
-
-    //        if (opt.selected) {
-    //            result.push(opt.value || opt.text);
-    //        }
-    //    }
-    //    return result;
-    //}
-</script>
 
 <div>
 
-    @using (Html.BeginForm("AgregarUsuario", "Usuario",  FormMethod.Post, new { onsubmit = "return confirmacion();" }))
+    @using (Html.BeginForm("AgregarUsuario", "Usuario",  FormMethod.Post))
     {
         @Html.AntiForgeryToken()
 
@@ -108,7 +75,7 @@
             <div>
                 Rol:
                 <div>
-                    <select name="roles" multiple="true">
+                    <select id="roles" name="roles" multiple="true">
                         @foreach (var rol in ViewBag.roles)
                         {
                             <option value="@rol.IDROL">@rol.NOMROL</option>
@@ -171,7 +138,7 @@
 
             <div>
                 <div>
-                    <input type="submit" value="Guardar"/>
+                    <input type="submit" value="Guardar" onclick="return confirmacionAgregarUsuario();"/>
                 </div>
                 <div>
                     @Html.ActionLink("Volver a la lista", "Index")

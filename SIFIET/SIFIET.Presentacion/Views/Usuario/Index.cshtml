@@ -6,7 +6,13 @@
     WebGrid grid = new WebGrid(Model);
 }
 <div>
-<h2>Usuarios</h2>
+    <h2>Usuarios</h2>
+    
+    @if (!string.IsNullOrEmpty(ViewBag.Mensaje) && ViewBag.Mensaje.Equals("No se han encontrado registros con el dato indicado, por favor intentelo de nuevo"))
+    {
+        <script> mensajeNoUsuarios(); </script>
+    }
+   
     @using (Html.BeginForm("Index", "Usuario"))
 {
     <div>
@@ -45,6 +51,6 @@
 
 
 <p>
-    @Html.ActionLink("Agregar", "AgregarUsuario")
+    @Html.ActionLink("Registrar Usuario", "AgregarUsuario")
 </p>
 </div>
