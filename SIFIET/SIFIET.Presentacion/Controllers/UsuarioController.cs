@@ -18,7 +18,12 @@ namespace SIFIET.Presentacion.Controllers
 
         public ActionResult Index()
         {
-            return View(FachadaSIFIET.ConsultarUsuarios());
+            List<USUARIO> lista= FachadaSIFIET.ConsultarUsuarios();
+            if (lista.Count ==0)
+            {
+                ViewBag.Mensaje = "No hay registros disponibles";
+            }
+            return View(lista);
         }
 
         [HttpPost]
@@ -26,15 +31,30 @@ namespace SIFIET.Presentacion.Controllers
         {
             if (datos["criterio"].Equals("nombre"))
             {
-                return View(FachadaSIFIET.BuscarUsuarioPorNombre((datos["valorbusqueda"])));
+                List<USUARIO> lista = FachadaSIFIET.BuscarUsuarioPorNombre((datos["valorbusqueda"]));
+                if (lista.Count == 0)
+                {
+                    ViewBag.Mensaje = "No se han encontrado registros con el dato indicado, por favor intentelo de nuevo";
+                }
+                return View(lista);
             }
             if (datos["criterio"].Equals("apellido"))
             {
-                return View(FachadaSIFIET.BuscarUsuarioPorApellido(datos["valorbusqueda"]));
+                List<USUARIO> lista = FachadaSIFIET.BuscarUsuarioPorApellido(datos["valorbusqueda"]);
+                if (lista.Count == 0)
+                {
+                    ViewBag.Mensaje = "No se han encontrado registros con el dato indicado, por favor intentelo de nuevo";
+                }
+                return View(lista);
             }
             if (datos["criterio"].Equals("identificacion"))
             {
-                return View(FachadaSIFIET.BuscarUsuarioPorIdentificacion(datos["valorbusqueda"]));
+                List<USUARIO> lista = FachadaSIFIET.BuscarUsuarioPorIdentificacion(int.Parse(datos["valorbusqueda"]));
+                if (lista.Count == 0)
+                {
+                    ViewBag.Mensaje = "No se han encontrado registros con el dato indicado, por favor intentelo de nuevo";
+                }
+                return View(lista);
             }
 
 
@@ -114,6 +134,10 @@ namespace SIFIET.Presentacion.Controllers
             {
                 ViewBag.ErrorIdentificacion = "Esta campo solo recive valores numericos";
             }
+            else if (FachadaSIFIET.BuscarUsuarioPorIdentificacion(int.Parse(datos["IDENTIFICACIONUSUARIO"])).Count>0)
+            {
+                ViewBag.ErrorIdentificacion = "Ya existe un usuario con esta identificacion";
+            }
             else
             {
                 try
@@ -134,7 +158,7 @@ namespace SIFIET.Presentacion.Controllers
 
 
                     FachadaSIFIET.RegistrarUsuario(usuario,roles);
-                   
+                    ViewBag.idUsuario = FachadaSIFIET.GenerarCodigo();
                     
                     ViewBag.Mensaje = "Registro Exitoso";
                 }

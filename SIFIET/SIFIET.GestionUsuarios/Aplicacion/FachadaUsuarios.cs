@@ -48,7 +48,7 @@ namespace SIFIET.GestionUsuarios.Aplicacion
            return ServicioUsuarios.BuscarUsuarioPorApellido(apellido);
        }
 
-       public static List<USUARIO> BuscarUsuarioPorIdentificacion(string id)
+       public static List<USUARIO> BuscarUsuarioPorIdentificacion(int id)
        {
            return ServicioUsuarios.BuscarUsuarioPorIdentificacion(id);
        }
