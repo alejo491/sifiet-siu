@@ -26,10 +26,15 @@ namespace SIFIET.Presentacion.Controllers
         public ActionResult ConsultarAsignaturas(string palabraBusqueda)
         {
              ViewData["Mensaje"] = Session["varsession"];
+            ViewBag.Resultado = TempData["ResultadoOperacion"] as string;
              return View(FachadaSIFIET.ConsultarAsignaturas(palabraBusqueda));   
         }
         public ActionResult RegistrarAsignatura()
         {
+            var listaAsignaturas = FachadaSIFIET.ConsultarAsignaturas("");
+            ViewBag.ListaAsignaturas = new MultiSelectList(listaAsignaturas, "IDASIGNATURA", "NOMADIGNATURA");
+            var listaPlanesEstudios = FachadaSIFIET.ConsultarPlanestudios("");
+            ViewBag.ListaPlanesEstudios = new SelectList(listaPlanesEstudios, "IDPLANESTUDIOS", "NOMPLANESTUDIOS");
             return View();
         }
         public ActionResult VisualizarAsignatura(string idAsignatura)
@@ -38,7 +43,10 @@ namespace SIFIET.Presentacion.Controllers
         }
         public ActionResult ModificarAsignatura(string idAsignatura)
         {
-
+            var listaAsignaturas = FachadaSIFIET.ConsultarAsignaturas("");
+            ViewBag.ListaAsignaturas = new MultiSelectList(listaAsignaturas, "IDASIGNATURA", "NOMADIGNATURA");
+            var listaPlanesEstudios = FachadaSIFIET.ConsultarPlanestudios("");
+            ViewBag.ListaPlanesEstudios = new SelectList(listaPlanesEstudios, "IDPLANESTUDIOS", "NOMPLANESTUDIOS",FachadaSIFIET.VisualizarAsignatura(idAsignatura));
             return View(FachadaSIFIET.VisualizarAsignatura(idAsignatura));
         }
         public ActionResult EliminarAsignatura(string idAsignatura)
@@ -52,11 +60,21 @@ namespace SIFIET.Presentacion.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RegistrarAsignatura(ASIGNATURA datos)
         {
+            var listaAsignaturas = FachadaSIFIET.ConsultarAsignaturas("");
+            ViewBag.ListaAsignaturas = new MultiSelectList(listaAsignaturas, "IDASIGNATURA", "NOMADIGNATURA");
+            var listaPlanesEstudios = FachadaSIFIET.ConsultarPlanestudios("");
+            ViewBag.ListaPlanesEstudios = new SelectList(listaPlanesEstudios, "IDPLANESTUDIOS", "NOMPLANESTUDIOS");
             if (!ModelState.IsValid) return View(datos);
-            FachadaSIFIET.RegistrarAsignatura(datos.IDASIGNATURA, datos.IDPLANESTUDIOS, datos.NOMADIGNATURA,
+            int resultado = FachadaSIFIET.RegistrarAsignatura(datos.IDASIGNATURA, datos.IDPLANESTUDIOS, datos.NOMADIGNATURA,
                 datos.CORREQUISITOSASIGNATURA, datos.PREREQUISITOSASIGNATURA, datos.SEMESTREASIGNATURA,
                 datos.INTENSIDADHORARIA, datos.MODALIDAD, datos.CLASIFICACION, datos.ESTADOASIGNATURA);
             //FachadaSIFIET.RegistrarAsignatura(datos["IDASIGNATURAv"], datos["IDPLANESTUDIOS"], datos["NOMADIGNATURA"], datos["CORREQUISITOSASIGNATURA"], datos["PREREQUISITOSASIGNATURA"], short.Parse(datos["SEMESTREASIGNATURA"]), short.Parse(datos["INTENSIDADHORARIA"]), datos["MODALIDAD"], datos["CLASIFICACION"], datos["ESTADOASIGNATURA"]);
+           
+            if (resultado == 0)
+                TempData["ResultadoOperacion"] = "Asignatura Agregada con Exito";
+            else
+                TempData["ResultadoOperacion"] = "Fallo al Agregoar la Asignatura";
+
             ViewBag.Mensaje = "false";
 
             return RedirectToAction("ConsultarAsignaturas");
@@ -67,11 +85,20 @@ namespace SIFIET.Presentacion.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ModificarAsignatura(ASIGNATURA datos)
         {
+            var listaAsignaturas = FachadaSIFIET.ConsultarAsignaturas("");
+            ViewBag.ListaAsignaturas = new MultiSelectList(listaAsignaturas, "IDASIGNATURA", "NOMADIGNATURA");
+            var listaPlanesEstudios = FachadaSIFIET.ConsultarPlanestudios("");
+            ViewBag.ListaPlanesEstudios = new SelectList(listaPlanesEstudios, "IDPLANESTUDIOS", "NOMPLANESTUDIOS", datos);
+            
             if (!ModelState.IsValid) return View();
-            //FachadaSIFIET.ModificarAsignatura(datos["IDASIGNATURA"], datos["IDPLANESTUDIOS"], datos["NOMADIGNATURA"], datos["CORREQUISITOSASIGNATURA"], datos["PREREQUISITOSASIGNATURA"], short.Parse(datos["SEMESTREASIGNATURA"]), short.Parse(datos["INTENSIDADHORARIA"]), datos["MODALIDAD"], datos["CLASIFICACION"], datos["ESTADOASIGNATURA"]);
-            FachadaSIFIET.ModificarAsignatura(datos.IDASIGNATURA, datos.IDPLANESTUDIOS, datos.NOMADIGNATURA,
+           var resultado = FachadaSIFIET.ModificarAsignatura(datos.IDASIGNATURA, datos.IDPLANESTUDIOS, datos.NOMADIGNATURA,
                 datos.CORREQUISITOSASIGNATURA, datos.PREREQUISITOSASIGNATURA, datos.SEMESTREASIGNATURA,
                 datos.INTENSIDADHORARIA, datos.MODALIDAD, datos.CLASIFICACION, datos.ESTADOASIGNATURA);
+
+           if (resultado == 0)
+               TempData["ResultadoOperacion"] = "Asignatura Modificada con Exito";
+           else
+               TempData["ResultadoOperacion"] = "Fallo al Modificar la Asignatura";
             ViewBag.Mensaje = "false";
 
             return RedirectToAction("ConsultarAsignaturas");
@@ -84,7 +111,11 @@ namespace SIFIET.Presentacion.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EliminarAsignaturaConfirmacion(string idAsignatura)
         {
-            FachadaSIFIET.EliminarAsignatura(idAsignatura);
+            var resultado = FachadaSIFIET.EliminarAsignatura(idAsignatura);
+            if (resultado == 0)
+                TempData["ResultadoOperacion"] = "Asignatura Eliminada con Exito";
+            else
+                TempData["ResultadoOperacion"] = "Fallo al Eliminar la Asignatura";
             return RedirectToAction("ConsultarAsignaturas");
         }
 

@@ -78,5 +78,10 @@ namespace SIFIET.GestionProgramas.Aplicacion
             ServicioProgramas.CargarDatos(datosExcel);
         }
         // Fin metodos Gestion Programa
+
+        public static List<PLANESTUDIO> ConsultarPlanesEstudios(string palabraBusqueda)
+        {
+            return ServicioPlanEstudio.ConsultarPlanestudios(palabraBusqueda);
+        }
     }
 }
