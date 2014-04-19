@@ -84,6 +84,23 @@ namespace SIFIET.GestionProgramas.Dominio.Servicios
             }
              
         }
+
+        public static List<ASIGNATURA> ConsultarCorrequisitos()
+        {
+            try
+            {
+                var db = new GestionProgramasEntities();
+
+                List<ASIGNATURA> lista = (from e in db.ASIGNATURAs
+                                   select e).ToList();
+                return lista;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         internal static int ModificarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short? semestre, decimal? intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
         {
             try
