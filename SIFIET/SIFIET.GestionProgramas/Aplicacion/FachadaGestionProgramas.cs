@@ -25,6 +25,12 @@ namespace SIFIET.GestionProgramas.Aplicacion
                 prerequisitos, semestre, intensidadhoraria, modalidad, clasificacion, estadoasignatura);
 
         }
+
+        public static List<ASIGNATURA> ConsultarCorrequisitos()
+        {
+            return ServicioAsignaturas.ConsultarCorrequisitos();
+        }
+
         public static int ModificarAsignatura(string idAsignatura, string idPlantadeEstudios, string nombreAsignatura, string correquisitos, string prerequisitos, short? semestre, decimal? intensidadhoraria, string modalidad, string clasificacion, string estadoasignatura)
         {
             return ServicioAsignaturas.ModificarAsignatura(idAsignatura, idPlantadeEstudios, nombreAsignatura, correquisitos,
