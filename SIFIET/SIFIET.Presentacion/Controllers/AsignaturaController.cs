@@ -30,11 +30,6 @@ namespace SIFIET.Presentacion.Controllers
         }
         public ActionResult RegistrarAsignatura()
         {
-            ViewBag.correquisitos = FachadaSIFIET.ConsultarCorrequisitos();
-            if (ViewBag.correquisitos == null)
-            {
-                ViewBag.ErrorCorrequisitos = "*";
-            }
             return View();
         }
         public ActionResult VisualizarAsignatura(string idAsignatura)

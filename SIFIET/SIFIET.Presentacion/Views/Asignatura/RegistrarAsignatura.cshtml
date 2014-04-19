@@ -44,25 +44,11 @@
                     @Html.ValidationMessageFor(model => model.NOMADIGNATURA)
                 </div>
             </div>
-            <div>
-                Correquisitos :
+                Corequisitos :
                 <div>
-                    <select id="correquisitos" name="correquisitos" multiple="true">
-                        @foreach (var correquisito in ViewBag.correquisitos)
-                        {
-                            <option value="@correquisito.IDASIGNATURA" type="checkbox">@correquisito.NOMADIGNATURA</option>
-
-                        }
-
-                    </select>
+                    @Html.EditorFor(model => model.CORREQUISITOSASIGNATURA)
+                    @Html.ValidationMessageFor(model => model.CORREQUISITOSASIGNATURA)
                 </div>
-                @if (!string.IsNullOrEmpty(ViewBag.ErrorCorrequisitos))
-                {
-                    <div>
-                        @ViewBag.ErrorCorrequisitos
-                    </div>
-                }
-            </div>
             <div>
                 Prerequisitos :
                 <div>
