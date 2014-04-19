@@ -70,6 +70,7 @@ namespace SIFIET.GestionProgramas.Dominio.Servicios
                     asg.INTENSIDADHORARIA = intensidadhoraria;
                     asg.ESTADOASIGNATURA = estadoasignatura;
                     asg.CLASIFICACION = clasificacion;
+                    asg.EdicionOmodificacion = "registrar";
                     asg.MODALIDAD = modalidad;
                 }
                 db.ASIGNATURAs.Add(asg);
@@ -101,6 +102,7 @@ namespace SIFIET.GestionProgramas.Dominio.Servicios
                     asignatura.ESTADOASIGNATURA = estadoasignatura;
                     asignatura.CLASIFICACION = clasificacion;
                     asignatura.MODALIDAD = modalidad;
+                    asignatura.EdicionOmodificacion = "modificacion";
                     db.SaveChanges();
                 }
                 return 0;

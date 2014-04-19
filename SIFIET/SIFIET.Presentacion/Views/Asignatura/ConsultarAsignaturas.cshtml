@@ -4,19 +4,19 @@
         ViewBag.Title = "Asignaturas";
         WebGrid grid = new WebGrid(Model);
     }
-    <div>
-        <h2>Asignaturas</h2>
+<div>
+    <h2>Asignaturas</h2>
         
-        @using (Html.BeginForm())
-        {
-            <p>
-                Palabra busqueda : @Html.TextBox("palabraBusqueda")
-                <input type="submit" value="Buscar" />
+    @using (Html.BeginForm())
+    {
+        <p>
+            Palabra busqueda : @Html.TextBox("palabraBusqueda")
+            <input type="submit" value="Buscar" />
 
-            </p>
-        }
+        </p>
+    }
         
-        @grid.GetHtml(
+    @grid.GetHtml(
         fillEmptyRows: true,
         mode: WebGridPagerModes.All,
         columns: new[]
@@ -29,15 +29,20 @@
             grid.Column("PREREQUISITOSASIGNATURA",header:"Correquisitos"),
             grid.Column("",header:"Opciones",
                 format: @<text>
-                        @Html.ActionLink("Editar", "ModificarAsignatura", new { idAsignatura = item.IDASIGNATURA }) |
-                        @Html.ActionLink("Visualizar", "VisualizarAsignatura", new { idAsignatura = item.IDASIGNATURA }) |
-                        @Html.ActionLink("Eliminar", "EliminarAsignatura", new { idAsignatura = item.IDASIGNATURA })
+                             @Html.ActionLink("Editar", "ModificarAsignatura", new { idAsignatura = item.IDASIGNATURA }) |
+                             @Html.ActionLink("Visualizar", "VisualizarAsignatura", new { idAsignatura = item.IDASIGNATURA }) |
+                             @Html.ActionLink("Eliminar", "EliminarAsignatura", new { idAsignatura = item.IDASIGNATURA })
                          </text>
-            )
+                )
         })
-        <p> 
-            @Html.ActionLink("Agregar", "RegistrarAsignatura")
-            @Html.ActionLink("Cargar desde Archivo", "CargarArchivo")
-            @Html.Encode(ViewData["UpSession"])
-        </p>
-    </div>
+    <p> 
+        @Html.ActionLink("Agregar", "RegistrarAsignatura")
+        @Html.ActionLink("Cargar desde Archivo", "CargarArchivo")
+        @Html.Encode(ViewData["UpSession"])
+        <h3> @ViewBag.Resultado </h3>
+    </p>
+</div>
+
+                      
+
+    

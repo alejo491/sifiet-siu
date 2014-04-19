@@ -33,7 +33,7 @@ namespace SIFIET.Aplicacion
         {
             FachadaUsuarios.EliminarUsuario(idUsuario);
         }
-
+        //Metodos Asignatura
         public static List<ASIGNATURA> ConsultarAsignaturas(string palabraBusqueda)
         {
             return FachadaGestionProgramas.ConsultarAsignaturas(palabraBusqueda);
@@ -61,7 +61,7 @@ namespace SIFIET.Aplicacion
         {
             return FachadaGestionProgramas.EliminarAsignatura(idAsignatura);
         }
-
+        //Fin Metodos Asignatura
         public static List<ROL> ConsultarRoles()
         {
 
@@ -162,6 +162,10 @@ namespace SIFIET.Aplicacion
             SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.CargarDatos(datosExcel);
         }
         // Fin metodos gestionar programa
-
+        //Metodos Plan Estudio
+        public static List<PLANESTUDIO> ConsultarPlanestudios(string palabraBusqueda)
+        {
+            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.ConsultarPlanesEstudios(palabraBusqueda);
+        }
     }
 }

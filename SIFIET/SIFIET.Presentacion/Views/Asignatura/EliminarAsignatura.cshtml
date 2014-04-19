@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Eliminar Asignatura";
+    
 }
 
 <h2>Eliminar Asignatura</h2>
@@ -90,8 +91,8 @@
         @Html.AntiForgeryToken()
 
         <div>
-            <input type="submit" value="Eliminar" class="btn btn-default" /> |
-            @Html.ActionLink("Regresar a la lista", "ConsultarAsignaturas")
+            <input type="submit" value="Eliminar" onclick="return confirmarEliminarAsignatura()" /> |
+            <input type="submit" value="Cancelar" onclick="return confirmSalirAsignatura();" />
         </div>
     }
 </div>
