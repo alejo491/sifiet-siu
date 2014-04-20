@@ -10,10 +10,11 @@ namespace SIFIET.Aplicacion
     public static class  FachadaSIFIET
     {
 
-        public static List<USUARIO> ConsultarUsuarios(){
-            
+        public static List<USUARIO> ConsultarUsuarios()
+        {
             return FachadaUsuarios.ConsultarUsuarios();
-            }
+        }
+
         public static void RegistrarUsuario(USUARIO usuario, string[] roles)
         {
             FachadaUsuarios.RegistrarUsuario(usuario,roles);
@@ -132,29 +133,31 @@ namespace SIFIET.Aplicacion
             return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.ConsultarProgramas();
         }
 
-        public static List<PROGRAMA> ConsultarProgramaPorNombre(string busqueda)
-        {
-            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.ConsultarProgramaPorNombre(busqueda);
-        }
-
-        public static void RegistrarPrograma(PROGRAMA programa)
-        {
-            SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.RegistrarPrograma(programa);
-        }
-
         public static PROGRAMA ConsultarPrograma(string id)
         {
             return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.ConsultarPrograma(id);
         }
 
-        public static void EditarPrograma(PROGRAMA programa)
+        public static List<PROGRAMA> ConsultarProgramaPorNombre(string busqueda)
         {
-            SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.EditarPrograma(programa);
+            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.ConsultarProgramaPorNombre(busqueda);
         }
 
-        public static void EliminarPrograma(PROGRAMA programa)
+
+        public static bool RegistrarPrograma(PROGRAMA programa)
         {
-            SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.EliminarPrograma(programa);
+            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.RegistrarPrograma(programa);
+        }
+
+        
+        public static bool EditarPrograma(PROGRAMA programa)
+        {
+            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.EditarPrograma(programa);
+        }
+
+        public static bool EliminarPrograma(PROGRAMA programa)
+        {
+            return SIFIET.GestionProgramas.Aplicacion.FachadaGestionProgramas.EliminarPrograma(programa);
         }
 
         public static void CargarDatos(DataSet datosExcel)
