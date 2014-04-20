@@ -12,17 +12,20 @@
 
     @using (Html.BeginForm())
     {
-        List<string> opciones = new List<string>();
-        opciones.Add("Nombre");
-        opciones.Add("Facultad");
         
-        <p>
-            <!-- Campo a buscar: Html.DropDownList("campo", (SelectList)opciones, "All")-->
-            @Html.TextBox("busqueda")  
+        
+        <fieldset>
+            <legend>Buscar Programa</legend>
+            Campo a buscar:
+            <select id="campoBuscar" name="campoBuscar">
+                <option>Escoja un campo</option>
+                <option>Nombre</option>
+            </select>
+            Ingrese el dato a buscar @Html.TextBox("busqueda")  
             <input type="submit" value="Buscar" />
-        </p>
+        </fieldset>
     }
-
+    <br />
 <table>
     <tr>
         <th>Nombre</th><th>Duración</th><th>Facultad</th><th>Codigo SNIES</th><th>Opciones</th>
@@ -34,7 +37,7 @@
             @Html.DisplayFor(modelItem => item.NOMPROGRAMA)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DURACIONPROGRAMA)
+            @Html.DisplayFor(modelItem => item.DURACIONPROGRAMA) Semestres
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IDFACULTAD)
@@ -54,7 +57,8 @@
 </table>
 
 <p>
+    @Html.ActionLink("Cargar desde Archivo", "CargarDatos")
     @Html.ActionLink("Agregar", "AgregarPrograma")
-    @Html.ActionLink("Cargar Datos", "CargarDatos");
+
 </p>
 </div>
