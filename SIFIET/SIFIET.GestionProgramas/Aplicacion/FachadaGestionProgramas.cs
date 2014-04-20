@@ -41,16 +41,12 @@ namespace SIFIET.GestionProgramas.Aplicacion
         {
             return ServicioAsignaturas.CargarInformacion(archivo);
         }
+
+
         // Metodos Gestion Programa
         public static List<PROGRAMA> ConsultarProgramas()
         {
             return ServicioProgramas.ConsultarProgramas();
-        }
-
-        public static void RegistrarPrograma(PROGRAMA programa)
-        {
-            ServicioProgramas.RegistrarPrograma(programa);
-
         }
 
         public static PROGRAMA ConsultarPrograma(string id)
@@ -63,14 +59,20 @@ namespace SIFIET.GestionProgramas.Aplicacion
             return ServicioProgramas.ConsultarProgramaPorNombre(busqueda);
         }
 
-        public static void EditarPrograma(PROGRAMA programa)
+        public static bool RegistrarPrograma(PROGRAMA programa)
         {
-            ServicioProgramas.EditarPrograma(programa);
+            return ServicioProgramas.RegistrarPrograma(programa);
+
         }
 
-        public static void EliminarPrograma(PROGRAMA programa)
+        public static bool EditarPrograma(PROGRAMA programa)
         {
-            ServicioProgramas.EliminarPrograma(programa);
+            return ServicioProgramas.EditarPrograma(programa);
+        }
+
+        public static bool EliminarPrograma(PROGRAMA programa)
+        {
+            return ServicioProgramas.EliminarPrograma(programa);
         }
 
         public static void CargarDatos(DataSet datosExcel)

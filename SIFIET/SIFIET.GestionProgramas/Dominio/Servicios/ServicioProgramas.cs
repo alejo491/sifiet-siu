@@ -15,6 +15,12 @@ namespace SIFIET.GestionProgramas.Dominio.Servicios
             return db.PROGRAMAs.ToList();
         }
 
+        public static PROGRAMA ConsultarPrograma(string id)
+        {
+            PROGRAMA programa = db.PROGRAMAs.Find(id);
+            return programa;
+        }
+
         public static List<PROGRAMA> ConsultarProgramaPorNombre(string busqueda)
         {
             var programas = from m in db.PROGRAMAs
@@ -28,32 +34,56 @@ namespace SIFIET.GestionProgramas.Dominio.Servicios
             return programas.ToList();
         }
 
-        public static void RegistrarPrograma(PROGRAMA programa)
+        public static bool RegistrarPrograma(PROGRAMA programa)
         {
-            db.PROGRAMAs.Add(programa);
-            db.SaveChanges();
-        }
-
-        public static PROGRAMA ConsultarPrograma(string id)
-        {
-            PROGRAMA programa = db.PROGRAMAs.Find(id);
-            return programa;
-        }
-
-        public static void EditarPrograma(PROGRAMA programa)
-        {
-            var original = ConsultarPrograma(programa.IDPROGRAMA);
-            if (original != null)
+            try
             {
-                db.Entry(original).CurrentValues.SetValues(programa);
+                db.PROGRAMAs.Add(programa);
                 db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
+        }
+
+        public static bool EditarPrograma(PROGRAMA programa)
+        {
+            try
+            {
+                var original = ConsultarPrograma(programa.IDPROGRAMA);
+                if (original != null)
+                {
+                    db.Entry(original).CurrentValues.SetValues(programa);
+                    db.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception)
+            {
+                return false;
             }
         }
 
-        public static void EliminarPrograma(PROGRAMA programa)
+        public static bool EliminarPrograma(PROGRAMA programa)
         {
-            db.PROGRAMAs.Remove(programa);
-            db.SaveChanges();
+            try
+            {
+                db.PROGRAMAs.Remove(programa);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            
         }
 
         public static void CargarDatos(DataSet datosExcel)

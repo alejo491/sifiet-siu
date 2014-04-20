@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
 using System.Web.Mvc;
@@ -12,8 +13,9 @@ namespace SIFIET.Presentacion.Controllers
         //
         // GET: /Programa/
 
-        public ActionResult Index(string busqueda = "")
+        public ActionResult Index(string campoBuscar = "", string busqueda = "")
         {
+           
             if (busqueda == "")
             {
                 return View(FachadaSIFIET.ConsultarProgramas());

@@ -18,6 +18,7 @@ namespace SIFIET.Presentacion.Tests.Controllers
             programa.IDFACULTAD = "1"; //Debe estar en la base datos un registro Plan de estudios con ese codigo;
             programa.NOMPROGRAMA = "Ingenieria de Sistemas";
             FachadaSIFIET.RegistrarPrograma(programa);
+
             FachadaSIFIET.EliminarPrograma(programa);
 
         }
