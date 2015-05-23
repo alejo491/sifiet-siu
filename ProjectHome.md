@@ -1,0 +1,1 @@
+Sistema software que apoya todos los procesos internos de la Facultad de Ingeniería Electrónica y Telecomunicaciones.
